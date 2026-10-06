@@ -16,9 +16,11 @@
     <PackageReference Include="Guna.UI2.WinForms" Version="2.0.4.8" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Paqueteria\Modelo.csproj" />
-  </ItemGroup>
+
+	  <ItemGroup>
+		  <ProjectReference Include="..\Modelo.csproj" />
+	  </ItemGroup>
+ 
 
   <ItemGroup>
     <Compile Update="Properties\Resources.Designer.cs">
