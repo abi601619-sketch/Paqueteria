@@ -1,4 +1,6 @@
 <Solution>
-  <Project Path="../Vista/Vista.csproj" />
-  <Project Path="Modelo.csproj" />
+  <Folder Name="/Paqueteria/">
+    <Project Path="../Vista/Vista.csproj" />
+    <Project Path="Modelo.csproj" />
+  </Folder>
 </Solution>
