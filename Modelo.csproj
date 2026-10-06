@@ -12,4 +12,10 @@
     <PackageReference Include="Microsoft.Data.SqlClient" Version="7.1.1" />
   </ItemGroup>
 
+<ItemGroup>
+  <Compile Remove="Vista\**" />
+  <EmbeddedResource Remove="Vista\**" />
+  <None Remove="Vista\**" />
+</ItemGroup>
+
 </Project>
