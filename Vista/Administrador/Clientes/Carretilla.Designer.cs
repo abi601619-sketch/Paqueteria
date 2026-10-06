@@ -41,7 +41,7 @@
             btnEnProceso = new Guna.UI2.WinForms.Guna2Button();
             btnPendientes = new Guna.UI2.WinForms.Guna2Button();
             guna2HtmlLabel2 = new Guna.UI2.WinForms.Guna2HtmlLabel();
-            guna2TextBox1 = new Guna.UI2.WinForms.Guna2TextBox();
+            txtBuscar = new Guna.UI2.WinForms.Guna2TextBox();
             SuspendLayout();
             // 
             // flpPedidos
@@ -113,24 +113,24 @@
             guna2HtmlLabel2.Text = "Mis Pedidos";
             guna2HtmlLabel2.Click += guna2HtmlLabel2_Click;
             // 
-            // guna2TextBox1
+            // txtBuscar
             // 
-            guna2TextBox1.CustomizableEdges = customizableEdges7;
-            guna2TextBox1.DefaultText = "";
-            guna2TextBox1.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
-            guna2TextBox1.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
-            guna2TextBox1.DisabledState.ForeColor = Color.FromArgb(138, 138, 138);
-            guna2TextBox1.DisabledState.PlaceholderForeColor = Color.FromArgb(138, 138, 138);
-            guna2TextBox1.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
-            guna2TextBox1.Font = new Font("Segoe UI", 9F);
-            guna2TextBox1.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            guna2TextBox1.Location = new Point(27, 20);
-            guna2TextBox1.Name = "guna2TextBox1";
-            guna2TextBox1.PlaceholderText = "";
-            guna2TextBox1.SelectedText = "";
-            guna2TextBox1.ShadowDecoration.CustomizableEdges = customizableEdges8;
-            guna2TextBox1.Size = new Size(890, 42);
-            guna2TextBox1.TabIndex = 7;
+            txtBuscar.CustomizableEdges = customizableEdges7;
+            txtBuscar.DefaultText = "";
+            txtBuscar.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
+            txtBuscar.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
+            txtBuscar.DisabledState.ForeColor = Color.FromArgb(138, 138, 138);
+            txtBuscar.DisabledState.PlaceholderForeColor = Color.FromArgb(138, 138, 138);
+            txtBuscar.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
+            txtBuscar.Font = new Font("Segoe UI", 9F);
+            txtBuscar.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
+            txtBuscar.Location = new Point(27, 20);
+            txtBuscar.Name = "txtBuscar";
+            txtBuscar.PlaceholderText = "";
+            txtBuscar.SelectedText = "";
+            txtBuscar.ShadowDecoration.CustomizableEdges = customizableEdges8;
+            txtBuscar.Size = new Size(890, 42);
+            txtBuscar.TabIndex = 7;
             // 
             // Carretilla
             // 
@@ -143,10 +143,11 @@
             Controls.Add(btnEnProceso);
             Controls.Add(btnPendientes);
             Controls.Add(guna2HtmlLabel2);
-            Controls.Add(guna2TextBox1);
+            Controls.Add(txtBuscar);
             FormBorderStyle = FormBorderStyle.None;
             Name = "Carretilla";
             Text = "Carretilla";
+            Load += Carretilla_Load;
             ResumeLayout(false);
             PerformLayout();
         }
@@ -158,6 +159,6 @@
         private Guna.UI2.WinForms.Guna2Button btnEnProceso;
         private Guna.UI2.WinForms.Guna2Button btnPendientes;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel2;
-        private Guna.UI2.WinForms.Guna2TextBox guna2TextBox1;
+        private Guna.UI2.WinForms.Guna2TextBox txtBuscar;
     }
 }

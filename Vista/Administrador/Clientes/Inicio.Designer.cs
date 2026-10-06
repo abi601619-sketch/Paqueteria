@@ -36,7 +36,7 @@
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges6 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges7 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges8 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            guna2TextBox1 = new Guna.UI2.WinForms.Guna2TextBox();
+            txtBuscar = new Guna.UI2.WinForms.Guna2TextBox();
             guna2HtmlLabel1 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             guna2HtmlLabel2 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             btnLimpieza = new Guna.UI2.WinForms.Guna2Button();
@@ -45,25 +45,25 @@
             flpProductos = new FlowLayoutPanel();
             SuspendLayout();
             // 
-            // guna2TextBox1
+            // txtBuscar
             // 
-            guna2TextBox1.CustomizableEdges = customizableEdges1;
-            guna2TextBox1.DefaultText = "";
-            guna2TextBox1.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
-            guna2TextBox1.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
-            guna2TextBox1.DisabledState.ForeColor = Color.FromArgb(138, 138, 138);
-            guna2TextBox1.DisabledState.PlaceholderForeColor = Color.FromArgb(138, 138, 138);
-            guna2TextBox1.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
-            guna2TextBox1.Font = new Font("Segoe UI", 9F);
-            guna2TextBox1.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            guna2TextBox1.Location = new Point(27, 27);
-            guna2TextBox1.Name = "guna2TextBox1";
-            guna2TextBox1.PlaceholderText = "";
-            guna2TextBox1.SelectedText = "";
-            guna2TextBox1.ShadowDecoration.CustomizableEdges = customizableEdges2;
-            guna2TextBox1.Size = new Size(890, 42);
-            guna2TextBox1.TabIndex = 0;
-            guna2TextBox1.TextChanged += guna2TextBox1_TextChanged;
+            txtBuscar.CustomizableEdges = customizableEdges1;
+            txtBuscar.DefaultText = "";
+            txtBuscar.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
+            txtBuscar.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
+            txtBuscar.DisabledState.ForeColor = Color.FromArgb(138, 138, 138);
+            txtBuscar.DisabledState.PlaceholderForeColor = Color.FromArgb(138, 138, 138);
+            txtBuscar.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
+            txtBuscar.Font = new Font("Segoe UI", 9F);
+            txtBuscar.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
+            txtBuscar.Location = new Point(27, 27);
+            txtBuscar.Name = "txtBuscar";
+            txtBuscar.PlaceholderText = "";
+            txtBuscar.SelectedText = "";
+            txtBuscar.ShadowDecoration.CustomizableEdges = customizableEdges2;
+            txtBuscar.Size = new Size(890, 42);
+            txtBuscar.TabIndex = 0;
+            txtBuscar.TextChanged += guna2TextBox1_TextChanged;
             // 
             // guna2HtmlLabel1
             // 
@@ -155,7 +155,7 @@
             Controls.Add(btnLimpieza);
             Controls.Add(guna2HtmlLabel2);
             Controls.Add(guna2HtmlLabel1);
-            Controls.Add(guna2TextBox1);
+            Controls.Add(txtBuscar);
             FormBorderStyle = FormBorderStyle.None;
             Name = "Inicio";
             Text = "Inicio";
@@ -166,7 +166,7 @@
 
         #endregion
 
-        private Guna.UI2.WinForms.Guna2TextBox guna2TextBox1;
+        private Guna.UI2.WinForms.Guna2TextBox txtBuscar;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel1;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel2;
         private Guna.UI2.WinForms.Guna2Button btnLimpieza;
