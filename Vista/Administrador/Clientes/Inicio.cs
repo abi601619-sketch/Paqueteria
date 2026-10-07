@@ -1,4 +1,5 @@
 ﻿using Modelo.Entidades;
+using static Modelo.Entidades.ProductoDB;
 namespace Vista.Administrador.Clientes
 {
     public partial class Inicio : Form
@@ -10,8 +11,13 @@ namespace Vista.Administrador.Clientes
 
         private void guna2TextBox1_TextChanged(object sender, EventArgs e)
         {
+            ProductoDB db = new ProductoDB();
 
+            List<Producto> productos = db.BuscarProductos(txtBuscar.Text);
+
+            MostrarProductos(productos);
         }
+
 
         private void Inicio_Load(object sender, EventArgs e)
         {
@@ -114,5 +120,6 @@ namespace Vista.Administrador.Clientes
 
             txtBuscar.BorderRadius = 18;
         }
+
     }
 }

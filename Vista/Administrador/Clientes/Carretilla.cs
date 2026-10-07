@@ -102,6 +102,9 @@ namespace Vista.Administrador.Clientes
             AplicarDiseño();
             DiseñarBarraBusqueda();
 
+            // Cargar pedidos pendientes inicialmente
+            btnPendientes.PerformClick();
+
         }
 
         private void DiseñarBarraBusqueda()
@@ -123,6 +126,26 @@ namespace Vista.Administrador.Clientes
             txtBuscar.PlaceholderForeColor = Color.FromArgb(140, 140, 140);
 
             txtBuscar.BorderRadius = 18;
+        }
+
+        private void txtBuscar_TextChanged(object sender, EventArgs e)
+        {
+            PedidoDB db = new PedidoDB();
+
+            if (string.IsNullOrWhiteSpace(txtBuscar.Text))
+            {
+                List<Pedido> pedidos =
+                    db.ObtenerPedidosPorEstado("Pendiente");
+
+                MostrarPedidos(pedidos);
+                return;
+            }
+
+            List<Pedido> resultados =
+                db.BuscarPedidos(txtBuscar.Text);
+
+            MostrarPedidos(resultados);
+
         }
     }
 }

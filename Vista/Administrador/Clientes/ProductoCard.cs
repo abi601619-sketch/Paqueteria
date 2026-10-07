@@ -1,10 +1,13 @@
 ﻿using Modelo.Entidades;
+using static Modelo.Entidades.ProductoDB;
 
 namespace Vista.Administrador.Clientes
 {
     public partial class ProductoCard : UserControl
     {
         private Producto producto;
+
+        public ProductoDB.Producto Producto { get; }
 
         public ProductoCard(Producto producto)
         {
@@ -14,6 +17,8 @@ namespace Vista.Administrador.Clientes
 
             CargarDatos();
         }
+
+
 
         private void CargarDatos()
         {
@@ -225,13 +230,39 @@ namespace Vista.Administrador.Clientes
                 case 60:
                     return "mochila.jpeg";
 
-
-
-
-
                 default:
                     return null;
             }
+        }
+
+        private void guna2Button1_Click(object sender, EventArgs e)
+        {
+            // Formulario Principal donde está la tarjeta
+            Form principal = this.FindForm();
+
+            // El contenedor donde está Principal
+            Control contenedor = principal.Parent;
+
+            // Crear sombra
+            Panel overlay = new Panel();
+
+            overlay.Dock = DockStyle.Fill;
+            overlay.BackColor = Color.FromArgb(150, 0, 0, 0);
+
+            // Agregar la sombra encima de Principal
+            contenedor.Controls.Add(overlay);
+            overlay.BringToFront();
+
+            // Abrir detalle
+            frmProductos formulario = new frmProductos(producto);
+
+            formulario.StartPosition = FormStartPosition.CenterScreen;
+
+            formulario.ShowDialog();
+
+            // Quitar sombra al cerrar
+            contenedor.Controls.Remove(overlay);
+            overlay.Dispose();
         }
     }
 }

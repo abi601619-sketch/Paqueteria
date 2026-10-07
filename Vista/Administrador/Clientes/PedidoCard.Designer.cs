@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges3 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges4 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges1 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges2 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             picProducto = new Guna.UI2.WinForms.Guna2PictureBox();
             lblNombre = new Label();
             lblPrecio = new Label();
@@ -41,12 +41,13 @@
             // 
             // picProducto
             // 
-            picProducto.CustomizableEdges = customizableEdges3;
+            picProducto.CustomizableEdges = customizableEdges1;
             picProducto.ImageRotate = 0F;
-            picProducto.Location = new Point(7, 15);
+            picProducto.Location = new Point(16, 18);
             picProducto.Name = "picProducto";
-            picProducto.ShadowDecoration.CustomizableEdges = customizableEdges4;
-            picProducto.Size = new Size(229, 119);
+            picProducto.ShadowDecoration.CustomizableEdges = customizableEdges2;
+            picProducto.Size = new Size(307, 194);
+            picProducto.SizeMode = PictureBoxSizeMode.Zoom;
             picProducto.TabIndex = 0;
             picProducto.TabStop = false;
             // 
@@ -54,7 +55,7 @@
             // 
             lblNombre.AutoSize = true;
             lblNombre.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblNombre.Location = new Point(12, 147);
+            lblNombre.Location = new Point(32, 215);
             lblNombre.Name = "lblNombre";
             lblNombre.Size = new Size(80, 21);
             lblNombre.TabIndex = 1;
@@ -63,7 +64,7 @@
             // lblPrecio
             // 
             lblPrecio.AutoSize = true;
-            lblPrecio.Location = new Point(13, 207);
+            lblPrecio.Location = new Point(33, 275);
             lblPrecio.Name = "lblPrecio";
             lblPrecio.Size = new Size(56, 15);
             lblPrecio.TabIndex = 2;
@@ -72,7 +73,7 @@
             // lblCantidad
             // 
             lblCantidad.AutoSize = true;
-            lblCantidad.Location = new Point(12, 181);
+            lblCantidad.Location = new Point(32, 249);
             lblCantidad.Name = "lblCantidad";
             lblCantidad.Size = new Size(56, 15);
             lblCantidad.TabIndex = 3;
@@ -81,7 +82,7 @@
             // lblFecha
             // 
             lblFecha.AutoSize = true;
-            lblFecha.Location = new Point(13, 243);
+            lblFecha.Location = new Point(33, 311);
             lblFecha.Name = "lblFecha";
             lblFecha.Size = new Size(56, 15);
             lblFecha.TabIndex = 4;
@@ -90,7 +91,7 @@
             // lblEstado
             // 
             lblEstado.AutoSize = true;
-            lblEstado.Location = new Point(113, 268);
+            lblEstado.Location = new Point(220, 325);
             lblEstado.Name = "lblEstado";
             lblEstado.Size = new Size(56, 15);
             lblEstado.TabIndex = 5;
@@ -107,7 +108,7 @@
             Controls.Add(lblNombre);
             Controls.Add(picProducto);
             Name = "PedidoCard";
-            Size = new Size(249, 300);
+            Size = new Size(348, 384);
             ((System.ComponentModel.ISupportInitialize)picProducto).EndInit();
             ResumeLayout(false);
             PerformLayout();

@@ -28,14 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges1 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges2 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges3 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges4 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges5 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges6 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges7 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges8 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges9 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges10 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges11 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges12 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges13 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges14 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges15 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges16 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             txtBuscar = new Guna.UI2.WinForms.Guna2TextBox();
             guna2HtmlLabel1 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             guna2HtmlLabel2 = new Guna.UI2.WinForms.Guna2HtmlLabel();
@@ -47,7 +47,7 @@
             // 
             // txtBuscar
             // 
-            txtBuscar.CustomizableEdges = customizableEdges1;
+            txtBuscar.CustomizableEdges = customizableEdges9;
             txtBuscar.DefaultText = "";
             txtBuscar.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
             txtBuscar.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
@@ -60,7 +60,7 @@
             txtBuscar.Name = "txtBuscar";
             txtBuscar.PlaceholderText = "";
             txtBuscar.SelectedText = "";
-            txtBuscar.ShadowDecoration.CustomizableEdges = customizableEdges2;
+            txtBuscar.ShadowDecoration.CustomizableEdges = customizableEdges10;
             txtBuscar.Size = new Size(890, 42);
             txtBuscar.TabIndex = 0;
             txtBuscar.TextChanged += guna2TextBox1_TextChanged;
@@ -87,7 +87,7 @@
             // 
             // btnLimpieza
             // 
-            btnLimpieza.CustomizableEdges = customizableEdges3;
+            btnLimpieza.CustomizableEdges = customizableEdges11;
             btnLimpieza.DisabledState.BorderColor = Color.DarkGray;
             btnLimpieza.DisabledState.CustomBorderColor = Color.DarkGray;
             btnLimpieza.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
@@ -96,7 +96,7 @@
             btnLimpieza.ForeColor = Color.White;
             btnLimpieza.Location = new Point(28, 150);
             btnLimpieza.Name = "btnLimpieza";
-            btnLimpieza.ShadowDecoration.CustomizableEdges = customizableEdges4;
+            btnLimpieza.ShadowDecoration.CustomizableEdges = customizableEdges12;
             btnLimpieza.Size = new Size(376, 44);
             btnLimpieza.TabIndex = 3;
             btnLimpieza.Text = "Limpieza";
@@ -104,7 +104,7 @@
             // 
             // btnTecnologia
             // 
-            btnTecnologia.CustomizableEdges = customizableEdges5;
+            btnTecnologia.CustomizableEdges = customizableEdges13;
             btnTecnologia.DisabledState.BorderColor = Color.DarkGray;
             btnTecnologia.DisabledState.CustomBorderColor = Color.DarkGray;
             btnTecnologia.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
@@ -113,7 +113,7 @@
             btnTecnologia.ForeColor = Color.White;
             btnTecnologia.Location = new Point(414, 150);
             btnTecnologia.Name = "btnTecnologia";
-            btnTecnologia.ShadowDecoration.CustomizableEdges = customizableEdges6;
+            btnTecnologia.ShadowDecoration.CustomizableEdges = customizableEdges14;
             btnTecnologia.Size = new Size(376, 44);
             btnTecnologia.TabIndex = 4;
             btnTecnologia.Text = "Tecnología";
@@ -121,7 +121,7 @@
             // 
             // btnRopa
             // 
-            btnRopa.CustomizableEdges = customizableEdges7;
+            btnRopa.CustomizableEdges = customizableEdges15;
             btnRopa.DisabledState.BorderColor = Color.DarkGray;
             btnRopa.DisabledState.CustomBorderColor = Color.DarkGray;
             btnRopa.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
@@ -130,7 +130,7 @@
             btnRopa.ForeColor = Color.White;
             btnRopa.Location = new Point(801, 150);
             btnRopa.Name = "btnRopa";
-            btnRopa.ShadowDecoration.CustomizableEdges = customizableEdges8;
+            btnRopa.ShadowDecoration.CustomizableEdges = customizableEdges16;
             btnRopa.Size = new Size(376, 44);
             btnRopa.TabIndex = 5;
             btnRopa.Text = "Ropa";
@@ -138,17 +138,17 @@
             // 
             // flpProductos
             // 
+            flpProductos.AutoScroll = true;
             flpProductos.Location = new Point(13, 291);
             flpProductos.Name = "flpProductos";
-            flpProductos.Size = new Size(1915, 797);
+            flpProductos.Size = new Size(1615, 797);
             flpProductos.TabIndex = 6;
             // 
             // Inicio
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            AutoScroll = true;
-            ClientSize = new Size(1940, 1100);
+            ClientSize = new Size(1640, 1015);
             Controls.Add(flpProductos);
             Controls.Add(btnRopa);
             Controls.Add(btnTecnologia);

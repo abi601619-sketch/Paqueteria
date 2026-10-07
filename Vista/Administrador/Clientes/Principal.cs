@@ -1,4 +1,5 @@
 ﻿using Modelo.Entidades;
+using static Modelo.Entidades.ProductoDB;
 
 namespace Vista.Administrador.Clientes
 {
@@ -9,13 +10,8 @@ namespace Vista.Administrador.Clientes
             InitializeComponent();
             DiseñarBarraBusqueda();
         }
-
-        private void CargarProductos()
+        private void CargarProductos(List<Producto> productos)
         {
-            ProductoDB db = new ProductoDB();
-
-            List<Producto> productos = db.ObtenerProductos();
-
             flpProductos.Controls.Clear();
 
             foreach (Producto producto in productos)
@@ -49,7 +45,20 @@ namespace Vista.Administrador.Clientes
 
         private void Principal_Load(object sender, EventArgs e)
         {
-            CargarProductos();
+            ProductoDB db = new ProductoDB();
+
+            List<Producto> productos = db.ObtenerProductos();
+
+            CargarProductos(productos);
+        }
+
+        private void txtBuscar_TextChanged(object sender, EventArgs e)
+        {
+            ProductoDB db = new ProductoDB();
+
+            List<Producto> productos = db.BuscarProductos(txtBuscar.Text);
+
+            CargarProductos(productos);
         }
     }
 }

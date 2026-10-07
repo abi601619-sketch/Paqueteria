@@ -91,25 +91,72 @@ namespace Modelo.Entidades
 
             return lista;
         }
-    }
 
 
-    public class Producto
-    {
-        public int IdProducto { get; set; }
+        public List<Producto> BuscarProductos(string texto)
+        {
+            List<Producto> productos = new List<Producto>();
 
-        public string Nombre { get; set; } = string.Empty;
+            using (SqlConnection conexion = Conexion.Conectar())
+            {
+                string consulta = @"
+            SELECT 
+                idProducto,
+                Nombre,
+                Precio,
+                IdCategoria,
+                Descripcion,
+                Stock,
+                LugarOrigen
+            FROM Productos
+            WHERE Nombre LIKE @Texto
+               OR LugarOrigen LIKE @Texto";
 
-        public byte[] Foto { get; set; }
+                using (SqlCommand comando = new SqlCommand(consulta, conexion))
+                {
+                    comando.Parameters.AddWithValue("@Texto", "%" + texto + "%");
 
-        public decimal Precio { get; set; }
+                    using (SqlDataReader reader = comando.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            productos.Add(new Producto
+                            {
+                                IdProducto = Convert.ToInt32(reader["idProducto"]),
+                                Nombre = reader["Nombre"].ToString(),
+                                Precio = Convert.ToDecimal(reader["Precio"]),
+                                IdCategoria = Convert.ToInt32(reader["IdCategoria"]),
+                                Descripcion = reader["Descripcion"].ToString(),
+                                Stock = Convert.ToInt32(reader["Stock"]),
+                                LugarOrigen = reader["LugarOrigen"].ToString()
+                            });
+                        }
+                    }
+                }
+            }
 
-        public string Descripcion { get; set; } = string.Empty;
+            return productos;
+        }
 
-        public int Stock { get; set; }
 
-        public string LugarOrigen { get; set; } = string.Empty;
 
-        public int IdCategoria { get; set; }
+        public class Producto
+        {
+            public int IdProducto { get; set; }
+
+            public string Nombre { get; set; } = string.Empty;
+
+            public byte[] Foto { get; set; }
+
+            public decimal Precio { get; set; }
+
+            public string Descripcion { get; set; } = string.Empty;
+
+            public int Stock { get; set; }
+
+            public string LugarOrigen { get; set; } = string.Empty;
+
+            public int IdCategoria { get; set; }
+        }
     }
 }

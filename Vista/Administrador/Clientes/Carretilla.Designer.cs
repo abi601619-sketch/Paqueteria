@@ -131,6 +131,7 @@
             txtBuscar.ShadowDecoration.CustomizableEdges = customizableEdges8;
             txtBuscar.Size = new Size(890, 42);
             txtBuscar.TabIndex = 7;
+            txtBuscar.TextChanged += txtBuscar_TextChanged;
             // 
             // Carretilla
             // 

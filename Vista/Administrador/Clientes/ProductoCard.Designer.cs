@@ -84,6 +84,7 @@
             guna2Button1.TabIndex = 3;
             guna2Button1.Text = "\U0001f6d2";
             guna2Button1.TextOffset = new Point(0, -2);
+            guna2Button1.Click += guna2Button1_Click;
             // 
             // ProductoCard
             // 

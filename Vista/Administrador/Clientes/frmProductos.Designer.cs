@@ -39,8 +39,6 @@
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges9 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges10 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges11 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges12 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges13 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             picProducto = new Guna.UI2.WinForms.Guna2PictureBox();
             guna2HtmlLabel1 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             lblTipoTitulo = new Guna.UI2.WinForms.Guna2HtmlLabel();
@@ -49,7 +47,6 @@
             guna2HtmlLabel5 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             lblPrecio = new Guna.UI2.WinForms.Guna2HtmlLabel();
             guna2HtmlLabel7 = new Guna.UI2.WinForms.Guna2HtmlLabel();
-            cmbLugarOrigen = new Guna.UI2.WinForms.Guna2ComboBox();
             guna2HtmlLabel8 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             cmbPuntoEntrega = new Guna.UI2.WinForms.Guna2ComboBox();
             guna2HtmlLabel9 = new Guna.UI2.WinForms.Guna2HtmlLabel();
@@ -60,6 +57,7 @@
             guna2HtmlLabel12 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             btnComprar = new Guna.UI2.WinForms.Guna2Button();
             btnCerrar = new Guna.UI2.WinForms.Guna2CircleButton();
+            lblLugarOrigen = new Guna.UI2.WinForms.Guna2HtmlLabel();
             ((System.ComponentModel.ISupportInitialize)picProducto).BeginInit();
             SuspendLayout();
             // 
@@ -71,6 +69,7 @@
             picProducto.Name = "picProducto";
             picProducto.ShadowDecoration.CustomizableEdges = customizableEdges2;
             picProducto.Size = new Size(240, 248);
+            picProducto.SizeMode = PictureBoxSizeMode.Zoom;
             picProducto.TabIndex = 0;
             picProducto.TabStop = false;
             // 
@@ -145,23 +144,6 @@
             guna2HtmlLabel7.TabIndex = 7;
             guna2HtmlLabel7.Text = "Lugar de origen";
             // 
-            // cmbLugarOrigen
-            // 
-            cmbLugarOrigen.BackColor = Color.Transparent;
-            cmbLugarOrigen.CustomizableEdges = customizableEdges3;
-            cmbLugarOrigen.DrawMode = DrawMode.OwnerDrawFixed;
-            cmbLugarOrigen.DropDownStyle = ComboBoxStyle.DropDownList;
-            cmbLugarOrigen.FocusedColor = Color.FromArgb(94, 148, 255);
-            cmbLugarOrigen.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
-            cmbLugarOrigen.Font = new Font("Segoe UI", 7F);
-            cmbLugarOrigen.ForeColor = Color.FromArgb(68, 88, 112);
-            cmbLugarOrigen.ItemHeight = 30;
-            cmbLugarOrigen.Location = new Point(282, 267);
-            cmbLugarOrigen.Name = "cmbLugarOrigen";
-            cmbLugarOrigen.ShadowDecoration.CustomizableEdges = customizableEdges4;
-            cmbLugarOrigen.Size = new Size(273, 36);
-            cmbLugarOrigen.TabIndex = 8;
-            // 
             // guna2HtmlLabel8
             // 
             guna2HtmlLabel8.BackColor = Color.Transparent;
@@ -175,7 +157,7 @@
             // cmbPuntoEntrega
             // 
             cmbPuntoEntrega.BackColor = Color.Transparent;
-            cmbPuntoEntrega.CustomizableEdges = customizableEdges5;
+            cmbPuntoEntrega.CustomizableEdges = customizableEdges3;
             cmbPuntoEntrega.DrawMode = DrawMode.OwnerDrawFixed;
             cmbPuntoEntrega.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbPuntoEntrega.FocusedColor = Color.FromArgb(94, 148, 255);
@@ -185,7 +167,7 @@
             cmbPuntoEntrega.ItemHeight = 30;
             cmbPuntoEntrega.Location = new Point(282, 345);
             cmbPuntoEntrega.Name = "cmbPuntoEntrega";
-            cmbPuntoEntrega.ShadowDecoration.CustomizableEdges = customizableEdges6;
+            cmbPuntoEntrega.ShadowDecoration.CustomizableEdges = customizableEdges4;
             cmbPuntoEntrega.Size = new Size(273, 36);
             cmbPuntoEntrega.TabIndex = 10;
             // 
@@ -201,7 +183,7 @@
             // 
             // btnMas
             // 
-            btnMas.CustomizableEdges = customizableEdges7;
+            btnMas.CustomizableEdges = customizableEdges5;
             btnMas.DisabledState.BorderColor = Color.DarkGray;
             btnMas.DisabledState.CustomBorderColor = Color.DarkGray;
             btnMas.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
@@ -210,14 +192,14 @@
             btnMas.ForeColor = Color.White;
             btnMas.Location = new Point(378, 412);
             btnMas.Name = "btnMas";
-            btnMas.ShadowDecoration.CustomizableEdges = customizableEdges8;
+            btnMas.ShadowDecoration.CustomizableEdges = customizableEdges6;
             btnMas.Size = new Size(44, 19);
             btnMas.TabIndex = 12;
             btnMas.Click += btnMas_Click;
             // 
             // btnMenos
             // 
-            btnMenos.CustomizableEdges = customizableEdges9;
+            btnMenos.CustomizableEdges = customizableEdges7;
             btnMenos.DisabledState.BorderColor = Color.DarkGray;
             btnMenos.DisabledState.CustomBorderColor = Color.DarkGray;
             btnMenos.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
@@ -226,7 +208,7 @@
             btnMenos.ForeColor = Color.White;
             btnMenos.Location = new Point(282, 413);
             btnMenos.Name = "btnMenos";
-            btnMenos.ShadowDecoration.CustomizableEdges = customizableEdges10;
+            btnMenos.ShadowDecoration.CustomizableEdges = customizableEdges8;
             btnMenos.Size = new Size(44, 19);
             btnMenos.TabIndex = 13;
             btnMenos.Click += btnMenos_Click;
@@ -261,7 +243,7 @@
             // 
             // btnComprar
             // 
-            btnComprar.CustomizableEdges = customizableEdges11;
+            btnComprar.CustomizableEdges = customizableEdges9;
             btnComprar.DisabledState.BorderColor = Color.DarkGray;
             btnComprar.DisabledState.CustomBorderColor = Color.DarkGray;
             btnComprar.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
@@ -270,10 +252,11 @@
             btnComprar.ForeColor = Color.White;
             btnComprar.Location = new Point(289, 449);
             btnComprar.Name = "btnComprar";
-            btnComprar.ShadowDecoration.CustomizableEdges = customizableEdges12;
+            btnComprar.ShadowDecoration.CustomizableEdges = customizableEdges10;
             btnComprar.Size = new Size(260, 29);
             btnComprar.TabIndex = 17;
             btnComprar.Text = "guna2Button3";
+            btnComprar.Click += btnComprar_Click;
             // 
             // btnCerrar
             // 
@@ -287,17 +270,29 @@
             btnCerrar.Image = Properties.Resources.letra_x;
             btnCerrar.Location = new Point(532, 16);
             btnCerrar.Name = "btnCerrar";
-            btnCerrar.ShadowDecoration.CustomizableEdges = customizableEdges13;
+            btnCerrar.ShadowDecoration.CustomizableEdges = customizableEdges11;
             btnCerrar.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
             btnCerrar.Size = new Size(40, 38);
             btnCerrar.TabIndex = 18;
             btnCerrar.Click += btnCerrar_Click;
+            // 
+            // lblLugarOrigen
+            // 
+            lblLugarOrigen.BackColor = Color.Transparent;
+            lblLugarOrigen.Font = new Font("Segoe UI Black", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblLugarOrigen.ForeColor = Color.Blue;
+            lblLugarOrigen.Location = new Point(282, 269);
+            lblLugarOrigen.Name = "lblLugarOrigen";
+            lblLugarOrigen.Size = new Size(94, 27);
+            lblLugarOrigen.TabIndex = 19;
+            lblLugarOrigen.Text = "Categoria";
             // 
             // frmProductos
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(587, 500);
+            Controls.Add(lblLugarOrigen);
             Controls.Add(btnCerrar);
             Controls.Add(btnComprar);
             Controls.Add(guna2HtmlLabel12);
@@ -308,7 +303,6 @@
             Controls.Add(guna2HtmlLabel9);
             Controls.Add(cmbPuntoEntrega);
             Controls.Add(guna2HtmlLabel8);
-            Controls.Add(cmbLugarOrigen);
             Controls.Add(guna2HtmlLabel7);
             Controls.Add(lblPrecio);
             Controls.Add(guna2HtmlLabel5);
@@ -319,6 +313,7 @@
             Controls.Add(picProducto);
             FormBorderStyle = FormBorderStyle.None;
             Name = "frmProductos";
+            StartPosition = FormStartPosition.CenterParent;
             Text = "frmProductos";
             Load += frmProductos_Load;
             ((System.ComponentModel.ISupportInitialize)picProducto).EndInit();
@@ -336,7 +331,6 @@
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel5;
         private Guna.UI2.WinForms.Guna2HtmlLabel lblPrecio;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel7;
-        private Guna.UI2.WinForms.Guna2ComboBox cmbLugarOrigen;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel8;
         private Guna.UI2.WinForms.Guna2ComboBox cmbPuntoEntrega;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel9;
@@ -347,5 +341,6 @@
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel12;
         private Guna.UI2.WinForms.Guna2Button btnComprar;
         private Guna.UI2.WinForms.Guna2CircleButton btnCerrar;
+        private Guna.UI2.WinForms.Guna2HtmlLabel lblLugarOrigen;
     }
 }
