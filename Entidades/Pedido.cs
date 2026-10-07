@@ -1,6 +1,7 @@
 ﻿
 using Microsoft.Data.SqlClient;
 using Modelo.Conexion_DB;
+using System.Data;
 
 
 
@@ -14,24 +15,10 @@ namespace Modelo.Entidades
 
             using (SqlConnection conexion = Conexion.Conectar())
             {
-                string sql = @"SELECT
-                                    dp.idPedido,
-                                    dp.FechaPedido,
-                                    dp.Estado,
-                                    dp.Cantidad,
-                                    dp.idProducto,
-                                    dp.idUsuario,
-                                    dp.idPuntoEntrega,
-                                    p.Nombre,
-                                    p.Precio,
-                                    p.Foto
-                               FROM DetallePedidos dp
-                               INNER JOIN Productos p
-                                   ON dp.idProducto = p.idProducto
-                               WHERE dp.Estado = @Estado";
-
-                using (SqlCommand cmd = new SqlCommand(sql, conexion))
+                using (SqlCommand cmd = new SqlCommand("sp_ObtenerPedidosPorEstado", conexion))
                 {
+                    cmd.CommandType = CommandType.StoredProcedure;
+
                     cmd.Parameters.AddWithValue("@Estado", estado);
 
                     using (SqlDataReader reader = cmd.ExecuteReader())
@@ -40,37 +27,27 @@ namespace Modelo.Entidades
                         {
                             Pedido pedido = new Pedido();
 
-                            pedido.IdPedido =
-                                Convert.ToInt32(reader["idPedido"]);
+                            pedido.IdPedido = Convert.ToInt32(reader["IdPedido"]);
 
-                            pedido.FechaPedido =
-                                Convert.ToDateTime(reader["FechaPedido"]);
+                            pedido.FechaPedido = Convert.ToDateTime(reader["FechaPedido"]);
 
-                            pedido.Estado =
-                                reader["Estado"].ToString();
+                            pedido.Estado = reader["Estado"].ToString();
 
-                            pedido.Cantidad =
-                                Convert.ToInt32(reader["Cantidad"]);
+                            pedido.Cantidad = Convert.ToInt32(reader["Cantidad"]);
 
-                            pedido.IdProducto =
-                                Convert.ToInt32(reader["idProducto"]);
+                            pedido.IdProducto = Convert.ToInt32(reader["IdProducto"]);
 
-                            pedido.IdUsuario =
-                                Convert.ToInt32(reader["idUsuario"]);
+                            pedido.IdUsuario = Convert.ToInt32(reader["IdUsuario"]);
 
-                            pedido.IdPuntoEntrega =
-                                Convert.ToInt32(reader["idPuntoEntrega"]);
+                            pedido.IdPuntoEntrega = Convert.ToInt32(reader["IdPuntoEntrega"]);
 
-                            pedido.NombreProducto =
-                                reader["Nombre"].ToString();
+                            pedido.NombreProducto = reader["NombreProducto"].ToString();
 
-                            pedido.Precio =
-                                Convert.ToDecimal(reader["Precio"]);
+                            pedido.Precio = Convert.ToDecimal(reader["Precio"]);
 
                             if (reader["Foto"] != DBNull.Value)
                             {
-                                pedido.Foto =
-                                    (byte[])reader["Foto"];
+                                pedido.Foto = (byte[])reader["Foto"];
                             }
 
                             lista.Add(pedido);
@@ -82,50 +59,23 @@ namespace Modelo.Entidades
             return lista;
         }
 
-
-
         public bool CrearPedido(int cantidad, int idProducto, int idUsuario, int idPuntoEntrega)
         {
             try
             {
                 using (SqlConnection conexion = Conexion.Conectar())
                 {
-                    string consulta = @"
-                INSERT INTO DetallePedidos
-                (
-                    FechaPedido,
-                    Estado,
-                    Cantidad,
-                    idProducto,
-                    idUsuario,
-                    idPuntoEntrega
-                )
-                VALUES
-                (
-                    GETDATE(),
-                    'Pendiente',
-                    @Cantidad,
-                    @IdProducto,
-                    @IdUsuario,
-                    @IdPuntoEntrega
-                )";
-
-                    using (SqlCommand comando =
-                           new SqlCommand(consulta, conexion))
+                    using (SqlCommand comando = new SqlCommand("sp_CrearPedido", conexion))
                     {
-                        comando.Parameters.AddWithValue(
-                            "@Cantidad", cantidad);
+                        comando.CommandType = CommandType.StoredProcedure;
 
-                        comando.Parameters.AddWithValue(
-                            "@IdProducto", idProducto);
+                        comando.Parameters.AddWithValue("@Cantidad", cantidad);
 
-                        comando.Parameters.AddWithValue(
-                            "@IdUsuario", idUsuario);
+                        comando.Parameters.AddWithValue("@IdProducto", idProducto);
 
-                        comando.Parameters.AddWithValue(
-                            "@IdPuntoEntrega", idPuntoEntrega);
+                        comando.Parameters.AddWithValue("@IdUsuario", idUsuario);
 
-                        conexion.Open();
+                        comando.Parameters.AddWithValue("@IdPuntoEntrega", idPuntoEntrega);
 
                         return comando.ExecuteNonQuery() > 0;
                     }
@@ -137,37 +87,48 @@ namespace Modelo.Entidades
             }
         }
 
-
         public List<Pedido> BuscarPedidos(string texto)
         {
             List<Pedido> pedidos = new List<Pedido>();
 
             using (SqlConnection conexion = Conexion.Conectar())
             {
-                string consulta = @"SELECT * FROM VerPedidos
-            WHERE NombreProducto LIKE @Texto";
-
-                using (SqlCommand comando = new SqlCommand(consulta, conexion))
+                using (SqlCommand comando = new SqlCommand("sp_BuscarPedidos", conexion))
                 {
-                    comando.Parameters.AddWithValue("@Texto", "%" + texto + "%");
+                    comando.CommandType = CommandType.StoredProcedure;
+
+                    comando.Parameters.AddWithValue("@Texto", texto);
 
                     using (SqlDataReader reader = comando.ExecuteReader())
                     {
                         while (reader.Read())
                         {
-                            pedidos.Add(new Pedido
-                            {
-                                IdPedido = Convert.ToInt32(reader["IdPedido"]),
-                                FechaPedido = Convert.ToDateTime(reader["FechaPedido"]),
-                                Estado = reader["Estado"].ToString(),
-                                Cantidad = Convert.ToInt32(reader["Cantidad"]),
-                                IdProducto = Convert.ToInt32(reader["IdProducto"]),
-                                IdUsuario = Convert.ToInt32(reader["IdUsuario"]),
-                                IdPuntoEntrega = Convert.ToInt32(reader["IdPuntoEntrega"]),
-                                NombreProducto = reader["NombreProducto"].ToString(),
-                                Precio = Convert.ToDecimal(reader["Precio"]),
+                            Pedido pedido = new Pedido();
 
-                            });
+                            pedido.IdPedido = Convert.ToInt32(reader["IdPedido"]);
+
+                            pedido.FechaPedido = Convert.ToDateTime(reader["FechaPedido"]);
+
+                            pedido.Estado = reader["Estado"].ToString();
+
+                            pedido.Cantidad = Convert.ToInt32(reader["Cantidad"]);
+
+                            pedido.IdProducto = Convert.ToInt32(reader["IdProducto"]);
+
+                            pedido.IdUsuario = Convert.ToInt32(reader["IdUsuario"]);
+
+                            pedido.IdPuntoEntrega = Convert.ToInt32(reader["IdPuntoEntrega"]);
+
+                            pedido.NombreProducto = reader["NombreProducto"].ToString();
+
+                            pedido.Precio = Convert.ToDecimal(reader["Precio"]);
+
+                            if (reader["Foto"] != DBNull.Value)
+                            {
+                                pedido.Foto = (byte[])reader["Foto"];
+                            }
+
+                            pedidos.Add(pedido);
                         }
                     }
                 }

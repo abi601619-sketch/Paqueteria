@@ -5,12 +5,12 @@
         public Overlay()
         {
             InitializeComponent();
+
             this.FormBorderStyle = FormBorderStyle.None;
             this.BackColor = Color.Black;
             this.Opacity = 0.5;
             this.ShowInTaskbar = false;
-
+            this.StartPosition = FormStartPosition.Manual;
         }
     }
 }
-

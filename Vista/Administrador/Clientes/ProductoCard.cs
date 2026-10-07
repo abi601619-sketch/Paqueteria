@@ -1,4 +1,5 @@
 ﻿using Modelo.Entidades;
+using Vista.Administrador.Clientes.Imagenes;
 using static Modelo.Entidades.ProductoDB;
 
 namespace Vista.Administrador.Clientes
@@ -237,31 +238,33 @@ namespace Vista.Administrador.Clientes
 
         private void guna2Button1_Click(object sender, EventArgs e)
         {
-            // Formulario Principal donde está la tarjeta
+            // Principal donde está la tarjeta
             Form principal = this.FindForm();
 
-            // El contenedor donde está Principal
+            // PanelContenido del Dashboard
             Control contenedor = principal.Parent;
 
-            // Crear sombra
-            Panel overlay = new Panel();
+            // Crear overlay
+            Overlay overlay = new Overlay();
 
-            overlay.Dock = DockStyle.Fill;
-            overlay.BackColor = Color.FromArgb(150, 0, 0, 0);
+            // Hacer que cubra exactamente el panelContenido
+            overlay.Bounds = contenedor.RectangleToScreen(
+                contenedor.ClientRectangle
+            );
 
-            // Agregar la sombra encima de Principal
-            contenedor.Controls.Add(overlay);
+            // Mostrar el overlay
+            overlay.Show(principal);
             overlay.BringToFront();
 
-            // Abrir detalle
+            // Abrir detalle del producto
             frmProductos formulario = new frmProductos(producto);
 
             formulario.StartPosition = FormStartPosition.CenterScreen;
 
-            formulario.ShowDialog();
+            formulario.ShowDialog(principal);
 
-            // Quitar sombra al cerrar
-            contenedor.Controls.Remove(overlay);
+            // Cuando se cierre el detalle
+            overlay.Close();
             overlay.Dispose();
         }
     }
