@@ -1,14 +1,8 @@
 ﻿using Modelo.Datos;
 using Modelo.Entidades;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
-using System.Windows.Forms;
 using Vista.Administrador.Clientes;
 using Vista.Conductor;
+using Vista.Crear_cuenta;
 
 namespace Vista.Login
 {
@@ -153,6 +147,18 @@ namespace Vista.Login
             {
                 return false;
             }
+        }
+
+        private void guna2Button2_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void guna2Button1_Click(object sender, EventArgs e)
+        {
+            frmCrearCuenta dashboard = new frmCrearCuenta();
+            dashboard.Show();
+            this.Hide();
         }
     }
 }
