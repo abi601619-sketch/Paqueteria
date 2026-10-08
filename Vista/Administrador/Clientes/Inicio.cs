@@ -25,6 +25,11 @@ namespace Vista.Administrador.Clientes
             AplicarDiseñoCategorias();
             DiseñarBarraBusqueda();
 
+            // Cargar productos de Limpieza
+            CargarCategoria(1);
+            // Marcar Limpieza como seleccionada
+            SeleccionarCategoria(btnLimpieza);
+
         }
         private void MostrarProductos(List<Producto> productos)
         {

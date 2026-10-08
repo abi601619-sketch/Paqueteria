@@ -98,6 +98,9 @@
             ConfigurarBotonMenu(btnProductos);
             ConfigurarBotonMenu(btnCarretilla);
             ConfigurarCerrarSesion();
+
+            // Cargar productos automáticamente
+            AbrirFormulario(PantallaInicio);
         }
     }
 }
