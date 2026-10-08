@@ -31,19 +31,13 @@ namespace Vista.Login
 
             if (string.IsNullOrWhiteSpace(txtUsuario.Text))
             {
-                errorProvider1.SetError(
-                    txtUsuario,
-                    "El correo electrónico es obligatorio."
-                );
+                errorProvider1.SetError(txtUsuario, "El correo electrónico es obligatorio.");
 
                 hayErrores = true;
             }
             else if (!CorreoValido(txtUsuario.Text.Trim()))
             {
-                errorProvider1.SetError(
-                    txtUsuario,
-                    "Ingrese un correo electrónico válido."
-                );
+                errorProvider1.SetError(txtUsuario, "Ingrese un correo electrónico válido.");
 
                 hayErrores = true;
             }
@@ -54,10 +48,7 @@ namespace Vista.Login
 
             if (string.IsNullOrWhiteSpace(txtContraseña.Text))
             {
-                errorProvider1.SetError(
-                    txtContraseña,
-                    "La contraseña es obligatoria."
-                );
+                errorProvider1.SetError(txtContraseña, "La contraseña es obligatoria.");
 
                 hayErrores = true;
             }
@@ -77,17 +68,13 @@ namespace Vista.Login
 
             UsuarioDAO usuarioDAO = new UsuarioDAO();
 
-            Usuario usuario = usuarioDAO.IniciarSesion(
-                txtUsuario.Text.Trim(),
-                txtContraseña.Text
-            );
+            Usuario usuario = usuarioDAO.IniciarSesion(txtUsuario.Text.Trim(), txtContraseña.Text);
 
             if (usuario != null)
             {
                 UsuarioDAO UsuarioDAO = new UsuarioDAO();
 
-                string tipoUsuario =
-                    usuarioDAO.ObtenerTipoUsuario(usuario.IdUsuario);
+                string tipoUsuario = usuarioDAO.ObtenerTipoUsuario(usuario.IdUsuario);
 
                 if (tipoUsuario == "Conductor")
                 {
@@ -106,12 +93,7 @@ namespace Vista.Login
                 }
                 else if (tipoUsuario == "Administrador")
                 {
-                    MessageBox.Show(
-                        "Usuario administrador detectado. " +
-                        "El menú de administrador se conectará posteriormente.",
-                        "Inicio de sesión",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Information
+                    MessageBox.Show("Usuario administrador detectado. " + "El menú de administrador se conectará posteriormente.", "Inicio de sesión", MessageBoxButtons.OK, MessageBoxIcon.Information
                     );
                 }
                 else

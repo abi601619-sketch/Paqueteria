@@ -276,26 +276,13 @@ namespace Vista.Crear_cuenta
 
         private void btnMostrarContrasena_Click(object sender, EventArgs e)
         {
-            if (txtContrasena.PasswordChar == '●')
-            {
-                txtContrasena.PasswordChar = '\0';
-            }
-            else
-            {
-                txtContrasena.PasswordChar = '●';
-            }
+            txtConfirmarContrasena.UseSystemPasswordChar = !txtConfirmarContrasena.UseSystemPasswordChar;
+
         }
 
         private void btnMostrarcontrasena1_Click(object sender, EventArgs e)
         {
-            if (txtConfirmarContrasena.PasswordChar == '●')
-            {
-                txtConfirmarContrasena.PasswordChar = '\0';
-            }
-            else
-            {
-                txtConfirmarContrasena.PasswordChar = '●';
-            }
+            txtContrasena.UseSystemPasswordChar = !txtContrasena.UseSystemPasswordChar;
         }
 
         private void lnkIniciarSesion_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

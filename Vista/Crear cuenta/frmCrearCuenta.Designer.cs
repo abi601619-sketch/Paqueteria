@@ -141,14 +141,15 @@
             btnMostrarContrasena.DisabledState.CustomBorderColor = Color.DarkGray;
             btnMostrarContrasena.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
             btnMostrarContrasena.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            btnMostrarContrasena.FillColor = Color.Transparent;
             btnMostrarContrasena.Font = new Font("Segoe UI", 9F);
             btnMostrarContrasena.ForeColor = Color.White;
+            btnMostrarContrasena.Image = Properties.Resources.vista;
             btnMostrarContrasena.Location = new Point(728, 483);
             btnMostrarContrasena.Name = "btnMostrarContrasena";
             btnMostrarContrasena.ShadowDecoration.CustomizableEdges = customizableEdges2;
             btnMostrarContrasena.Size = new Size(24, 24);
             btnMostrarContrasena.TabIndex = 31;
-            btnMostrarContrasena.Text = "guna2Button2";
             btnMostrarContrasena.Click += btnMostrarContrasena_Click;
             // 
             // btnMostrarcontrasena1
@@ -158,14 +159,15 @@
             btnMostrarcontrasena1.DisabledState.CustomBorderColor = Color.DarkGray;
             btnMostrarcontrasena1.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
             btnMostrarcontrasena1.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            btnMostrarcontrasena1.FillColor = Color.Transparent;
             btnMostrarcontrasena1.Font = new Font("Segoe UI", 9F);
             btnMostrarcontrasena1.ForeColor = Color.White;
+            btnMostrarcontrasena1.Image = Properties.Resources.vista;
             btnMostrarcontrasena1.Location = new Point(313, 483);
             btnMostrarcontrasena1.Name = "btnMostrarcontrasena1";
             btnMostrarcontrasena1.ShadowDecoration.CustomizableEdges = customizableEdges4;
             btnMostrarcontrasena1.Size = new Size(24, 24);
             btnMostrarcontrasena1.TabIndex = 30;
-            btnMostrarcontrasena1.Text = "guna2Button1";
             btnMostrarcontrasena1.Click += btnMostrarcontrasena1_Click;
             // 
             // lnkIniciarSesion
