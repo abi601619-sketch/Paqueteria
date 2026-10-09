@@ -86,7 +86,7 @@ namespace Vista.Login
                 }
                 else if (tipoUsuario == "Cliente")
                 {
-                    Dashboard ventanaCliente = new Dashboard();
+                    Dashboard ventanaCliente = new Dashboard(usuario);
 
                     ventanaCliente.Show();
                     this.Hide();

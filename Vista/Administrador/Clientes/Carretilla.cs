@@ -8,7 +8,12 @@ namespace Vista.Administrador.Clientes
         {
             InitializeComponent();
         }
-
+        private List<Pedido> pedidosFiltrados = new List<Pedido>();
+        private int indiceActual = 0;
+        private const int TAMANO_PAGINA = 8;
+        private bool mostrandoTodos = false;
+        private string estadoActual = "Pendiente";
+        private bool buscando = false;
         private void AplicarDiseño()
         {
             Color gris = ColorTranslator.FromHtml("#F0F0F2");
@@ -52,27 +57,49 @@ namespace Vista.Administrador.Clientes
         {
 
         }
+
         private void MostrarPedidos(List<Pedido> pedidos)
         {
+            pedidosFiltrados = pedidos ?? new List<Pedido>();
+            indiceActual = 0;
+            mostrandoTodos = false;
+
             flpPedidos.Controls.Clear();
 
-            foreach (Pedido pedido in pedidos)
-            {
-                PedidoCard card = new PedidoCard(pedido);
+            CargarSiguientePagina();
+        }
 
+        private void CargarSiguientePagina()
+        {
+            int limite = Math.Min(
+                indiceActual + TAMANO_PAGINA,
+                pedidosFiltrados.Count
+            );
+
+            for (int i = indiceActual; i < limite; i++)
+            {
+                PedidoCard card = new PedidoCard(pedidosFiltrados[i]);
                 flpPedidos.Controls.Add(card);
             }
+
+            indiceActual = limite;
+
+            btnVerMas.Visible = pedidosFiltrados.Count > TAMANO_PAGINA;
+
+            btnVerMas.Text = mostrandoTodos ? "↑ Ver menos pedidos" : "↓ Ver más pedidos";
         }
+
 
         private void btnPendientes_Click(object sender, EventArgs e)
         {
+            buscando = false;
+
             SeleccionarBoton(btnPendientes, "#F51B23");
 
             PedidoDB db = new PedidoDB();
+            MostrarPedidos(db.ObtenerPedidosPorEstado(estadoActual)); estadoActual = "Pendiente";
 
-            List<Pedido> pedidos = db.ObtenerPedidosPorEstado("Pendiente");
-
-            MostrarPedidos(pedidos);
+            ActualizarPedidos();
         }
 
         private void btnEnProceso_Click(object sender, EventArgs e)
@@ -147,5 +174,41 @@ namespace Vista.Administrador.Clientes
             MostrarPedidos(resultados);
 
         }
+
+        private void btnVerMas_Click(object sender, EventArgs e)
+        {
+            if (mostrandoTodos)
+            {
+                // Volver a mostrar los primeros 8 pedidos
+                mostrandoTodos = false;
+                indiceActual = 0;
+                flpPedidos.Controls.Clear();
+
+                CargarSiguientePagina();
+            }
+            else
+            {
+                // Mostrar los siguientes 8 pedidos
+                CargarSiguientePagina();
+
+                if (indiceActual >= pedidosFiltrados.Count)
+                {
+                    mostrandoTodos = true;
+                    btnVerMas.Text = "↑ Ver menos pedidos";
+                }
+            }
+        }
+
+
+
+        public void ActualizarPedidos()
+        {
+            PedidoDB db = new PedidoDB();
+
+            List<Pedido> pedidos = db.ObtenerPedidosPorEstado(estadoActual);
+
+            MostrarPedidos(pedidos);
+        }
+
     }
 }

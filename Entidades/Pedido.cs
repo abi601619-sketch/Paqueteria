@@ -59,33 +59,46 @@ namespace Modelo.Entidades
             return lista;
         }
 
+
         public bool CrearPedido(int cantidad, int idProducto, int idUsuario, int idPuntoEntrega)
         {
             try
             {
                 using (SqlConnection conexion = Conexion.Conectar())
                 {
+                    if (conexion.State != ConnectionState.Open)
+                        conexion.Open();
+
                     using (SqlCommand comando = new SqlCommand("sp_CrearPedido", conexion))
                     {
                         comando.CommandType = CommandType.StoredProcedure;
 
-                        comando.Parameters.AddWithValue("@Cantidad", cantidad);
+                        comando.Parameters.Add("@Cantidad", SqlDbType.Int).Value = cantidad;
+                        comando.Parameters.Add("@IdProducto", SqlDbType.Int).Value = idProducto;
+                        comando.Parameters.Add("@IdUsuario", SqlDbType.Int).Value = idUsuario;
+                        comando.Parameters.Add("@IdPuntoEntrega", SqlDbType.Int).Value = idPuntoEntrega;
 
-                        comando.Parameters.AddWithValue("@IdProducto", idProducto);
+                        // Ejecutar el procedimiento almacenado.
+                        // No depender del número de filas afectadas.
+                        comando.ExecuteNonQuery();
 
-                        comando.Parameters.AddWithValue("@IdUsuario", idUsuario);
-
-                        comando.Parameters.AddWithValue("@IdPuntoEntrega", idPuntoEntrega);
-
-                        return comando.ExecuteNonQuery() > 0;
+                        return true;
                     }
                 }
             }
-            catch
+            catch (Exception ex)
             {
+                MessageBox.Show(
+                    "Error SQL al crear el pedido:\n" + ex.Message,
+                    "Error al registrar pedido",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error
+                );
+
                 return false;
             }
         }
+
 
         public List<Pedido> BuscarPedidos(string texto)
         {

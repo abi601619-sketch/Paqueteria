@@ -36,19 +36,23 @@
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges6 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges7 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges8 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges9 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges10 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             flpPedidos = new FlowLayoutPanel();
             btnEtregados = new Guna.UI2.WinForms.Guna2Button();
             btnEnProceso = new Guna.UI2.WinForms.Guna2Button();
             btnPendientes = new Guna.UI2.WinForms.Guna2Button();
             guna2HtmlLabel2 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             txtBuscar = new Guna.UI2.WinForms.Guna2TextBox();
+            btnVerMas = new Guna.UI2.WinForms.Guna2Button();
             SuspendLayout();
             // 
             // flpPedidos
             // 
+            flpPedidos.AutoScroll = true;
             flpPedidos.Location = new Point(12, 215);
             flpPedidos.Name = "flpPedidos";
-            flpPedidos.Size = new Size(1603, 779);
+            flpPedidos.Size = new Size(1603, 741);
             flpPedidos.TabIndex = 13;
             // 
             // btnEtregados
@@ -133,12 +137,32 @@
             txtBuscar.TabIndex = 7;
             txtBuscar.TextChanged += txtBuscar_TextChanged;
             // 
+            // btnVerMas
+            // 
+            btnVerMas.BorderRadius = 8;
+            btnVerMas.CustomizableEdges = customizableEdges9;
+            btnVerMas.DisabledState.BorderColor = Color.DarkGray;
+            btnVerMas.DisabledState.CustomBorderColor = Color.DarkGray;
+            btnVerMas.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
+            btnVerMas.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            btnVerMas.FillColor = Color.Red;
+            btnVerMas.Font = new Font("Segoe UI", 9F);
+            btnVerMas.ForeColor = Color.White;
+            btnVerMas.Location = new Point(521, 962);
+            btnVerMas.Name = "btnVerMas";
+            btnVerMas.ShadowDecoration.CustomizableEdges = customizableEdges10;
+            btnVerMas.Size = new Size(436, 39);
+            btnVerMas.TabIndex = 14;
+            btnVerMas.Text = "Ver más productos";
+            btnVerMas.Click += btnVerMas_Click;
+            // 
             // Carretilla
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.Control;
             ClientSize = new Size(1640, 1015);
+            Controls.Add(btnVerMas);
             Controls.Add(flpPedidos);
             Controls.Add(btnEtregados);
             Controls.Add(btnEnProceso);
@@ -161,5 +185,6 @@
         private Guna.UI2.WinForms.Guna2Button btnPendientes;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel2;
         private Guna.UI2.WinForms.Guna2TextBox txtBuscar;
+        private Guna.UI2.WinForms.Guna2Button btnVerMas;
     }
 }

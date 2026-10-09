@@ -19,6 +19,8 @@ namespace Vista.Crear_cuenta
             ConfigurarLabels();
             ConfigurarCampos();
         }
+
+        //-------------------------------------CONFIGURACIONES-------------------------------------
         private void ConfigurarFormulario()
         {
             this.BackColor = Color.FromArgb(30, 30, 30);
@@ -110,6 +112,7 @@ namespace Vista.Crear_cuenta
 
             txtConfirmarContrasena.UseSystemPasswordChar = true;
         }
+        //-------------------------------------FIN DE CONFIGURACIONES-------------------------------------  
         private void btnSeleccionarFoto_Click(object sender, EventArgs e)
         {
 
@@ -132,6 +135,8 @@ namespace Vista.Crear_cuenta
             }
         }
 
+        // Validar correo electrónico
+
         private bool CorreoValido(string correo)
         {
             try
@@ -145,7 +150,7 @@ namespace Vista.Crear_cuenta
                 return false;
             }
         }
-
+        // Validar formulario
         private bool ValidarFormulario()
         {
             if (string.IsNullOrWhiteSpace(txtNombre.Text))
@@ -214,7 +219,7 @@ namespace Vista.Crear_cuenta
 
             return true;
         }
-
+        // Crear cuenta
         private void btnCrearCuenta_Click(object sender, EventArgs e)
         {
             try
@@ -273,7 +278,7 @@ namespace Vista.Crear_cuenta
 
             lblFotoPerfil.Text = "Foto de perfil (opcional)";
         }
-
+        // Mostrar u ocultar contraseña
         private void btnMostrarContrasena_Click(object sender, EventArgs e)
         {
             txtConfirmarContrasena.UseSystemPasswordChar = !txtConfirmarContrasena.UseSystemPasswordChar;
@@ -284,7 +289,7 @@ namespace Vista.Crear_cuenta
         {
             txtContrasena.UseSystemPasswordChar = !txtContrasena.UseSystemPasswordChar;
         }
-
+        // Enlace para iniciar sesión
         private void lnkIniciarSesion_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             frmLogin login = new frmLogin();
@@ -293,12 +298,12 @@ namespace Vista.Crear_cuenta
 
             this.Hide();
         }
-
+        // Salir de la aplicación
         private void btnSalir_Click(object sender, EventArgs e)
         {
             Application.Exit();
         }
-
+        //Validar que solo se ingresen números en el campo DUI
         private void txtDui_KeyPress(object sender, KeyPressEventArgs e)
         {
             // Permitir teclas de control, como Backspace
@@ -311,7 +316,7 @@ namespace Vista.Crear_cuenta
                 e.Handled = true;
             }
         }
-
+        // Formatear el DUI mientras se escribe
         private void txtDui_TextChanged(object sender, EventArgs e)
         {
 

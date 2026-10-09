@@ -188,12 +188,14 @@
             btnMas.DisabledState.CustomBorderColor = Color.DarkGray;
             btnMas.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
             btnMas.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            btnMas.FillColor = Color.Transparent;
             btnMas.Font = new Font("Segoe UI", 9F);
             btnMas.ForeColor = Color.White;
-            btnMas.Location = new Point(378, 412);
+            btnMas.Image = Properties.Resources.boton_mas;
+            btnMas.Location = new Point(363, 413);
             btnMas.Name = "btnMas";
             btnMas.ShadowDecoration.CustomizableEdges = customizableEdges6;
-            btnMas.Size = new Size(44, 19);
+            btnMas.Size = new Size(42, 28);
             btnMas.TabIndex = 12;
             btnMas.Click += btnMas_Click;
             // 
@@ -204,21 +206,24 @@
             btnMenos.DisabledState.CustomBorderColor = Color.DarkGray;
             btnMenos.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
             btnMenos.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            btnMenos.FillColor = Color.Transparent;
             btnMenos.Font = new Font("Segoe UI", 9F);
             btnMenos.ForeColor = Color.White;
-            btnMenos.Location = new Point(282, 413);
+            btnMenos.Image = Properties.Resources.boton_menos__3_;
+            btnMenos.Location = new Point(293, 413);
             btnMenos.Name = "btnMenos";
             btnMenos.ShadowDecoration.CustomizableEdges = customizableEdges8;
-            btnMenos.Size = new Size(44, 19);
+            btnMenos.Size = new Size(42, 28);
             btnMenos.TabIndex = 13;
             btnMenos.Click += btnMenos_Click;
             // 
             // lblCantidadValor
             // 
             lblCantidadValor.BackColor = Color.Transparent;
-            lblCantidadValor.Location = new Point(346, 414);
+            lblCantidadValor.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblCantidadValor.Location = new Point(341, 413);
             lblCantidadValor.Name = "lblCantidadValor";
-            lblCantidadValor.Size = new Size(9, 17);
+            lblCantidadValor.Size = new Size(14, 27);
             lblCantidadValor.TabIndex = 14;
             lblCantidadValor.Text = "1";
             // 

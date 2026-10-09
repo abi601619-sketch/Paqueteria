@@ -7,14 +7,18 @@ namespace Vista.Administrador.Clientes
     public partial class frmProductos : Form
     {
         private Producto producto;
-        public frmProductos(Producto producto)
+        private Usuario usuarioActual;
+
+        public frmProductos(Producto producto, Usuario usuario)
         {
             InitializeComponent();
 
             this.producto = producto;
+            this.usuarioActual = usuario;
 
             CargarDatos();
         }
+
         private void CargarDatos()
         {
             lblNombre.Text = producto.Nombre;
@@ -52,8 +56,7 @@ namespace Vista.Administrador.Clientes
 
         private void CargarImagen()
         {
-            string carpetaImagenes = Path.Combine(
-                Directory.GetParent(AppContext.BaseDirectory).Parent.Parent.Parent.FullName, "Administrador", "Clientes", "Imagenes");
+            string carpetaImagenes = Path.Combine(Directory.GetParent(AppContext.BaseDirectory).Parent.Parent.Parent.FullName, "Administrador", "Clientes", "Imagenes");
 
             string nombreImagen =
                 ObtenerNombreImagen(producto.IdProducto);
@@ -61,8 +64,7 @@ namespace Vista.Administrador.Clientes
             if (string.IsNullOrEmpty(nombreImagen))
                 return;
 
-            string rutaImagen =
-                Path.Combine(carpetaImagenes, nombreImagen);
+            string rutaImagen = Path.Combine(carpetaImagenes, nombreImagen);
 
             if (File.Exists(rutaImagen))
             {
@@ -73,10 +75,7 @@ namespace Vista.Administrador.Clientes
             }
             else
             {
-                MessageBox.Show(
-                    "No se encontró la imagen:\n\n" + rutaImagen,
-                    "Imagen no encontrada"
-                );
+                MessageBox.Show("No se encontró la imagen:\n\n" + rutaImagen, "Imagen no encontrada");
             }
         }
 
@@ -249,10 +248,6 @@ namespace Vista.Administrador.Clientes
                 case 60:
                     return "mochila.jpeg";
 
-
-
-
-
                 default:
                     return null;
             }
@@ -267,30 +262,18 @@ namespace Vista.Administrador.Clientes
             lblNombre.Font = new Font("Segoe UI", 18F, FontStyle.Bold);
             lblTipo.ForeColor = ColorTranslator.FromHtml("#F51B23");
 
-            lblTipo.Font = new Font(
-                "Segoe UI",
-                12F,
-                FontStyle.Bold
-            );
-            lblPrecio.ForeColor =
-    ColorTranslator.FromHtml("#F51B23");
+            lblTipo.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            lblPrecio.ForeColor = ColorTranslator.FromHtml("#F51B23");
 
-            lblPrecio.Font = new Font(
-                "Segoe UI",
-                20F,
-                FontStyle.Bold
-            );
-            cmbPuntoEntrega.BorderColor =
-    ColorTranslator.FromHtml("#D9D9D9");
+            lblPrecio.Font = new Font("Segoe UI", 20F, FontStyle.Bold);
+            cmbPuntoEntrega.BorderColor = ColorTranslator.FromHtml("#D9D9D9");
 
             cmbPuntoEntrega.BorderRadius = 8;
 
             cmbPuntoEntrega.FillColor = Color.White;
 
-            cmbPuntoEntrega.ForeColor =
-                Color.FromArgb(50, 50, 50);
-            btnMenos.FillColor =
-    ColorTranslator.FromHtml("#F0F0F2");
+            cmbPuntoEntrega.ForeColor = Color.FromArgb(50, 50, 50);
+            btnMenos.FillColor = ColorTranslator.FromHtml("#F0F0F2");
 
             btnMenos.ForeColor = Color.FromArgb(40, 40, 40);
 
@@ -304,39 +287,31 @@ namespace Vista.Administrador.Clientes
 
             lblCantidadValor.Text = "1";
 
-            lblCantidadValor.Font =
-                new Font("Segoe UI", 11F, FontStyle.Bold);
+            lblCantidadValor.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
 
-            lblCantidadValor.ForeColor =
-                Color.FromArgb(40, 40, 40);
+            lblCantidadValor.ForeColor = Color.FromArgb(40, 40, 40);
 
             btnComprar.Text = "COMPRAR";
 
-            btnComprar.FillColor =
-                ColorTranslator.FromHtml("#F51B23");
+            btnComprar.FillColor = ColorTranslator.FromHtml("#F51B23");
 
             btnComprar.ForeColor = Color.White;
 
             btnComprar.BorderRadius = 8;
 
-            btnComprar.Font =
-                new Font("Segoe UI", 11F, FontStyle.Bold);
+            btnComprar.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
 
-            btnComprar.HoverState.FillColor =
-                ColorTranslator.FromHtml("#D9141B");
+            btnComprar.HoverState.FillColor = ColorTranslator.FromHtml("#D9141B");
 
 
             btnCerrar.FillColor = Color.Transparent;
 
-            btnCerrar.ForeColor =
-                Color.FromArgb(30, 30, 30);
+            btnCerrar.ForeColor = Color.FromArgb(30, 30, 30);
 
-            btnCerrar.HoverState.FillColor =
-                Color.FromArgb(240, 240, 240);
+            btnCerrar.HoverState.FillColor = Color.FromArgb(240, 240, 240);
             btnComprar.BorderRadius = 8;
             btnComprar.FillColor = ColorTranslator.FromHtml("#F51B23");
-            btnComprar.HoverState.FillColor =
-                ColorTranslator.FromHtml("#D9141B");
+            btnComprar.HoverState.FillColor = ColorTranslator.FromHtml("#D9141B");
         }
 
         private void btnCerrar_Click(object sender, EventArgs e)
@@ -384,30 +359,70 @@ namespace Vista.Administrador.Clientes
         {
             if (cmbPuntoEntrega.SelectedIndex == -1)
             {
-                MessageBox.Show("Seleccione un punto de entrega.", "Pedido", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-
+                MessageBox.Show(
+                    "Seleccione un punto de entrega.",
+                    "Pedido",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning
+                );
                 return;
             }
 
-            int cantidad = int.Parse(lblCantidadValor.Text);
+            if (usuarioActual == null)
+            {
+                MessageBox.Show("No se recibió el usuario que inició sesión.");
+                return;
+            }
+
+            if (!int.TryParse(lblCantidadValor.Text, out int cantidad) || cantidad < 1)
+            {
+                MessageBox.Show("La cantidad seleccionada no es válida.");
+                return;
+            }
 
             int idPuntoEntrega = Convert.ToInt32(cmbPuntoEntrega.SelectedValue);
+            int idUsuario = usuarioActual.IdUsuario;
 
-            int idUsuario = 1;
-
-            PedidoDB db = new PedidoDB();
-
-            bool resultado = db.CrearPedido(cantidad, producto.IdProducto, idUsuario, idPuntoEntrega);
-
-            if (resultado)
+            try
             {
-                MessageBox.Show("¡Pedido realizado correctamente!", "Pedido", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                PedidoDB db = new PedidoDB();
 
-                this.Close();
+                bool resultado = db.CrearPedido(
+                    cantidad,
+                    producto.IdProducto,
+                    idUsuario,
+                    idPuntoEntrega
+                );
+
+                if (resultado)
+                {
+                    MessageBox.Show(
+                        "¡Pedido realizado correctamente!",
+                        "Pedido",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Information
+                    );
+
+                    this.Close();
+                }
+                else
+                {
+                    MessageBox.Show(
+                        "No se pudo confirmar el pedido. Revisa el método CrearPedido.",
+                        "Pedido",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Warning
+                    );
+                }
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("No se pudo realizar el pedido.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(
+                    "Error al realizar el pedido:\n" + ex.Message,
+                    "Error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error
+                );
             }
         }
     }

@@ -65,8 +65,7 @@ namespace Modelo.Datos
         {
             string tipoUsuario = "";
 
-            string consulta = @"SELECT
-            CASE
+            string consulta = @"SELECT CASE
                 WHEN EXISTS (
                     SELECT 1
                     FROM Administradores
@@ -99,6 +98,47 @@ namespace Modelo.Datos
             }
 
             return tipoUsuario;
+        }
+
+        public Usuario ObtenerUsuario(int idUsuario)
+        {
+            Usuario usuario = null;
+
+            string consulta = @"SELECT
+            idUsuario,
+            dui,
+            nombre,
+            apellido,
+            correo,
+            contrasena,
+            fotoPerfil FROM Usuarios WHERE idUsuario = @idUsuario";
+
+            using (SqlConnection conexion = Conexion.Conectar())
+            using (SqlCommand comando = new SqlCommand(consulta, conexion))
+            {
+                comando.Parameters.AddWithValue("@idUsuario", idUsuario);
+
+                using (SqlDataReader reader = comando.ExecuteReader())
+                {
+                    if (reader.Read())
+                    {
+                        usuario = new Usuario();
+
+                        usuario.IdUsuario = Convert.ToInt32(reader["idUsuario"]);
+                        usuario.Dui = reader["dui"].ToString();
+                        usuario.Nombre = reader["nombre"].ToString();
+                        usuario.Apellido = reader["apellido"].ToString();
+                        usuario.Correo = reader["correo"].ToString();
+
+                        if (reader["fotoPerfil"] != DBNull.Value)
+                        {
+                            usuario.FotoPerfil = (byte[])reader["fotoPerfil"];
+                        }
+                    }
+                }
+            }
+
+            return usuario;
         }
     }
 }
