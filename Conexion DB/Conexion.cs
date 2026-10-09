@@ -4,7 +4,7 @@ namespace Modelo.Conexion_DB
     internal class Conexion
     {
         private static string servidor = "LAPTOP-4E9GKUE4\\SQLEXPRESS";
-        private static string baseDeDatos = "MyPickup";
+        private static string baseDeDatos = "MyPickup1";
 
         public static SqlConnection Conectar()
         {

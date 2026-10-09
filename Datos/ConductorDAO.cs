@@ -136,21 +136,39 @@ namespace Modelo.Datos
 
             string consulta = @"
         SELECT TOP 1
+            pr.idProgramacion,
+            pr.idRuta,
+            pr.FechaRuta,
+            pr.PuntoActual,
+            pr.HoraInicioReal,
+            pr.HoraFinReal,
+
             r.Nombre AS Ruta,
-            r.Estado,
+
             origen.Nombre AS PuntoOrigen,
+
             destinoA.Nombre AS DestinoA,
+
             finalRuta.Nombre AS PuntoFinal
-        FROM ListaDeRutas lr
+
+        FROM ProgramacionRutas pr
+
         INNER JOIN Rutas r
-            ON lr.idRuta = r.idRuta
+            ON pr.idRuta = r.idRuta
+
         INNER JOIN PuntosEntrega origen
             ON r.PuntoOrigen = origen.idPunto
+
         LEFT JOIN PuntosEntrega destinoA
             ON r.DestinoA = destinoA.idPunto
+
         INNER JOIN PuntosEntrega finalRuta
             ON r.PuntoFinal = finalRuta.idPunto
-        WHERE lr.idUsuario = @idUsuario";
+
+        WHERE pr.idUsuario = @idUsuario
+          AND pr.FechaRuta >= CAST(GETDATE() AS DATE)
+
+        ORDER BY pr.FechaRuta ASC";
 
             using (SqlConnection conexion = Conexion.Conectar())
             {
@@ -167,6 +185,52 @@ namespace Modelo.Datos
 
             return tabla;
         }
+
+
+        public DataTable ObtenerProgresoProgramacion(int idProgramacion)
+        {
+            DataTable tabla = new DataTable();
+
+            string consulta = @"
+        SELECT
+            pr.idProgramacion,
+            pr.idRuta,
+            pr.FechaRuta,
+            pr.PuntoActual,
+            pr.HoraInicioReal,
+            pr.HoraFinReal,
+            r.Nombre AS Ruta,
+            origen.Nombre AS PuntoOrigen,
+            destinoA.Nombre AS DestinoA,
+            finalRuta.Nombre AS PuntoFinal
+        FROM ProgramacionRutas pr
+        INNER JOIN Rutas r
+            ON pr.idRuta = r.idRuta
+        INNER JOIN PuntosEntrega origen
+            ON r.PuntoOrigen = origen.idPunto
+        LEFT JOIN PuntosEntrega destinoA
+            ON r.DestinoA = destinoA.idPunto
+        INNER JOIN PuntosEntrega finalRuta
+            ON r.PuntoFinal = finalRuta.idPunto
+        WHERE pr.idProgramacion = @idProgramacion";
+
+            using (SqlConnection conexion = Conexion.Conectar())
+            using (SqlCommand comando = new SqlCommand(consulta, conexion))
+            {
+                comando.Parameters.AddWithValue(
+                    "@idProgramacion",
+                    idProgramacion
+                );
+
+                using (SqlDataAdapter adaptador = new SqlDataAdapter(comando))
+                {
+                    adaptador.Fill(tabla);
+                }
+            }
+
+            return tabla;
+        }
+
 
         public DataTable ObtenerProgramacionRutas(int idUsuario)
         {
@@ -203,5 +267,125 @@ namespace Modelo.Datos
 
             return tabla;
         }
+
+
+        public DataTable ObtenerRutasDelDia(int idUsuario)
+        {
+            DataTable tabla = new DataTable();
+
+
+
+            string consulta = @"
+    SELECT
+        pr.idProgramacion,
+        pr.idRuta,
+        pr.FechaRuta,
+        pr.PuntoActual,
+        pr.HoraInicioReal,
+        pr.HoraFinReal,
+        r.Nombre AS NombreRuta,
+        r.Zona,
+        r.Estado AS Estado,
+        origen.Nombre AS PuntoOrigen,
+        destinoA.Nombre AS DestinoA,
+        finalRuta.Nombre AS PuntoFinal
+    FROM ProgramacionRutas pr
+    INNER JOIN Rutas r
+        ON pr.idRuta = r.idRuta
+    INNER JOIN PuntosEntrega origen
+        ON r.PuntoOrigen = origen.idPunto
+    LEFT JOIN PuntosEntrega destinoA
+        ON r.DestinoA = destinoA.idPunto
+    INNER JOIN PuntosEntrega finalRuta
+        ON r.PuntoFinal = finalRuta.idPunto
+    WHERE pr.idUsuario = @idUsuario
+      AND pr.FechaRuta = CAST(GETDATE() AS DATE)
+    ORDER BY pr.FechaRuta, pr.idProgramacion";
+
+
+            using (SqlConnection conexion = Conexion.Conectar())
+            using (SqlCommand comando = new SqlCommand(consulta, conexion))
+            {
+                comando.Parameters.AddWithValue("@idUsuario", idUsuario);
+
+                using (SqlDataAdapter adaptador =
+                    new SqlDataAdapter(comando))
+                {
+                    adaptador.Fill(tabla);
+                }
+            }
+
+            return tabla;
+        }
+
+
+        public bool IniciarRuta(int idProgramacion)
+        {
+            string consulta = @"
+        UPDATE ProgramacionRutas
+        SET HoraInicioReal = GETDATE(),
+            PuntoActual = 1
+        WHERE idProgramacion = @idProgramacion
+          AND HoraInicioReal IS NULL
+          AND HoraFinReal IS NULL";
+
+            using (SqlConnection conexion = Conexion.Conectar())
+            using (SqlCommand comando = new SqlCommand(consulta, conexion))
+            {
+                comando.Parameters.AddWithValue(
+                    "@idProgramacion",
+                    idProgramacion
+                );
+
+                return comando.ExecuteNonQuery() > 0;
+            }
+        }
+
+
+        public bool AvanzarPuntoRuta(int idProgramacion)
+        {
+            string consulta = @"
+        UPDATE ProgramacionRutas
+        SET PuntoActual = PuntoActual + 1
+        WHERE idProgramacion = @idProgramacion
+          AND HoraInicioReal IS NOT NULL
+          AND HoraFinReal IS NULL
+          AND PuntoActual < 3";
+
+            using (SqlConnection conexion = Conexion.Conectar())
+            using (SqlCommand comando = new SqlCommand(consulta, conexion))
+            {
+                comando.Parameters.AddWithValue(
+                    "@idProgramacion",
+                    idProgramacion
+                );
+
+                return comando.ExecuteNonQuery() > 0;
+            }
+        }
+
+
+        public bool FinalizarRuta(int idProgramacion)
+        {
+            string consulta = @"
+        UPDATE ProgramacionRutas
+        SET HoraFinReal = GETDATE()
+        WHERE idProgramacion = @idProgramacion
+          AND HoraInicioReal IS NOT NULL
+          AND HoraFinReal IS NULL
+          AND PuntoActual = 3";
+
+            using (SqlConnection conexion = Conexion.Conectar())
+            using (SqlCommand comando = new SqlCommand(consulta, conexion))
+            {
+                comando.Parameters.AddWithValue(
+                    "@idProgramacion",
+                    idProgramacion
+                );
+
+                return comando.ExecuteNonQuery() > 0;
+            }
+        }
+
     }
 }

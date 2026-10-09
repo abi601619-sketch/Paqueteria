@@ -14,9 +14,11 @@ namespace Vista.Login
 {
     public partial class frmLogin : Form
     {
+        private int idUsuario;
         public frmLogin()
         {
             InitializeComponent();
+            this.idUsuario = idUsuario;
         }
 
         private void pnlInicioS_Paint(object sender, PaintEventArgs e)
@@ -95,14 +97,14 @@ namespace Vista.Login
                 string tipoUsuario =
                     usuarioDAO.ObtenerTipoUsuario(usuario.IdUsuario);
 
+
                 if (tipoUsuario == "Conductor")
                 {
-                    frmDashboardConductor dashboard =
-                        new frmDashboardConductor(usuario.IdUsuario);
-
-                    dashboard.Show();
+                    frmMenu menu = new frmMenu(usuario.IdUsuario);
+                    menu.Show();
                     this.Hide();
                 }
+    
                 else if (tipoUsuario == "Cliente")
                 {
                     Dashboard ventanaCliente = new Dashboard();

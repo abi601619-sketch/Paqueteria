@@ -14,6 +14,7 @@ namespace Vista.Conductor
         private int idUsuario;
         private Modelo.Entidades.Conductor conductor;
         private DataTable programacionesRutas;
+        private int idProgramacionSeleccionada = 0;
 
         public frmDashboardConductor(int idUsuario)
         {
@@ -24,6 +25,11 @@ namespace Vista.Conductor
             CargarDatosConductor();
             CrearCalendario();
             CargarRutas();
+            CargarProgresoRuta();
+            lblFecha.Text = DateTime.Now.ToString(
+    "dddd, dd 'de' MMMM 'de' yyyy",
+    new System.Globalization.CultureInfo("es-SV")
+);
         }
 
         //Calendario ---------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -251,71 +257,45 @@ namespace Vista.Conductor
 
             conductor = conductorDAO.ObtenerConductor(idUsuario);
 
-            if (conductor != null)
-            {
-                MessageBox.Show(
-                    "Nombre: " + conductor.Nombre + " " + conductor.Apellido +
-                    "\nZona: " + conductor.ZonaEncargada +
-                    "\nCorreo: " + conductor.Correo,
-                    "Datos del conductor",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Information
-                );
-            }
-            else
-            {
-                MessageBox.Show(
-                    "No se encontró la información del conductor.",
-                    "Error",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Error
-                );
-            }
+            lblNombre.Text =
+    conductor.Nombre + " " + conductor.Apellido;
         }
+
+
 
         private void CargarRutas()
         {
             ConductorDAO conductorDAO = new ConductorDAO();
 
-            DataTable rutas =
-                conductorDAO.ObtenerRutas(idUsuario);
+            DataTable tabla =
+                conductorDAO.ObtenerRutasDelDia(idUsuario);
 
+            MostrarEstadoRutas(tabla.Rows.Count > 0);
+
+            pnlRutas.SuspendLayout();
             pnlRutas.Controls.Clear();
 
-            foreach (DataRow fila in rutas.Rows)
+            pnlRutas.AutoScroll = true;
+
+            int posicionY = 5;
+
+            foreach (DataRow fila in tabla.Rows)
             {
                 Panel tarjeta = CrearTarjetaRuta(fila);
 
+                tarjeta.Left = 5;
+                tarjeta.Top = posicionY;
+                tarjeta.Width = pnlRutas.ClientSize.Width - 25;
+
                 pnlRutas.Controls.Add(tarjeta);
+
+                posicionY += tarjeta.Height + 10;
             }
+
+            pnlRutas.ResumeLayout();
         }
 
-        //private void CargarProgresoRuta()
-        //{
-        //    ConductorDAO conductorDAO = new ConductorDAO();
 
-        //    DataTable tabla = conductorDAO.ObtenerRutaProgreso(idUsuario);
-
-        //    if (tabla.Rows.Count == 0)
-        //    {
-        //        return;
-        //    }
-
-        //    DataRow ruta = tabla.Rows[0];
-
-        //    lblPunto1.Text = ruta["PuntoOrigen"].ToString();
-
-        //    if (ruta["DestinoA"] != DBNull.Value)
-        //        lblPunto2.Text = ruta["DestinoA"].ToString();
-        //    else
-        //        lblPunto2.Text = "Sin parada";
-
-        //    lblPunto3.Text = ruta["PuntoFinal"].ToString();
-
-        //    lblEstado1.Text = "COMPLETADO";
-        //    lblEstado2.Text = "EN CAMINO";
-        //    lblEstado3.Text = "PENDIENTE";
-        //}
 
         private Panel CrearTarjetaRuta(DataRow fila)
         {
@@ -324,6 +304,17 @@ namespace Vista.Conductor
             // ==========================
 
             Panel tarjeta = new Panel();
+
+            int idProgramacion =
+    Convert.ToInt32(fila["idProgramacion"]);
+
+            tarjeta.Cursor = Cursors.Hand;
+
+            tarjeta.Click += (sender, e) =>
+            {
+                idProgramacionSeleccionada = idProgramacion;
+                CargarProgresoRuta();
+            };
 
             tarjeta.Width = pnlRutas.ClientSize.Width - 20;
             tarjeta.Height = 150;
@@ -340,7 +331,7 @@ namespace Vista.Conductor
             Color colorRuta = Color.DodgerBlue;
 
             string nombreRuta =
-                fila["Nombre"].ToString().ToUpper();
+    fila["NombreRuta"].ToString().ToUpper();
 
             if (nombreRuta.Contains("01"))
             {
@@ -376,7 +367,7 @@ namespace Vista.Conductor
             Label lblRuta = new Label();
 
             lblRuta.Text =
-                fila["Nombre"].ToString().ToUpper();
+    fila["NombreRuta"].ToString().ToUpper();
 
             lblRuta.Font = new Font(
                 "Arial",
@@ -515,6 +506,370 @@ namespace Vista.Conductor
             tarjeta.Controls.Add(lblEstado);
 
             return tarjeta;
+        }
+
+        //Puntos -------------------------------------------------------------------------------------------------------------------------
+
+        private void CargarProgresoRuta()
+        {
+
+
+            if (idProgramacionSeleccionada <= 0)
+            {
+                return;
+            }
+
+            ConductorDAO conductorDAO = new ConductorDAO();
+
+            DataTable tabla =
+                conductorDAO.ObtenerProgresoProgramacion(
+                    idProgramacionSeleccionada
+                );
+
+            if (tabla.Rows.Count == 0)
+            {
+                return;
+            }
+
+
+            DataRow ruta = tabla.Rows[0];
+
+            // ==========================
+            // NOMBRES DE LOS PUNTOS
+            // ==========================
+
+            label1.Text = ruta["PuntoOrigen"].ToString()
+    .Replace("Punto de entrega - ", "");
+
+            if (ruta["DestinoA"] != DBNull.Value)
+            {
+                label2.Text = ruta["DestinoA"].ToString()
+                    .Replace("Punto de entrega - ", "");
+            }
+            else
+            {
+                label2.Text = "Sin parada";
+            }
+
+            label3.Text = ruta["PuntoFinal"].ToString()
+                .Replace("Punto de entrega - ", "");
+
+
+            // ==========================
+            // DATOS DE LA RUTA
+            // ==========================
+
+            int puntoActual = Convert.ToInt32(ruta["PuntoActual"]);
+
+            bool rutaIniciada =
+                ruta["HoraInicioReal"] != DBNull.Value;
+
+            bool rutaFinalizada =
+                ruta["HoraFinReal"] != DBNull.Value;
+
+
+            // ==========================
+            // RUTA PENDIENTE
+            // ==========================
+
+            if (!rutaIniciada)
+            {
+                CambiarEstadoPunto(
+                    pictureBox1,
+                    label4,
+                    panel5,
+
+                "PENDIENTE"
+                );
+
+                CambiarEstadoPunto(
+                    pictureBox2,
+                    label5,
+                    panel6,
+                    "PENDIENTE"
+                );
+
+                CambiarEstadoPunto(
+                    pictureBox3,
+                    label6,
+                    panel7,
+                    "PENDIENTE"
+                );
+
+                btnAccionRuta.Text = "INICIAR RUTA";
+
+                btnAccionRuta.Enabled = true;
+
+                return;
+            }
+
+
+            // ==========================
+            // RUTA COMPLETADA
+            // ==========================
+
+            if (rutaFinalizada)
+            {
+                CambiarEstadoPunto(
+                    pictureBox1,
+                    label4,
+                    panel5,
+                    "COMPLETADO"
+                );
+
+                CambiarEstadoPunto(
+                    pictureBox2,
+                    label5,
+                    panel6,
+                    "COMPLETADO"
+                );
+
+                CambiarEstadoPunto(
+                    pictureBox3,
+                    label6,
+                    panel7,
+                    "COMPLETADO"
+                );
+
+                btnAccionRuta.Text = "RUTA COMPLETADA";
+
+                btnAccionRuta.Enabled = false;
+
+                return;
+            }
+
+
+            // ==========================
+            // RUTA EN PROGRESO
+            // ==========================
+
+            if (puntoActual == 1)
+            {
+                CambiarEstadoPunto(
+                    pictureBox1,
+                    label4,
+                    panel5,
+                    "EN CAMINO"
+                );
+
+                CambiarEstadoPunto(
+                    pictureBox2,
+                    label5,
+                    panel6,
+                    "PENDIENTE"
+                );
+
+                CambiarEstadoPunto(
+                    pictureBox3,
+                    label6,
+                    panel7,
+                    "PENDIENTE"
+                );
+
+                btnAccionRuta.Text = "LLEGAR AL SIGUIENTE PUNTO";
+            }
+            else if (puntoActual == 2)
+            {
+                CambiarEstadoPunto(
+                    pictureBox1,
+                    label4,
+                    panel5,
+                    "COMPLETADO"
+                );
+
+                CambiarEstadoPunto(
+                    pictureBox2,
+                    label5,
+                    panel6,
+                    "EN CAMINO"
+                );
+
+                CambiarEstadoPunto(
+                    pictureBox3,
+                    label6,
+                    panel7,
+                    "PENDIENTE"
+                );
+
+                btnAccionRuta.Text = "LLEGAR AL SIGUIENTE PUNTO";
+            }
+            else if (puntoActual == 3)
+            {
+                CambiarEstadoPunto(
+                    pictureBox1,
+                    label4,
+                    panel5,
+                    "COMPLETADO"
+                );
+
+                CambiarEstadoPunto(
+                    pictureBox2,
+                    label5,
+                    panel6,
+                    "COMPLETADO"
+                );
+
+                CambiarEstadoPunto(
+                    pictureBox3,
+                    label6,
+                    panel7,
+                    "EN CAMINO"
+                );
+
+                btnAccionRuta.Text = "FINALIZAR RUTA";
+            }
+        }
+
+
+        private void CambiarEstadoPunto(
+            PictureBox pictureBox,
+            Label labelEstado,
+            Panel panelEstado,
+            string estado)
+        {
+            switch (estado)
+            {
+                case "PENDIENTE":
+
+                    pictureBox.Image =
+                        Properties.Resources.r_removebg_preview;
+
+                    labelEstado.Text = "PENDIENTE";
+                    labelEstado.ForeColor = Color.Red;
+
+                    panelEstado.BackColor =
+                        Color.FromArgb(251, 226, 227);
+
+                    break;
+
+                case "EN CAMINO":
+
+                    pictureBox.Image =
+                        Properties.Resources.n_removebg_preview;
+
+                    labelEstado.Text = "EN CAMINO";
+                    labelEstado.ForeColor = Color.Goldenrod;
+
+                    panelEstado.BackColor =
+                        Color.FromArgb(255, 242, 204);
+
+                    break;
+
+                case "COMPLETADO":
+
+                    pictureBox.Image =
+                        Properties.Resources.circulo_verde_removebg_preview;
+
+                    labelEstado.Text = "COMPLETADO";
+                    labelEstado.ForeColor = Color.Green;
+
+                    panelEstado.BackColor =
+                        Color.FromArgb(212, 241, 213);
+
+                    break;
+            }
+        }
+
+        private void MostrarEstadoRutas(bool hayRutas)
+        {
+            panel2.Visible = hayRutas;
+            panel4.Visible = hayRutas;
+            panel3.Visible = hayRutas;
+
+            btnAccionRuta.Visible = hayRutas;
+
+            lblSinRutas.Visible = !hayRutas;
+
+            pnlRutas.Visible = hayRutas;
+
+            if (!hayRutas)
+            {
+                lblSinRutas.BringToFront();
+            }
+        }
+
+
+        private void tlpCalendario_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void btnAccionRuta_Click(object sender, EventArgs e)
+        {
+            if (idProgramacionSeleccionada <= 0)
+            {
+                MessageBox.Show(
+                    "Seleccioná una ruta antes de continuar.",
+                    "Ruta no seleccionada",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning
+                );
+                return;
+            }
+
+            ConductorDAO conductorDAO = new ConductorDAO();
+
+            DataTable tabla =
+                conductorDAO.ObtenerProgresoProgramacion(
+                    idProgramacionSeleccionada
+                );
+
+            if (tabla.Rows.Count == 0)
+            {
+                MessageBox.Show("No se encontró la programación seleccionada.");
+                return;
+            }
+
+            DataRow ruta = tabla.Rows[0];
+
+            bool rutaIniciada =
+                ruta["HoraInicioReal"] != DBNull.Value;
+
+            bool rutaFinalizada =
+                ruta["HoraFinReal"] != DBNull.Value;
+
+            int puntoActual =
+                Convert.ToInt32(ruta["PuntoActual"]);
+
+            bool resultado;
+
+            if (!rutaIniciada)
+            {
+                resultado = conductorDAO.IniciarRuta(
+                    idProgramacionSeleccionada
+                );
+            }
+            else if (rutaFinalizada)
+            {
+                MessageBox.Show("Esta ruta ya está completada.");
+                return;
+            }
+            else if (puntoActual < 3)
+            {
+                resultado = conductorDAO.AvanzarPuntoRuta(
+                    idProgramacionSeleccionada
+                );
+            }
+            else
+            {
+                resultado = conductorDAO.FinalizarRuta(
+                    idProgramacionSeleccionada
+                );
+            }
+
+            if (resultado)
+            {
+                CargarProgresoRuta();
+            }
+            else
+            {
+                MessageBox.Show(
+                    "No se pudo actualizar la ruta. Verificá su estado.",
+                    "Aviso",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning
+                );
+            }
         }
     }
 }
