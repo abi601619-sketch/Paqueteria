@@ -1,10 +1,10 @@
 ﻿using Microsoft.Data.SqlClient;
 namespace Modelo.Conexion_DB
 {
-    internal class Conexion
+    public class Conexion
     {
-        private static string servidor = "LAPTOP-4E9GKUE4\\SQLEXPRESS";
-        private static string baseDeDatos = "MyPickup";
+        private static string servidor = "Johnny\\SQLEXPRESS";
+        private static string baseDeDatos = "MyPickup12";
 
         public static SqlConnection Conectar()
         {
