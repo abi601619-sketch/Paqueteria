@@ -37,6 +37,8 @@
             flpTrailers = new FlowLayoutPanel();
             btnNextLigeros = new Button();
             btnNextTrailers = new Button();
+            btnLeftLigeros = new Button();
+            btnLeftTrailers = new Button();
             SuspendLayout();
             // 
             // lblCarros1
@@ -73,9 +75,9 @@
             // 
             // flpCarrosLigeros
             // 
-            flpCarrosLigeros.Location = new Point(12, 102);
+            flpCarrosLigeros.Location = new Point(142, 102);
             flpCarrosLigeros.Name = "flpCarrosLigeros";
-            flpCarrosLigeros.Size = new Size(1481, 373);
+            flpCarrosLigeros.Size = new Size(1318, 373);
             flpCarrosLigeros.TabIndex = 3;
             // 
             // pnlDecoracion2
@@ -99,9 +101,9 @@
             // 
             // flpTrailers
             // 
-            flpTrailers.Location = new Point(12, 604);
+            flpTrailers.Location = new Point(142, 604);
             flpTrailers.Name = "flpTrailers";
-            flpTrailers.Size = new Size(1481, 373);
+            flpTrailers.Size = new Size(1318, 373);
             flpTrailers.TabIndex = 6;
             // 
             // btnNextLigeros
@@ -109,30 +111,60 @@
             btnNextLigeros.BackColor = Color.Sienna;
             btnNextLigeros.Font = new Font("Segoe UI", 27.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnNextLigeros.ForeColor = SystemColors.Control;
-            btnNextLigeros.Location = new Point(1522, 155);
+            btnNextLigeros.Location = new Point(1493, 155);
             btnNextLigeros.Name = "btnNextLigeros";
-            btnNextLigeros.Size = new Size(68, 250);
+            btnNextLigeros.Size = new Size(44, 250);
             btnNextLigeros.TabIndex = 7;
             btnNextLigeros.Text = ">";
             btnNextLigeros.UseVisualStyleBackColor = false;
+            btnNextLigeros.Click += btnNextLigeros_Click;
             // 
             // btnNextTrailers
             // 
             btnNextTrailers.BackColor = Color.Sienna;
             btnNextTrailers.Font = new Font("Segoe UI", 27.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnNextTrailers.ForeColor = SystemColors.Control;
-            btnNextTrailers.Location = new Point(1522, 675);
+            btnNextTrailers.Location = new Point(1493, 666);
             btnNextTrailers.Name = "btnNextTrailers";
-            btnNextTrailers.Size = new Size(68, 250);
+            btnNextTrailers.Size = new Size(44, 250);
             btnNextTrailers.TabIndex = 8;
             btnNextTrailers.Text = ">";
             btnNextTrailers.UseVisualStyleBackColor = false;
+            btnNextTrailers.Click += btnNextTrailers_Click;
+            // 
+            // btnLeftLigeros
+            // 
+            btnLeftLigeros.BackColor = Color.Sienna;
+            btnLeftLigeros.Font = new Font("Segoe UI", 27.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnLeftLigeros.ForeColor = SystemColors.Control;
+            btnLeftLigeros.Location = new Point(63, 155);
+            btnLeftLigeros.Name = "btnLeftLigeros";
+            btnLeftLigeros.Size = new Size(47, 250);
+            btnLeftLigeros.TabIndex = 9;
+            btnLeftLigeros.Text = "<";
+            btnLeftLigeros.UseVisualStyleBackColor = false;
+            btnLeftLigeros.Click += btnLeftLigeros_Click;
+            // 
+            // btnLeftTrailers
+            // 
+            btnLeftTrailers.BackColor = Color.Sienna;
+            btnLeftTrailers.Font = new Font("Segoe UI", 27.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnLeftTrailers.ForeColor = SystemColors.Control;
+            btnLeftTrailers.Location = new Point(63, 666);
+            btnLeftTrailers.Name = "btnLeftTrailers";
+            btnLeftTrailers.Size = new Size(47, 250);
+            btnLeftTrailers.TabIndex = 10;
+            btnLeftTrailers.Text = "<";
+            btnLeftTrailers.UseVisualStyleBackColor = false;
+            btnLeftTrailers.Click += btnLeftTrailers_Click;
             // 
             // frmVehiculosAdministrador
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1640, 1015);
+            Controls.Add(btnLeftTrailers);
+            Controls.Add(btnLeftLigeros);
             Controls.Add(btnNextTrailers);
             Controls.Add(btnNextLigeros);
             Controls.Add(flpTrailers);
@@ -160,5 +192,7 @@
         private FlowLayoutPanel flpTrailers;
         private Button btnNextLigeros;
         private Button btnNextTrailers;
+        private Button btnLeftLigeros;
+        private Button btnLeftTrailers;
     }
 }

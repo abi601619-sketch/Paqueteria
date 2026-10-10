@@ -29,5 +29,10 @@ namespace Vista.Administrador.Administradores_Gerardo_
         {
 
         }
+
+        private void ptbExit_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

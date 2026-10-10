@@ -44,9 +44,14 @@
             btnZonaCentral = new Button();
             btnZonaOriente = new Button();
             btnZonaSur = new Button();
+            flpMultizona = new FlowLayoutPanel();
+            pnlDecoracion4 = new Panel();
+            lblMultizona = new Label();
+            ptbMultizona = new PictureBox();
             ((System.ComponentModel.ISupportInitialize)ptbZonaCentral).BeginInit();
             ((System.ComponentModel.ISupportInitialize)ptbZonaOriente).BeginInit();
             ((System.ComponentModel.ISupportInitialize)ptbZonaSur).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)ptbMultizona).BeginInit();
             SuspendLayout();
             // 
             // ptbZonaCentral
@@ -95,21 +100,21 @@
             // 
             flpZonaCentral.Location = new Point(12, 116);
             flpZonaCentral.Name = "flpZonaCentral";
-            flpZonaCentral.Size = new Size(1506, 203);
+            flpZonaCentral.Size = new Size(1506, 130);
             flpZonaCentral.TabIndex = 4;
             // 
             // flpZonaOriente
             // 
-            flpZonaOriente.Location = new Point(12, 457);
+            flpZonaOriente.Location = new Point(12, 361);
             flpZonaOriente.Name = "flpZonaOriente";
-            flpZonaOriente.Size = new Size(1506, 203);
+            flpZonaOriente.Size = new Size(1506, 130);
             flpZonaOriente.TabIndex = 8;
             // 
             // pnlDecoracion2
             // 
             pnlDecoracion2.BackColor = SystemColors.AppWorkspace;
             pnlDecoracion2.ForeColor = SystemColors.ControlDarkDark;
-            pnlDecoracion2.Location = new Point(438, 393);
+            pnlDecoracion2.Location = new Point(438, 297);
             pnlDecoracion2.Name = "pnlDecoracion2";
             pnlDecoracion2.Size = new Size(941, 10);
             pnlDecoracion2.TabIndex = 7;
@@ -118,7 +123,7 @@
             // 
             lblZonaOriente.AutoSize = true;
             lblZonaOriente.Font = new Font("Segoe UI", 36F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblZonaOriente.Location = new Point(103, 362);
+            lblZonaOriente.Location = new Point(103, 266);
             lblZonaOriente.Name = "lblZonaOriente";
             lblZonaOriente.Size = new Size(323, 65);
             lblZonaOriente.TabIndex = 6;
@@ -127,7 +132,7 @@
             // ptbZonaOriente
             // 
             ptbZonaOriente.Image = Properties.Resources.maps_and_flags;
-            ptbZonaOriente.Location = new Point(12, 353);
+            ptbZonaOriente.Location = new Point(12, 257);
             ptbZonaOriente.Name = "ptbZonaOriente";
             ptbZonaOriente.Size = new Size(85, 79);
             ptbZonaOriente.SizeMode = PictureBoxSizeMode.CenterImage;
@@ -136,16 +141,16 @@
             // 
             // flpZonaSur
             // 
-            flpZonaSur.Location = new Point(12, 800);
+            flpZonaSur.Location = new Point(12, 630);
             flpZonaSur.Name = "flpZonaSur";
-            flpZonaSur.Size = new Size(1506, 203);
+            flpZonaSur.Size = new Size(1506, 130);
             flpZonaSur.TabIndex = 12;
             // 
             // pnlDecoracion3
             // 
             pnlDecoracion3.BackColor = SystemColors.AppWorkspace;
             pnlDecoracion3.ForeColor = SystemColors.ControlDarkDark;
-            pnlDecoracion3.Location = new Point(338, 736);
+            pnlDecoracion3.Location = new Point(338, 566);
             pnlDecoracion3.Name = "pnlDecoracion3";
             pnlDecoracion3.Size = new Size(1041, 10);
             pnlDecoracion3.TabIndex = 11;
@@ -154,7 +159,7 @@
             // 
             lblZonaSur.AutoSize = true;
             lblZonaSur.Font = new Font("Segoe UI", 36F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblZonaSur.Location = new Point(103, 705);
+            lblZonaSur.Location = new Point(103, 535);
             lblZonaSur.Name = "lblZonaSur";
             lblZonaSur.Size = new Size(229, 65);
             lblZonaSur.TabIndex = 10;
@@ -163,7 +168,7 @@
             // ptbZonaSur
             // 
             ptbZonaSur.Image = Properties.Resources.maps_and_flags;
-            ptbZonaSur.Location = new Point(12, 696);
+            ptbZonaSur.Location = new Point(12, 526);
             ptbZonaSur.Name = "ptbZonaSur";
             ptbZonaSur.Size = new Size(85, 79);
             ptbZonaSur.SizeMode = PictureBoxSizeMode.CenterImage;
@@ -206,11 +211,51 @@
             btnZonaSur.Text = ">";
             btnZonaSur.UseVisualStyleBackColor = false;
             // 
+            // flpMultizona
+            // 
+            flpMultizona.Location = new Point(12, 882);
+            flpMultizona.Name = "flpMultizona";
+            flpMultizona.Size = new Size(1506, 130);
+            flpMultizona.TabIndex = 17;
+            // 
+            // pnlDecoracion4
+            // 
+            pnlDecoracion4.BackColor = SystemColors.AppWorkspace;
+            pnlDecoracion4.ForeColor = SystemColors.ControlDarkDark;
+            pnlDecoracion4.Location = new Point(358, 818);
+            pnlDecoracion4.Name = "pnlDecoracion4";
+            pnlDecoracion4.Size = new Size(1021, 10);
+            pnlDecoracion4.TabIndex = 16;
+            // 
+            // lblMultizona
+            // 
+            lblMultizona.AutoSize = true;
+            lblMultizona.Font = new Font("Segoe UI", 36F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblMultizona.Location = new Point(103, 787);
+            lblMultizona.Name = "lblMultizona";
+            lblMultizona.Size = new Size(257, 65);
+            lblMultizona.TabIndex = 15;
+            lblMultizona.Text = "Multizona";
+            // 
+            // ptbMultizona
+            // 
+            ptbMultizona.Image = Properties.Resources.maps_and_flags;
+            ptbMultizona.Location = new Point(12, 778);
+            ptbMultizona.Name = "ptbMultizona";
+            ptbMultizona.Size = new Size(85, 79);
+            ptbMultizona.SizeMode = PictureBoxSizeMode.CenterImage;
+            ptbMultizona.TabIndex = 14;
+            ptbMultizona.TabStop = false;
+            // 
             // frmConductoresAdministrador
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1640, 1015);
+            Controls.Add(flpMultizona);
+            Controls.Add(pnlDecoracion4);
+            Controls.Add(lblMultizona);
+            Controls.Add(ptbMultizona);
             Controls.Add(btnZonaSur);
             Controls.Add(btnZonaOriente);
             Controls.Add(btnZonaCentral);
@@ -233,6 +278,7 @@
             ((System.ComponentModel.ISupportInitialize)ptbZonaCentral).EndInit();
             ((System.ComponentModel.ISupportInitialize)ptbZonaOriente).EndInit();
             ((System.ComponentModel.ISupportInitialize)ptbZonaSur).EndInit();
+            ((System.ComponentModel.ISupportInitialize)ptbMultizona).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -255,5 +301,9 @@
         private Button btnZonaCentral;
         private Button btnZonaOriente;
         private Button btnZonaSur;
+        private FlowLayoutPanel flpMultizona;
+        private Panel pnlDecoracion4;
+        private Label lblMultizona;
+        private PictureBox ptbMultizona;
     }
 }

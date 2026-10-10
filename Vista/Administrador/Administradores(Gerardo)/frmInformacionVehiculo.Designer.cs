@@ -34,23 +34,23 @@
             pnlDecoracion = new Panel();
             ptbFoto = new PictureBox();
             pnlInformacion = new Panel();
+            lblEstado = new Label();
+            lblTituloEstado = new Label();
+            lblKilometraje = new Label();
+            lblMarca = new Label();
+            lblModelo = new Label();
             lblCapacidad = new Label();
             lblTituloModelo = new Label();
             lblTituloKilometraje = new Label();
             lblTituloMarca = new Label();
             lblTituloCapacidad = new Label();
+            panel1 = new Panel();
             pnlDecoracion3 = new Panel();
             pnlDecoracion2 = new Panel();
             lblDetalles = new Label();
             flpPersonasEncargadas = new FlowLayoutPanel();
             btnAgregar = new Button();
             lblPersonas = new Label();
-            lblModelo = new Label();
-            lblMarca = new Label();
-            lblKilometraje = new Label();
-            panel1 = new Panel();
-            lblEstado = new Label();
-            lblTituloEstado = new Label();
             ((System.ComponentModel.ISupportInitialize)ptbBack).BeginInit();
             tlpTitulo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)ptbFoto).BeginInit();
@@ -66,6 +66,7 @@
             ptbBack.SizeMode = PictureBoxSizeMode.Zoom;
             ptbBack.TabIndex = 1;
             ptbBack.TabStop = false;
+            ptbBack.Click += ptbBack_Click;
             // 
             // tlpTitulo
             // 
@@ -106,6 +107,7 @@
             ptbFoto.Location = new Point(12, 145);
             ptbFoto.Name = "ptbFoto";
             ptbFoto.Size = new Size(645, 616);
+            ptbFoto.SizeMode = PictureBoxSizeMode.Zoom;
             ptbFoto.TabIndex = 4;
             ptbFoto.TabStop = false;
             // 
@@ -132,6 +134,57 @@
             pnlInformacion.Name = "pnlInformacion";
             pnlInformacion.Size = new Size(902, 841);
             pnlInformacion.TabIndex = 5;
+            // 
+            // lblEstado
+            // 
+            lblEstado.AutoSize = true;
+            lblEstado.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblEstado.Location = new Point(102, 767);
+            lblEstado.Name = "lblEstado";
+            lblEstado.Size = new Size(236, 30);
+            lblEstado.TabIndex = 9;
+            lblEstado.Text = "En buenas condiciones";
+            // 
+            // lblTituloEstado
+            // 
+            lblTituloEstado.AutoSize = true;
+            lblTituloEstado.Font = new Font("Segoe UI Semibold", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblTituloEstado.Location = new Point(22, 769);
+            lblTituloEstado.Name = "lblTituloEstado";
+            lblTituloEstado.Size = new Size(74, 25);
+            lblTituloEstado.TabIndex = 8;
+            lblTituloEstado.Text = "Estado:";
+            // 
+            // lblKilometraje
+            // 
+            lblKilometraje.AutoSize = true;
+            lblKilometraje.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblKilometraje.Location = new Point(568, 653);
+            lblKilometraje.Name = "lblKilometraje";
+            lblKilometraje.Size = new Size(116, 30);
+            lblKilometraje.TabIndex = 7;
+            lblKilometraje.Text = "45,000 km";
+            // 
+            // lblMarca
+            // 
+            lblMarca.AutoSize = true;
+            lblMarca.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblMarca.Location = new Point(523, 553);
+            lblMarca.Name = "lblMarca";
+            lblMarca.Size = new Size(88, 30);
+            lblMarca.TabIndex = 7;
+            lblMarca.Text = "Renault";
+            // 
+            // lblModelo
+            // 
+            lblModelo.AutoSize = true;
+            lblModelo.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblModelo.Location = new Point(102, 653);
+            lblModelo.Name = "lblModelo";
+            lblModelo.Size = new Size(171, 30);
+            lblModelo.TabIndex = 7;
+            lblModelo.Text = "Renault Kangoo";
+            lblModelo.Click += lblModelo_Click;
             // 
             // lblCapacidad
             // 
@@ -182,6 +235,14 @@
             lblTituloCapacidad.Size = new Size(106, 25);
             lblTituloCapacidad.TabIndex = 6;
             lblTituloCapacidad.Text = "Capacidad:";
+            // 
+            // panel1
+            // 
+            panel1.BackColor = Color.SaddleBrown;
+            panel1.Location = new Point(13, 702);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(877, 10);
+            panel1.TabIndex = 5;
             // 
             // pnlDecoracion3
             // 
@@ -242,65 +303,6 @@
             lblPersonas.Size = new Size(383, 50);
             lblPersonas.TabIndex = 0;
             lblPersonas.Text = "Personas encargadas";
-            // 
-            // lblModelo
-            // 
-            lblModelo.AutoSize = true;
-            lblModelo.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblModelo.Location = new Point(102, 653);
-            lblModelo.Name = "lblModelo";
-            lblModelo.Size = new Size(171, 30);
-            lblModelo.TabIndex = 7;
-            lblModelo.Text = "Renault Kangoo";
-            lblModelo.Click += lblModelo_Click;
-            // 
-            // lblMarca
-            // 
-            lblMarca.AutoSize = true;
-            lblMarca.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblMarca.Location = new Point(523, 553);
-            lblMarca.Name = "lblMarca";
-            lblMarca.Size = new Size(88, 30);
-            lblMarca.TabIndex = 7;
-            lblMarca.Text = "Renault";
-            // 
-            // lblKilometraje
-            // 
-            lblKilometraje.AutoSize = true;
-            lblKilometraje.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblKilometraje.Location = new Point(568, 653);
-            lblKilometraje.Name = "lblKilometraje";
-            lblKilometraje.Size = new Size(116, 30);
-            lblKilometraje.TabIndex = 7;
-            lblKilometraje.Text = "45,000 km";
-            // 
-            // panel1
-            // 
-            panel1.BackColor = Color.SaddleBrown;
-            panel1.Location = new Point(13, 702);
-            panel1.Name = "panel1";
-            panel1.Size = new Size(877, 10);
-            panel1.TabIndex = 5;
-            // 
-            // lblEstado
-            // 
-            lblEstado.AutoSize = true;
-            lblEstado.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblEstado.Location = new Point(102, 767);
-            lblEstado.Name = "lblEstado";
-            lblEstado.Size = new Size(236, 30);
-            lblEstado.TabIndex = 9;
-            lblEstado.Text = "En buenas condiciones";
-            // 
-            // lblTituloEstado
-            // 
-            lblTituloEstado.AutoSize = true;
-            lblTituloEstado.Font = new Font("Segoe UI Semibold", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblTituloEstado.Location = new Point(22, 769);
-            lblTituloEstado.Name = "lblTituloEstado";
-            lblTituloEstado.Size = new Size(74, 25);
-            lblTituloEstado.TabIndex = 8;
-            lblTituloEstado.Text = "Estado:";
             // 
             // frmInformacionVehiculo
             // 

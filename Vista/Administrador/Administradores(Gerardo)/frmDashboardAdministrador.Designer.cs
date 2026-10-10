@@ -37,16 +37,16 @@
             pnlDecoracion = new Panel();
             pnlConductores = new Panel();
             pnlConductoresInfo = new Panel();
+            btnConductores = new Button();
             lblConductoresText = new Label();
             lblConductores = new Label();
             ptbConductores = new PictureBox();
             pnlVehiculos = new Panel();
             pnlVehiculosInfo = new Panel();
+            btnVehiculos = new Button();
+            lblVehiculosText = new Label();
             lblVehiculos = new Label();
             ptbVehiculos = new PictureBox();
-            lblVehiculosText = new Label();
-            btnConductores = new Button();
-            btnVehiculos = new Button();
             ((System.ComponentModel.ISupportInitialize)ptbDashboard).BeginInit();
             tlpTexto.SuspendLayout();
             pnlConductoresInfo.SuspendLayout();
@@ -140,6 +140,19 @@
             pnlConductoresInfo.Size = new Size(728, 213);
             pnlConductoresInfo.TabIndex = 5;
             // 
+            // btnConductores
+            // 
+            btnConductores.BackColor = Color.OrangeRed;
+            btnConductores.Font = new Font("Segoe UI", 24F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnConductores.ForeColor = SystemColors.Control;
+            btnConductores.Location = new Point(420, 58);
+            btnConductores.Name = "btnConductores";
+            btnConductores.Size = new Size(270, 91);
+            btnConductores.TabIndex = 8;
+            btnConductores.Text = "Ver Más →";
+            btnConductores.UseVisualStyleBackColor = false;
+            btnConductores.Click += btnConductores_Click;
+            // 
             // lblConductoresText
             // 
             lblConductoresText.AutoSize = true;
@@ -191,6 +204,30 @@
             pnlVehiculosInfo.Size = new Size(728, 213);
             pnlVehiculosInfo.TabIndex = 5;
             // 
+            // btnVehiculos
+            // 
+            btnVehiculos.BackColor = Color.OrangeRed;
+            btnVehiculos.Font = new Font("Segoe UI", 24F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnVehiculos.ForeColor = SystemColors.Control;
+            btnVehiculos.Location = new Point(416, 58);
+            btnVehiculos.Name = "btnVehiculos";
+            btnVehiculos.Size = new Size(270, 91);
+            btnVehiculos.TabIndex = 8;
+            btnVehiculos.Text = "Ver Más →";
+            btnVehiculos.UseVisualStyleBackColor = false;
+            btnVehiculos.Click += btnVehiculos_Click;
+            // 
+            // lblVehiculosText
+            // 
+            lblVehiculosText.AutoSize = true;
+            lblVehiculosText.BackColor = SystemColors.Control;
+            lblVehiculosText.Font = new Font("Segoe UI Semibold", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblVehiculosText.Location = new Point(211, 119);
+            lblVehiculosText.Name = "lblVehiculosText";
+            lblVehiculosText.Size = new Size(122, 30);
+            lblVehiculosText.TabIndex = 6;
+            lblVehiculosText.Text = "VEHICULOS";
+            // 
             // lblVehiculos
             // 
             lblVehiculos.AutoSize = true;
@@ -210,41 +247,6 @@
             ptbVehiculos.SizeMode = PictureBoxSizeMode.Zoom;
             ptbVehiculos.TabIndex = 6;
             ptbVehiculos.TabStop = false;
-            // 
-            // lblVehiculosText
-            // 
-            lblVehiculosText.AutoSize = true;
-            lblVehiculosText.BackColor = SystemColors.Control;
-            lblVehiculosText.Font = new Font("Segoe UI Semibold", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblVehiculosText.Location = new Point(211, 119);
-            lblVehiculosText.Name = "lblVehiculosText";
-            lblVehiculosText.Size = new Size(122, 30);
-            lblVehiculosText.TabIndex = 6;
-            lblVehiculosText.Text = "VEHICULOS";
-            // 
-            // btnConductores
-            // 
-            btnConductores.BackColor = Color.OrangeRed;
-            btnConductores.Font = new Font("Segoe UI", 24F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnConductores.ForeColor = SystemColors.Control;
-            btnConductores.Location = new Point(420, 58);
-            btnConductores.Name = "btnConductores";
-            btnConductores.Size = new Size(270, 91);
-            btnConductores.TabIndex = 8;
-            btnConductores.Text = "Ver Más →";
-            btnConductores.UseVisualStyleBackColor = false;
-            // 
-            // btnVehiculos
-            // 
-            btnVehiculos.BackColor = Color.OrangeRed;
-            btnVehiculos.Font = new Font("Segoe UI", 24F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnVehiculos.ForeColor = SystemColors.Control;
-            btnVehiculos.Location = new Point(416, 58);
-            btnVehiculos.Name = "btnVehiculos";
-            btnVehiculos.Size = new Size(270, 91);
-            btnVehiculos.TabIndex = 8;
-            btnVehiculos.Text = "Ver Más →";
-            btnVehiculos.UseVisualStyleBackColor = false;
             // 
             // frmDashboardAdministrador
             // 

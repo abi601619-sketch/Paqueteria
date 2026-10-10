@@ -29,22 +29,22 @@
         private void InitializeComponent()
         {
             pnlMain = new Panel();
-            ptbVehiculo = new PictureBox();
+            tlpInfoCapacidad = new TableLayoutPanel();
+            lblCapacidad = new Label();
+            ptbInfoCapacidad = new PictureBox();
+            tlpInfoPeso = new TableLayoutPanel();
+            lblPeso = new Label();
+            ptbInfoPeso = new PictureBox();
             tlpNombre = new TableLayoutPanel();
             lblNombre = new Label();
-            tlpInfoPeso = new TableLayoutPanel();
-            tlpInfoCapacidad = new TableLayoutPanel();
-            ptbInfoPeso = new PictureBox();
-            ptbInfoCapacidad = new PictureBox();
-            lblCapacidad = new Label();
-            lblPeso = new Label();
+            ptbVehiculo = new PictureBox();
             pnlMain.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)ptbVehiculo).BeginInit();
-            tlpNombre.SuspendLayout();
-            tlpInfoPeso.SuspendLayout();
             tlpInfoCapacidad.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)ptbInfoPeso).BeginInit();
             ((System.ComponentModel.ISupportInitialize)ptbInfoCapacidad).BeginInit();
+            tlpInfoPeso.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)ptbInfoPeso).BeginInit();
+            tlpNombre.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)ptbVehiculo).BeginInit();
             SuspendLayout();
             // 
             // pnlMain
@@ -58,16 +58,77 @@
             pnlMain.Name = "pnlMain";
             pnlMain.Size = new Size(428, 325);
             pnlMain.TabIndex = 0;
+            pnlMain.Click += pnlMain_Click;
+            pnlMain.Paint += pnlMain_Paint;
             // 
-            // ptbVehiculo
+            // tlpInfoCapacidad
             // 
-            ptbVehiculo.Image = Properties.Resources.CARRO_removebg_preview;
-            ptbVehiculo.Location = new Point(13, 13);
-            ptbVehiculo.Name = "ptbVehiculo";
-            ptbVehiculo.Size = new Size(398, 197);
-            ptbVehiculo.SizeMode = PictureBoxSizeMode.Zoom;
-            ptbVehiculo.TabIndex = 0;
-            ptbVehiculo.TabStop = false;
+            tlpInfoCapacidad.ColumnCount = 2;
+            tlpInfoCapacidad.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 18.0904522F));
+            tlpInfoCapacidad.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 81.9095459F));
+            tlpInfoCapacidad.Controls.Add(lblCapacidad, 1, 0);
+            tlpInfoCapacidad.Controls.Add(ptbInfoCapacidad, 0, 0);
+            tlpInfoCapacidad.Location = new Point(212, 276);
+            tlpInfoCapacidad.Name = "tlpInfoCapacidad";
+            tlpInfoCapacidad.RowCount = 1;
+            tlpInfoCapacidad.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            tlpInfoCapacidad.Size = new Size(199, 33);
+            tlpInfoCapacidad.TabIndex = 2;
+            // 
+            // lblCapacidad
+            // 
+            lblCapacidad.AutoSize = true;
+            lblCapacidad.Font = new Font("Segoe UI Semibold", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblCapacidad.Location = new Point(39, 0);
+            lblCapacidad.Name = "lblCapacidad";
+            lblCapacidad.Size = new Size(25, 30);
+            lblCapacidad.TabIndex = 3;
+            lblCapacidad.Text = "2";
+            // 
+            // ptbInfoCapacidad
+            // 
+            ptbInfoCapacidad.Dock = DockStyle.Fill;
+            ptbInfoCapacidad.Image = Properties.Resources.user;
+            ptbInfoCapacidad.Location = new Point(3, 3);
+            ptbInfoCapacidad.Name = "ptbInfoCapacidad";
+            ptbInfoCapacidad.Size = new Size(30, 27);
+            ptbInfoCapacidad.TabIndex = 3;
+            ptbInfoCapacidad.TabStop = false;
+            // 
+            // tlpInfoPeso
+            // 
+            tlpInfoPeso.ColumnCount = 2;
+            tlpInfoPeso.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 18.0904522F));
+            tlpInfoPeso.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 81.9095459F));
+            tlpInfoPeso.Controls.Add(lblPeso, 1, 0);
+            tlpInfoPeso.Controls.Add(ptbInfoPeso, 0, 0);
+            tlpInfoPeso.Location = new Point(13, 276);
+            tlpInfoPeso.Name = "tlpInfoPeso";
+            tlpInfoPeso.RowCount = 1;
+            tlpInfoPeso.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            tlpInfoPeso.Size = new Size(199, 33);
+            tlpInfoPeso.TabIndex = 2;
+            // 
+            // lblPeso
+            // 
+            lblPeso.AutoSize = true;
+            lblPeso.Font = new Font("Segoe UI Semibold", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblPeso.Location = new Point(39, 0);
+            lblPeso.Name = "lblPeso";
+            lblPeso.Size = new Size(79, 30);
+            lblPeso.TabIndex = 3;
+            lblPeso.Text = "800 kg";
+            // 
+            // ptbInfoPeso
+            // 
+            ptbInfoPeso.Dock = DockStyle.Fill;
+            ptbInfoPeso.Image = Properties.Resources.box__1_;
+            ptbInfoPeso.Location = new Point(3, 3);
+            ptbInfoPeso.Name = "ptbInfoPeso";
+            ptbInfoPeso.Size = new Size(30, 27);
+            ptbInfoPeso.SizeMode = PictureBoxSizeMode.Zoom;
+            ptbInfoPeso.TabIndex = 3;
+            ptbInfoPeso.TabStop = false;
             // 
             // tlpNombre
             // 
@@ -94,74 +155,16 @@
             lblNombre.Text = "Van Compacta";
             lblNombre.TextAlign = ContentAlignment.MiddleCenter;
             // 
-            // tlpInfoPeso
+            // ptbVehiculo
             // 
-            tlpInfoPeso.ColumnCount = 2;
-            tlpInfoPeso.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 18.0904522F));
-            tlpInfoPeso.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 81.9095459F));
-            tlpInfoPeso.Controls.Add(lblPeso, 1, 0);
-            tlpInfoPeso.Controls.Add(ptbInfoPeso, 0, 0);
-            tlpInfoPeso.Location = new Point(13, 276);
-            tlpInfoPeso.Name = "tlpInfoPeso";
-            tlpInfoPeso.RowCount = 1;
-            tlpInfoPeso.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            tlpInfoPeso.Size = new Size(199, 33);
-            tlpInfoPeso.TabIndex = 2;
-            // 
-            // tlpInfoCapacidad
-            // 
-            tlpInfoCapacidad.ColumnCount = 2;
-            tlpInfoCapacidad.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 18.0904522F));
-            tlpInfoCapacidad.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 81.9095459F));
-            tlpInfoCapacidad.Controls.Add(lblCapacidad, 1, 0);
-            tlpInfoCapacidad.Controls.Add(ptbInfoCapacidad, 0, 0);
-            tlpInfoCapacidad.Location = new Point(212, 276);
-            tlpInfoCapacidad.Name = "tlpInfoCapacidad";
-            tlpInfoCapacidad.RowCount = 1;
-            tlpInfoCapacidad.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            tlpInfoCapacidad.Size = new Size(199, 33);
-            tlpInfoCapacidad.TabIndex = 2;
-            // 
-            // ptbInfoPeso
-            // 
-            ptbInfoPeso.Dock = DockStyle.Fill;
-            ptbInfoPeso.Image = Properties.Resources.box__1_;
-            ptbInfoPeso.Location = new Point(3, 3);
-            ptbInfoPeso.Name = "ptbInfoPeso";
-            ptbInfoPeso.Size = new Size(30, 27);
-            ptbInfoPeso.SizeMode = PictureBoxSizeMode.Zoom;
-            ptbInfoPeso.TabIndex = 3;
-            ptbInfoPeso.TabStop = false;
-            // 
-            // ptbInfoCapacidad
-            // 
-            ptbInfoCapacidad.Dock = DockStyle.Fill;
-            ptbInfoCapacidad.Image = Properties.Resources.user;
-            ptbInfoCapacidad.Location = new Point(3, 3);
-            ptbInfoCapacidad.Name = "ptbInfoCapacidad";
-            ptbInfoCapacidad.Size = new Size(30, 27);
-            ptbInfoCapacidad.TabIndex = 3;
-            ptbInfoCapacidad.TabStop = false;
-            // 
-            // lblCapacidad
-            // 
-            lblCapacidad.AutoSize = true;
-            lblCapacidad.Font = new Font("Segoe UI Semibold", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblCapacidad.Location = new Point(39, 0);
-            lblCapacidad.Name = "lblCapacidad";
-            lblCapacidad.Size = new Size(25, 30);
-            lblCapacidad.TabIndex = 3;
-            lblCapacidad.Text = "2";
-            // 
-            // lblPeso
-            // 
-            lblPeso.AutoSize = true;
-            lblPeso.Font = new Font("Segoe UI Semibold", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblPeso.Location = new Point(39, 0);
-            lblPeso.Name = "lblPeso";
-            lblPeso.Size = new Size(79, 30);
-            lblPeso.TabIndex = 3;
-            lblPeso.Text = "800 kg";
+            ptbVehiculo.Image = Properties.Resources.CARRO_removebg_preview;
+            ptbVehiculo.Location = new Point(13, 13);
+            ptbVehiculo.Name = "ptbVehiculo";
+            ptbVehiculo.Size = new Size(398, 197);
+            ptbVehiculo.SizeMode = PictureBoxSizeMode.Zoom;
+            ptbVehiculo.TabIndex = 0;
+            ptbVehiculo.TabStop = false;
+            ptbVehiculo.Click += ptbVehiculo_Click;
             // 
             // ucVehiculo
             // 
@@ -171,16 +174,18 @@
             Controls.Add(pnlMain);
             Name = "ucVehiculo";
             Size = new Size(428, 337);
+            Load += ucVehiculo_Load;
+            Click += ucVehiculo_Click;
             pnlMain.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)ptbVehiculo).EndInit();
-            tlpNombre.ResumeLayout(false);
-            tlpNombre.PerformLayout();
-            tlpInfoPeso.ResumeLayout(false);
-            tlpInfoPeso.PerformLayout();
             tlpInfoCapacidad.ResumeLayout(false);
             tlpInfoCapacidad.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)ptbInfoPeso).EndInit();
             ((System.ComponentModel.ISupportInitialize)ptbInfoCapacidad).EndInit();
+            tlpInfoPeso.ResumeLayout(false);
+            tlpInfoPeso.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)ptbInfoPeso).EndInit();
+            tlpNombre.ResumeLayout(false);
+            tlpNombre.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)ptbVehiculo).EndInit();
             ResumeLayout(false);
         }
 
