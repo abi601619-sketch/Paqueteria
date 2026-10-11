@@ -49,11 +49,11 @@
             ptbVehiculos = new PictureBox();
             pnlInformacion = new Panel();
             pnlInformacion1 = new Panel();
-            lblInfo = new Label();
-            lblCorreo = new Label();
             lblDui = new Label();
-            lblCorreoInsertar = new Label();
             lblDuiInsertar = new Label();
+            lblCorreoInsertar = new Label();
+            lblCorreo = new Label();
+            lblInfo = new Label();
             ((System.ComponentModel.ISupportInitialize)ptbDashboard).BeginInit();
             tlpTexto.SuspendLayout();
             pnlConductoresInfo.SuspendLayout();
@@ -280,15 +280,39 @@
             pnlInformacion1.Size = new Size(775, 301);
             pnlInformacion1.TabIndex = 0;
             // 
-            // lblInfo
+            // lblDui
             // 
-            lblInfo.AutoSize = true;
-            lblInfo.Font = new Font("Segoe UI", 48F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblInfo.Location = new Point(197, 0);
-            lblInfo.Name = "lblInfo";
-            lblInfo.Size = new Size(405, 86);
-            lblInfo.TabIndex = 8;
-            lblInfo.Text = "Información";
+            lblDui.AutoSize = true;
+            lblDui.BackColor = SystemColors.Control;
+            lblDui.Font = new Font("Microsoft Sans Serif", 15.75F, FontStyle.Bold);
+            lblDui.ForeColor = Color.Firebrick;
+            lblDui.Location = new Point(26, 223);
+            lblDui.Name = "lblDui";
+            lblDui.Size = new Size(54, 25);
+            lblDui.TabIndex = 9;
+            lblDui.Text = "Dui:";
+            // 
+            // lblDuiInsertar
+            // 
+            lblDuiInsertar.AutoSize = true;
+            lblDuiInsertar.BackColor = SystemColors.Control;
+            lblDuiInsertar.Font = new Font("Microsoft Sans Serif", 15.75F, FontStyle.Bold);
+            lblDuiInsertar.Location = new Point(154, 223);
+            lblDuiInsertar.Name = "lblDuiInsertar";
+            lblDuiInsertar.Size = new Size(137, 25);
+            lblDuiInsertar.TabIndex = 9;
+            lblDuiInsertar.Text = "00000000-0";
+            // 
+            // lblCorreoInsertar
+            // 
+            lblCorreoInsertar.AutoSize = true;
+            lblCorreoInsertar.BackColor = SystemColors.Control;
+            lblCorreoInsertar.Font = new Font("Microsoft Sans Serif", 15.75F, FontStyle.Bold);
+            lblCorreoInsertar.Location = new Point(122, 133);
+            lblCorreoInsertar.Name = "lblCorreoInsertar";
+            lblCorreoInsertar.Size = new Size(348, 25);
+            lblCorreoInsertar.TabIndex = 9;
+            lblCorreoInsertar.Text = "juan.vasquez@ricaldone.edu.sv";
             // 
             // lblCorreo
             // 
@@ -302,39 +326,15 @@
             lblCorreo.TabIndex = 9;
             lblCorreo.Text = "Correo:";
             // 
-            // lblDui
+            // lblInfo
             // 
-            lblDui.AutoSize = true;
-            lblDui.BackColor = SystemColors.Control;
-            lblDui.Font = new Font("Microsoft Sans Serif", 15.75F, FontStyle.Bold);
-            lblDui.ForeColor = Color.Firebrick;
-            lblDui.Location = new Point(26, 223);
-            lblDui.Name = "lblDui";
-            lblDui.Size = new Size(54, 25);
-            lblDui.TabIndex = 9;
-            lblDui.Text = "Dui:";
-            // 
-            // lblCorreoInsertar
-            // 
-            lblCorreoInsertar.AutoSize = true;
-            lblCorreoInsertar.BackColor = SystemColors.Control;
-            lblCorreoInsertar.Font = new Font("Microsoft Sans Serif", 15.75F, FontStyle.Bold);
-            lblCorreoInsertar.Location = new Point(122, 133);
-            lblCorreoInsertar.Name = "lblCorreoInsertar";
-            lblCorreoInsertar.Size = new Size(348, 25);
-            lblCorreoInsertar.TabIndex = 9;
-            lblCorreoInsertar.Text = "juan.vasquez@ricaldone.edu.sv";
-            // 
-            // lblDuiInsertar
-            // 
-            lblDuiInsertar.AutoSize = true;
-            lblDuiInsertar.BackColor = SystemColors.Control;
-            lblDuiInsertar.Font = new Font("Microsoft Sans Serif", 15.75F, FontStyle.Bold);
-            lblDuiInsertar.Location = new Point(122, 223);
-            lblDuiInsertar.Name = "lblDuiInsertar";
-            lblDuiInsertar.Size = new Size(137, 25);
-            lblDuiInsertar.TabIndex = 9;
-            lblDuiInsertar.Text = "00000000-0";
+            lblInfo.AutoSize = true;
+            lblInfo.Font = new Font("Segoe UI", 48F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblInfo.Location = new Point(197, 0);
+            lblInfo.Name = "lblInfo";
+            lblInfo.Size = new Size(405, 86);
+            lblInfo.TabIndex = 8;
+            lblInfo.Text = "Información";
             // 
             // frmDashboardAdministrador
             // 

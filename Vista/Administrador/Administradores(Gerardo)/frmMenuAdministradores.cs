@@ -30,25 +30,29 @@ namespace Vista.Administrador.Administradores_Gerardo_
             get { return pnlPlantilla; }
         }
 
-        private void AbrirDashboard()
+        private void AbrirDashboard(Usuario usuario)
         {
-            frmDashboardAdministrador dash = new frmDashboardAdministrador(usuario);
+            if (usuario == null)
+            {
+                MessageBox.Show("No se recibió ningún usuario.");
+                return;
+            }
+
+            frmDashboardAdministrador dash =
+                new frmDashboardAdministrador(usuario);
+
             dash.IrAConductores += AbrirConductores;
             dash.IrAVehiculos += AbrirVehiculos;
+
             navegador.AbrirFormularioEnPanel(this.panelPlantilla, dash);
         }
+
 
         private void AbrirVehiculos()
         {
             frmVehiculosAdministrador vehiculo = new frmVehiculosAdministrador();
             vehiculo.AbrirInfo += AbrirInformacionVehiculo;
             navegador.AbrirFormularioEnPanel(this.panelPlantilla, vehiculo);
-        }
-
-        private void AbrirPedidos()
-        {
-            frmPedidosAdministrador pedido = new frmPedidosAdministrador();
-            navegador.AbrirFormularioEnPanel(this.panelPlantilla, pedido);
         }
 
 
@@ -101,12 +105,12 @@ namespace Vista.Administrador.Administradores_Gerardo_
 
         private void frmMenuAdministradores_Load(object sender, EventArgs e)
         {
-            AbrirDashboard();
+            AbrirDashboard(usuario);
         }
 
         private void btnDashboard_Click(object sender, EventArgs e)
         {
-            AbrirDashboard();
+            AbrirDashboard(usuario);
         }
 
         private void btnCerrarSesion_Click(object sender, EventArgs e)
@@ -117,11 +121,6 @@ namespace Vista.Administrador.Administradores_Gerardo_
         private void btnVehiculos_Click(object sender, EventArgs e)
         {
             AbrirVehiculos();
-        }
-
-        private void btnPedidos_Click(object sender, EventArgs e)
-        {
-            AbrirPedidos();
         }
 
         private void btnConductores_Click(object sender, EventArgs e)

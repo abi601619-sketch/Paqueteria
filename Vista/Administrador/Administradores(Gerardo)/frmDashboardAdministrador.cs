@@ -20,9 +20,12 @@ namespace Vista.Administrador.Administradores_Gerardo_
         public frmDashboardAdministrador(Usuario usuario)
         {
             InitializeComponent();
+
             this.usuario = usuario;
-            lblCorreoInsertar.Text = usuario.Correo;
-            lblDui.Text = usuario.Dui;
+
+            lblCorreoInsertar.Text = this.usuario.Correo;
+            lblDuiInsertar.Text = this.usuario.Dui;
+
             CargarEstadisticas();
 
         }
