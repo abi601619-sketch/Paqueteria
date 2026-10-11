@@ -1,5 +1,6 @@
 ﻿using Modelo.Entidades;
 using Modelo.Navegación;
+using Conductor = Modelo.Entidades.Conductor;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -16,6 +17,8 @@ namespace Vista.Administrador.Administradores_Gerardo_
     {
 
         private Navegacion navegador = new Navegacion();
+        private frmConductoresAdministrador adminConductores;
+        private Usuario usuario;
 
         public frmMenuAdministradores()
         {
@@ -29,7 +32,7 @@ namespace Vista.Administrador.Administradores_Gerardo_
 
         private void AbrirDashboard()
         {
-            frmDashboardAdministrador dash = new frmDashboardAdministrador();
+            frmDashboardAdministrador dash = new frmDashboardAdministrador(usuario);
             dash.IrAConductores += AbrirConductores;
             dash.IrAVehiculos += AbrirVehiculos;
             navegador.AbrirFormularioEnPanel(this.panelPlantilla, dash);
@@ -48,18 +51,51 @@ namespace Vista.Administrador.Administradores_Gerardo_
             navegador.AbrirFormularioEnPanel(this.panelPlantilla, pedido);
         }
 
+
         private void AbrirConductores()
         {
-            frmConductoresAdministrador conductor = new frmConductoresAdministrador();
-            navegador.AbrirFormularioEnPanel(this.panelPlantilla, conductor);
+            adminConductores = new frmConductoresAdministrador();
+
+            adminConductores.AbrirInfo += AbrirInformacionConductor;
+
+            navegador.AbrirFormularioEnPanel(
+                this.panelPlantilla,
+                adminConductores
+            );
         }
+
 
         private void AbrirInformacionVehiculo(Vehiculos vehiculo)
         {
             frmInformacionVehiculo form = new frmInformacionVehiculo(vehiculo);
             form.volver += AbrirVehiculos;
+            form.VehiculoEliminado += AbrirVehiculos;
             navegador.AbrirFormularioEnPanel(this.pnlPlantilla, form);
         }
+
+
+        private void AbrirInformacionConductor(
+            Modelo.Entidades.Conductor conductor)
+        {
+            frmInformacionConductor form =
+                new frmInformacionConductor(conductor);
+
+            form.volver += AbrirConductores;
+
+            form.ConductorEliminado += () =>
+            {
+                adminConductores?.ActualizarListaConductores();
+
+                AbrirConductores();
+            };
+
+            navegador.AbrirFormularioEnPanel(
+                this.panelPlantilla,
+                form
+            );
+        }
+
+
 
 
 

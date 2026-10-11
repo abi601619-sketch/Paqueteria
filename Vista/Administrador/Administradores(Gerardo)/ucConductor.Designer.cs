@@ -69,8 +69,10 @@
             cptbPerfil.ShadowDecoration.CustomizableEdges = customizableEdges1;
             cptbPerfil.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
             cptbPerfil.Size = new Size(97, 80);
+            cptbPerfil.SizeMode = PictureBoxSizeMode.Zoom;
             cptbPerfil.TabIndex = 3;
             cptbPerfil.TabStop = false;
+            cptbPerfil.Click += cptbPerfil_Click;
             // 
             // ucConductor
             // 

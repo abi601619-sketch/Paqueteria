@@ -51,6 +51,7 @@
             flpPersonasEncargadas = new FlowLayoutPanel();
             btnAgregar = new Button();
             lblPersonas = new Label();
+            button1 = new Button();
             ((System.ComponentModel.ISupportInitialize)ptbBack).BeginInit();
             tlpTitulo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)ptbFoto).BeginInit();
@@ -304,11 +305,25 @@
             lblPersonas.TabIndex = 0;
             lblPersonas.Text = "Personas encargadas";
             // 
+            // button1
+            // 
+            button1.BackColor = Color.DarkRed;
+            button1.Font = new Font("Segoe UI", 20.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            button1.ForeColor = SystemColors.Control;
+            button1.Location = new Point(12, 894);
+            button1.Name = "button1";
+            button1.Size = new Size(386, 92);
+            button1.TabIndex = 12;
+            button1.Text = "Actualizar Información";
+            button1.UseVisualStyleBackColor = false;
+            button1.Click += button1_Click;
+            // 
             // frmInformacionVehiculo
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1640, 1015);
+            Controls.Add(button1);
             Controls.Add(pnlInformacion);
             Controls.Add(ptbFoto);
             Controls.Add(pnlDecoracion);
@@ -351,5 +366,6 @@
         private Label lblTituloEstado;
         private Label lblKilometraje;
         private Panel panel1;
+        private Button button1;
     }
 }

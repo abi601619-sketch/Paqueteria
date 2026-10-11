@@ -41,13 +41,18 @@
             pnlDecoracion3 = new Panel();
             lblZonaSur = new Label();
             ptbZonaSur = new PictureBox();
-            btnZonaCentral = new Button();
-            btnZonaOriente = new Button();
-            btnZonaSur = new Button();
+            btnNextZonaCentral = new Button();
+            btnNextZonaOriente = new Button();
+            btnNextZonaOccidente = new Button();
             flpMultizona = new FlowLayoutPanel();
             pnlDecoracion4 = new Panel();
             lblMultizona = new Label();
             ptbMultizona = new PictureBox();
+            btnNextMultizona = new Button();
+            btnLeftZonaOccidente = new Button();
+            btnLeftZonaOriente = new Button();
+            btnLeftZonaCentral = new Button();
+            btnLeftMultizona = new Button();
             ((System.ComponentModel.ISupportInitialize)ptbZonaCentral).BeginInit();
             ((System.ComponentModel.ISupportInitialize)ptbZonaOriente).BeginInit();
             ((System.ComponentModel.ISupportInitialize)ptbZonaSur).BeginInit();
@@ -98,16 +103,16 @@
             // 
             // flpZonaCentral
             // 
-            flpZonaCentral.Location = new Point(12, 116);
+            flpZonaCentral.Location = new Point(69, 117);
             flpZonaCentral.Name = "flpZonaCentral";
-            flpZonaCentral.Size = new Size(1506, 130);
+            flpZonaCentral.Size = new Size(1491, 130);
             flpZonaCentral.TabIndex = 4;
             // 
             // flpZonaOriente
             // 
-            flpZonaOriente.Location = new Point(12, 361);
+            flpZonaOriente.Location = new Point(69, 361);
             flpZonaOriente.Name = "flpZonaOriente";
-            flpZonaOriente.Size = new Size(1506, 130);
+            flpZonaOriente.Size = new Size(1491, 130);
             flpZonaOriente.TabIndex = 8;
             // 
             // pnlDecoracion2
@@ -141,18 +146,18 @@
             // 
             // flpZonaSur
             // 
-            flpZonaSur.Location = new Point(12, 630);
+            flpZonaSur.Location = new Point(69, 625);
             flpZonaSur.Name = "flpZonaSur";
-            flpZonaSur.Size = new Size(1506, 130);
+            flpZonaSur.Size = new Size(1491, 130);
             flpZonaSur.TabIndex = 12;
             // 
             // pnlDecoracion3
             // 
             pnlDecoracion3.BackColor = SystemColors.AppWorkspace;
             pnlDecoracion3.ForeColor = SystemColors.ControlDarkDark;
-            pnlDecoracion3.Location = new Point(338, 566);
+            pnlDecoracion3.Location = new Point(478, 566);
             pnlDecoracion3.Name = "pnlDecoracion3";
-            pnlDecoracion3.Size = new Size(1041, 10);
+            pnlDecoracion3.Size = new Size(901, 10);
             pnlDecoracion3.TabIndex = 11;
             // 
             // lblZonaSur
@@ -161,9 +166,9 @@
             lblZonaSur.Font = new Font("Segoe UI", 36F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblZonaSur.Location = new Point(103, 535);
             lblZonaSur.Name = "lblZonaSur";
-            lblZonaSur.Size = new Size(229, 65);
+            lblZonaSur.Size = new Size(380, 65);
             lblZonaSur.TabIndex = 10;
-            lblZonaSur.Text = "Zona Sur";
+            lblZonaSur.Text = "Zona Occidente";
             // 
             // ptbZonaSur
             // 
@@ -175,47 +180,50 @@
             ptbZonaSur.TabIndex = 9;
             ptbZonaSur.TabStop = false;
             // 
-            // btnZonaCentral
+            // btnNextZonaCentral
             // 
-            btnZonaCentral.BackColor = SystemColors.ControlLight;
-            btnZonaCentral.Font = new Font("Segoe UI Black", 20.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnZonaCentral.ForeColor = SystemColors.ActiveCaptionText;
-            btnZonaCentral.Location = new Point(1549, 126);
-            btnZonaCentral.Name = "btnZonaCentral";
-            btnZonaCentral.Size = new Size(48, 177);
-            btnZonaCentral.TabIndex = 13;
-            btnZonaCentral.Text = ">";
-            btnZonaCentral.UseVisualStyleBackColor = false;
+            btnNextZonaCentral.BackColor = SystemColors.ControlLight;
+            btnNextZonaCentral.Font = new Font("Segoe UI Black", 20.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnNextZonaCentral.ForeColor = SystemColors.ActiveCaptionText;
+            btnNextZonaCentral.Location = new Point(1580, 122);
+            btnNextZonaCentral.Name = "btnNextZonaCentral";
+            btnNextZonaCentral.Size = new Size(48, 120);
+            btnNextZonaCentral.TabIndex = 13;
+            btnNextZonaCentral.Text = ">";
+            btnNextZonaCentral.UseVisualStyleBackColor = false;
+            btnNextZonaCentral.Click += btnNextZonaCentral_Click_1;
             // 
-            // btnZonaOriente
+            // btnNextZonaOriente
             // 
-            btnZonaOriente.BackColor = SystemColors.ControlLight;
-            btnZonaOriente.Font = new Font("Segoe UI Black", 20.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnZonaOriente.ForeColor = SystemColors.ActiveCaptionText;
-            btnZonaOriente.Location = new Point(1549, 471);
-            btnZonaOriente.Name = "btnZonaOriente";
-            btnZonaOriente.Size = new Size(48, 177);
-            btnZonaOriente.TabIndex = 13;
-            btnZonaOriente.Text = ">";
-            btnZonaOriente.UseVisualStyleBackColor = false;
+            btnNextZonaOriente.BackColor = SystemColors.ControlLight;
+            btnNextZonaOriente.Font = new Font("Segoe UI Black", 20.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnNextZonaOriente.ForeColor = SystemColors.ActiveCaptionText;
+            btnNextZonaOriente.Location = new Point(1580, 364);
+            btnNextZonaOriente.Name = "btnNextZonaOriente";
+            btnNextZonaOriente.Size = new Size(48, 120);
+            btnNextZonaOriente.TabIndex = 13;
+            btnNextZonaOriente.Text = ">";
+            btnNextZonaOriente.UseVisualStyleBackColor = false;
+            btnNextZonaOriente.Click += btnNextZonaOriente_Click_1;
             // 
-            // btnZonaSur
+            // btnNextZonaOccidente
             // 
-            btnZonaSur.BackColor = SystemColors.ControlLight;
-            btnZonaSur.Font = new Font("Segoe UI Black", 20.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnZonaSur.ForeColor = SystemColors.ActiveCaptionText;
-            btnZonaSur.Location = new Point(1549, 812);
-            btnZonaSur.Name = "btnZonaSur";
-            btnZonaSur.Size = new Size(48, 177);
-            btnZonaSur.TabIndex = 13;
-            btnZonaSur.Text = ">";
-            btnZonaSur.UseVisualStyleBackColor = false;
+            btnNextZonaOccidente.BackColor = SystemColors.ControlLight;
+            btnNextZonaOccidente.Font = new Font("Segoe UI Black", 20.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnNextZonaOccidente.ForeColor = SystemColors.ActiveCaptionText;
+            btnNextZonaOccidente.Location = new Point(1580, 630);
+            btnNextZonaOccidente.Name = "btnNextZonaOccidente";
+            btnNextZonaOccidente.Size = new Size(48, 120);
+            btnNextZonaOccidente.TabIndex = 13;
+            btnNextZonaOccidente.Text = ">";
+            btnNextZonaOccidente.UseVisualStyleBackColor = false;
+            btnNextZonaOccidente.Click += btnNextZonaOccidente_Click;
             // 
             // flpMultizona
             // 
-            flpMultizona.Location = new Point(12, 882);
+            flpMultizona.Location = new Point(69, 882);
             flpMultizona.Name = "flpMultizona";
-            flpMultizona.Size = new Size(1506, 130);
+            flpMultizona.Size = new Size(1491, 130);
             flpMultizona.TabIndex = 17;
             // 
             // pnlDecoracion4
@@ -247,18 +255,88 @@
             ptbMultizona.TabIndex = 14;
             ptbMultizona.TabStop = false;
             // 
+            // btnNextMultizona
+            // 
+            btnNextMultizona.BackColor = SystemColors.ControlLight;
+            btnNextMultizona.Font = new Font("Segoe UI Black", 20.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnNextMultizona.ForeColor = SystemColors.ActiveCaptionText;
+            btnNextMultizona.Location = new Point(1580, 885);
+            btnNextMultizona.Name = "btnNextMultizona";
+            btnNextMultizona.Size = new Size(48, 120);
+            btnNextMultizona.TabIndex = 13;
+            btnNextMultizona.Text = ">";
+            btnNextMultizona.UseVisualStyleBackColor = false;
+            btnNextMultizona.Click += btnNextMultizona_Click_1;
+            // 
+            // btnLeftZonaOccidente
+            // 
+            btnLeftZonaOccidente.BackColor = SystemColors.ControlLight;
+            btnLeftZonaOccidente.Font = new Font("Segoe UI Black", 20.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnLeftZonaOccidente.ForeColor = SystemColors.ActiveCaptionText;
+            btnLeftZonaOccidente.Location = new Point(4, 630);
+            btnLeftZonaOccidente.Name = "btnLeftZonaOccidente";
+            btnLeftZonaOccidente.Size = new Size(48, 120);
+            btnLeftZonaOccidente.TabIndex = 18;
+            btnLeftZonaOccidente.Text = "<";
+            btnLeftZonaOccidente.UseVisualStyleBackColor = false;
+            btnLeftZonaOccidente.Click += btnLeftZonaOccidente_Click_1;
+            // 
+            // btnLeftZonaOriente
+            // 
+            btnLeftZonaOriente.BackColor = SystemColors.ControlLight;
+            btnLeftZonaOriente.Font = new Font("Segoe UI Black", 20.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnLeftZonaOriente.ForeColor = SystemColors.ActiveCaptionText;
+            btnLeftZonaOriente.Location = new Point(4, 363);
+            btnLeftZonaOriente.Name = "btnLeftZonaOriente";
+            btnLeftZonaOriente.Size = new Size(48, 120);
+            btnLeftZonaOriente.TabIndex = 18;
+            btnLeftZonaOriente.Text = "<";
+            btnLeftZonaOriente.UseVisualStyleBackColor = false;
+            btnLeftZonaOriente.Click += btnLeftZonaOriente_Click_1;
+            // 
+            // btnLeftZonaCentral
+            // 
+            btnLeftZonaCentral.BackColor = SystemColors.ControlLight;
+            btnLeftZonaCentral.Font = new Font("Segoe UI Black", 20.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnLeftZonaCentral.ForeColor = SystemColors.ActiveCaptionText;
+            btnLeftZonaCentral.Location = new Point(4, 119);
+            btnLeftZonaCentral.Name = "btnLeftZonaCentral";
+            btnLeftZonaCentral.Size = new Size(48, 120);
+            btnLeftZonaCentral.TabIndex = 19;
+            btnLeftZonaCentral.Text = "<";
+            btnLeftZonaCentral.UseVisualStyleBackColor = false;
+            btnLeftZonaCentral.Click += btnLeftZonaCentral_Click_1;
+            // 
+            // btnLeftMultizona
+            // 
+            btnLeftMultizona.BackColor = SystemColors.ControlLight;
+            btnLeftMultizona.Font = new Font("Segoe UI Black", 20.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnLeftMultizona.ForeColor = SystemColors.ActiveCaptionText;
+            btnLeftMultizona.Location = new Point(4, 887);
+            btnLeftMultizona.Name = "btnLeftMultizona";
+            btnLeftMultizona.Size = new Size(48, 120);
+            btnLeftMultizona.TabIndex = 18;
+            btnLeftMultizona.Text = "<";
+            btnLeftMultizona.UseVisualStyleBackColor = false;
+            btnLeftMultizona.Click += btnLeftMultizona_Click_1;
+            // 
             // frmConductoresAdministrador
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1640, 1015);
+            Controls.Add(btnLeftZonaCentral);
+            Controls.Add(btnLeftZonaOriente);
+            Controls.Add(btnLeftMultizona);
+            Controls.Add(btnLeftZonaOccidente);
             Controls.Add(flpMultizona);
             Controls.Add(pnlDecoracion4);
             Controls.Add(lblMultizona);
             Controls.Add(ptbMultizona);
-            Controls.Add(btnZonaSur);
-            Controls.Add(btnZonaOriente);
-            Controls.Add(btnZonaCentral);
+            Controls.Add(btnNextMultizona);
+            Controls.Add(btnNextZonaOccidente);
+            Controls.Add(btnNextZonaOriente);
+            Controls.Add(btnNextZonaCentral);
             Controls.Add(flpZonaSur);
             Controls.Add(pnlDecoracion3);
             Controls.Add(lblZonaSur);
@@ -298,12 +376,17 @@
         private Panel pnlDecoracion3;
         private Label lblZonaSur;
         private PictureBox ptbZonaSur;
-        private Button btnZonaCentral;
-        private Button btnZonaOriente;
-        private Button btnZonaSur;
+        private Button btnNextZonaCentral;
+        private Button btnNextZonaOriente;
+        private Button btnNextZonaOccidente;
         private FlowLayoutPanel flpMultizona;
         private Panel pnlDecoracion4;
         private Label lblMultizona;
         private PictureBox ptbMultizona;
+        private Button btnNextMultizona;
+        private Button btnLeftZonaOccidente;
+        private Button btnLeftZonaOriente;
+        private Button btnLeftZonaCentral;
+        private Button btnLeftMultizona;
     }
 }

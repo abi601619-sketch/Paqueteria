@@ -1,4 +1,5 @@
-﻿using Modelo.Navegación;
+﻿using Modelo.Entidades;
+using Modelo.Navegación;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -12,13 +13,30 @@ namespace Vista.Administrador.Administradores_Gerardo_
 {
     public partial class frmDashboardAdministrador : Form
     {
+        private Usuario usuario;
         public Action IrAConductores;
         public Action IrAVehiculos;
 
-        public frmDashboardAdministrador()
+        public frmDashboardAdministrador(Usuario usuario)
         {
             InitializeComponent();
+            this.usuario = usuario;
+            lblCorreoInsertar.Text = usuario.Correo;
+            lblDui.Text = usuario.Dui;
+            CargarEstadisticas();
 
+        }
+
+        private void CargarEstadisticas()
+        {
+            Modelo.Entidades.Conductor conductor = new Modelo.Entidades.Conductor();
+            Vehiculos vehiculo = new Vehiculos();
+
+            lblConductores.Text =
+                conductor.ObtenerCantidadConductores().ToString();
+
+            lblVehiculos.Text =
+                vehiculo.ObtenerCantidadVehiculos().ToString();
         }
 
         private void btnConductores_Click(object sender, EventArgs e)
