@@ -6,10 +6,14 @@ namespace Modelo.Datos
 {
     public class UsuarioDAO
     {
+
         public Usuario IniciarSesion(string correo, string contrasena)
         {
             Usuario usuario = null;
+            string hashGuardado = null;
 
+            string consulta = @"
+        SELECT
             string consulta = @"SELECT
             idUsuario,
             dui,
@@ -22,7 +26,9 @@ namespace Modelo.Datos
         WHERE correo = @correo";
 
             using (SqlConnection conexion = Conexion.Conectar())
+            using (SqlCommand comando = new SqlCommand(consulta, conexion))
             {
+                comando.Parameters.AddWithValue("@correo", correo);
                 Usuario usuario = null;
 
                 string consulta = @"
@@ -41,10 +47,78 @@ namespace Modelo.Datos
                 {
                     comando.Parameters.AddWithValue("@correo", correo);
 
-                    using (SqlDataReader reader = comando.ExecuteReader())
+                using (SqlDataReader reader = comando.ExecuteReader())
+                {
+                    if (reader.Read())
                     {
-                        if (reader.Read())
+                        hashGuardado = reader["contrasena"] == DBNull.Value
+                            ? null
+                            : reader["contrasena"].ToString();
+
+                        usuario = new Usuario
                         {
+                            IdUsuario = Convert.ToInt32(reader["idUsuario"]),
+                            Dui = reader["dui"].ToString(),
+                            Nombre = reader["nombre"].ToString(),
+                            Apellido = reader["apellido"].ToString(),
+                            Correo = reader["correo"].ToString()
+                        };
+
+                        if (reader["fotoPerfil"] != DBNull.Value)
+                        {
+                            usuario.FotoPerfil = (byte[])reader["fotoPerfil"];
+                        }
+                    }
+                }
+            }
+
+            if (usuario == null || string.IsNullOrEmpty(hashGuardado))
+                return null;
+
+            bool esHashBCrypt =
+                hashGuardado.StartsWith("$2a$") ||
+                hashGuardado.StartsWith("$2b$") ||
+                hashGuardado.StartsWith("$2y$");
+
+            if (esHashBCrypt)
+            {
+                try
+                {
+                    return BCrypt.Net.BCrypt.Verify(contrasena, hashGuardado)
+                        ? usuario
+                        : null;
+                }
+                catch (BCrypt.Net.SaltParseException)
+                {
+                    return null;
+                }
+                catch (BCrypt.Net.HashInformationException)
+                {
+                    return null;
+                }
+            }
+
+            // Compatibilidad temporal con contraseñas antiguas.
+            // Si coincide, se convierte a BCrypt automáticamente.
+            if (hashGuardado != contrasena)
+                return null;
+
+            string nuevoHash = BCrypt.Net.BCrypt.HashPassword(contrasena);
+
+            string actualizar = @"
+        UPDATE Usuarios
+        SET contrasena = @hash
+        WHERE idUsuario = @idUsuario";
+
+            using (SqlConnection conexion = Conexion.Conectar())
+            using (SqlCommand comando = new SqlCommand(actualizar, conexion))
+            {
+                comando.Parameters.AddWithValue("@hash", nuevoHash);
+                comando.Parameters.AddWithValue("@idUsuario", usuario.IdUsuario);
+
+                if (comando.ExecuteNonQuery() != 1)
+                    return null;
+            }
                             string hashContrasena = reader["contrasena"].ToString();
 
                             // Verificar contraseña con BCrypt

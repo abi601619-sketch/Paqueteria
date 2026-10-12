@@ -29,15 +29,11 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges1 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges2 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges3 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges4 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges5 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges6 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges7 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges8 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges9 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges10 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             tlpLogin = new TableLayoutPanel();
             pictureBox1 = new PictureBox();
             pnlInicioS = new Panel();
@@ -175,6 +171,7 @@
             // guna2CustomGradientPanel2
             // 
             guna2CustomGradientPanel2.BackColor = Color.Black;
+            guna2CustomGradientPanel2.CustomizableEdges = customizableEdges6;
             guna2CustomGradientPanel2.CustomizableEdges = customizableEdges5;
             guna2CustomGradientPanel2.FillColor = Color.Black;
             guna2CustomGradientPanel2.FillColor2 = Color.Black;
@@ -183,6 +180,7 @@
             guna2CustomGradientPanel2.Location = new Point(519, 910);
             guna2CustomGradientPanel2.MinimumSize = new Size(1, 1);
             guna2CustomGradientPanel2.Name = "guna2CustomGradientPanel2";
+            guna2CustomGradientPanel2.ShadowDecoration.CustomizableEdges = customizableEdges7;
             guna2CustomGradientPanel2.ShadowDecoration.CustomizableEdges = customizableEdges6;
             guna2CustomGradientPanel2.Size = new Size(200, 1);
             guna2CustomGradientPanel2.TabIndex = 9;
@@ -190,6 +188,7 @@
             // guna2CustomGradientPanel1
             // 
             guna2CustomGradientPanel1.BackColor = Color.Black;
+            guna2CustomGradientPanel1.CustomizableEdges = customizableEdges8;
             guna2CustomGradientPanel1.CustomizableEdges = customizableEdges7;
             guna2CustomGradientPanel1.FillColor = Color.Black;
             guna2CustomGradientPanel1.FillColor2 = Color.Black;
@@ -198,6 +197,7 @@
             guna2CustomGradientPanel1.Location = new Point(167, 910);
             guna2CustomGradientPanel1.MinimumSize = new Size(1, 1);
             guna2CustomGradientPanel1.Name = "guna2CustomGradientPanel1";
+            guna2CustomGradientPanel1.ShadowDecoration.CustomizableEdges = customizableEdges9;
             guna2CustomGradientPanel1.ShadowDecoration.CustomizableEdges = customizableEdges8;
             guna2CustomGradientPanel1.Size = new Size(200, 1);
             guna2CustomGradientPanel1.TabIndex = 8;
@@ -241,6 +241,7 @@
             txtUsuario.Name = "txtUsuario";
             txtUsuario.Size = new Size(399, 23);
             txtUsuario.TabIndex = 4;
+            txtUsuario.Text = "s";
             // 
             // lblUsuario
             // 
@@ -269,6 +270,7 @@
             guna2CirclePictureBox1.InitialImage = null;
             guna2CirclePictureBox1.Location = new Point(300, 125);
             guna2CirclePictureBox1.Name = "guna2CirclePictureBox1";
+            guna2CirclePictureBox1.ShadowDecoration.CustomizableEdges = customizableEdges10;
             guna2CirclePictureBox1.ShadowDecoration.CustomizableEdges = customizableEdges9;
             guna2CirclePictureBox1.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
             guna2CirclePictureBox1.Size = new Size(286, 286);
