@@ -4,9 +4,18 @@ namespace Vista.Administrador.Clientes
 {
     public partial class Inicio : Form
     {
+
+
         public Inicio()
         {
             InitializeComponent();
+        }
+
+        private Usuario usuarioActual;
+
+        public Inicio(Usuario usuario) : this()
+        {
+            this.usuarioActual = usuario;
         }
 
         private void guna2TextBox1_TextChanged(object sender, EventArgs e)
@@ -37,7 +46,7 @@ namespace Vista.Administrador.Clientes
 
             foreach (Producto producto in productos)
             {
-                ProductoCard card = new ProductoCard(producto);
+                ProductoCard card = new ProductoCard(producto, usuarioActual);
 
                 flpProductos.Controls.Add(card);
             }

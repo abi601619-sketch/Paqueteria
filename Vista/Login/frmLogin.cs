@@ -8,6 +8,7 @@ using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using Vista.Administrador.Clientes;
 using Vista.Conductor;
+using Vista.Crear_cuenta;
 
 namespace Vista.Login
 {
@@ -65,15 +66,13 @@ namespace Vista.Login
             // VALIDAR CORREO
             if (string.IsNullOrWhiteSpace(correo))
             {
-                errorProvider1.SetError(
-                    txtUsuario,
-                    "El correo electrónico es obligatorio."
-                );
+                errorProvider1.SetError(txtUsuario, "El correo electrónico es obligatorio.");
 
                 hayErrores = true;
             }
             else if (!CorreoValido(correo))
             {
+                errorProvider1.SetError(txtUsuario, "Ingrese un correo electrónico válido.");
                 errorProvider1.SetError(
                     txtUsuario,
                     "Ingrese un correo válido del dominio @mypickup.com."
@@ -85,10 +84,7 @@ namespace Vista.Login
             // VALIDAR CONTRASEÑA
             if (string.IsNullOrWhiteSpace(contraseña))
             {
-                errorProvider1.SetError(
-                    txtContraseña,
-                    "La contraseña es obligatoria."
-                );
+                errorProvider1.SetError(txtContraseña, "La contraseña es obligatoria.");
 
                 hayErrores = true;
             }
@@ -111,10 +107,7 @@ namespace Vista.Login
             // INICIAR SESIÓN
             UsuarioDAO usuarioDAO = new UsuarioDAO();
 
-            Usuario usuario = usuarioDAO.IniciarSesion(
-                correo,
-                contraseña
-            );
+            Usuario usuario = usuarioDAO.IniciarSesion(txtUsuario.Text.Trim(), txtContraseña.Text);
 
             if (usuario != null)
             {
@@ -122,8 +115,7 @@ namespace Vista.Login
                 intentosFallidos = 0;
                 bloqueoHasta = DateTime.MinValue;
 
-                string tipoUsuario =
-                    usuarioDAO.ObtenerTipoUsuario(usuario.IdUsuario);
+                string tipoUsuario = usuarioDAO.ObtenerTipoUsuario(usuario.IdUsuario);
 
                 if (tipoUsuario == "Conductor")
                 {
@@ -135,19 +127,14 @@ namespace Vista.Login
                 }
                 else if (tipoUsuario == "Cliente")
                 {
-                    Dashboard ventanaCliente = new Dashboard();
+                    Dashboard ventanaCliente = new Dashboard(usuario);
 
                     ventanaCliente.Show();
                     this.Hide();
                 }
                 else if (tipoUsuario == "Administrador")
                 {
-                    MessageBox.Show(
-                        "Usuario administrador detectado. " +
-                        "El menú de administrador se conectará posteriormente.",
-                        "Inicio de sesión",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Information
+                    MessageBox.Show("Usuario administrador detectado. " + "El menú de administrador se conectará posteriormente.", "Inicio de sesión", MessageBoxButtons.OK, MessageBoxIcon.Information
                     );
                 }
                 else
@@ -263,6 +250,18 @@ namespace Vista.Login
             {
                 ((TextBox)sender).ContextMenuStrip = new ContextMenuStrip();
             }
+        }
+
+        private void guna2Button2_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void guna2Button1_Click(object sender, EventArgs e)
+        {
+            frmCrearCuenta dashboard = new frmCrearCuenta();
+            dashboard.Show();
+            this.Hide();
         }
     }
 }
