@@ -41,6 +41,13 @@ namespace Modelo.Datos
                             {
                                 Vehiculos vehiculo = new Vehiculos();
 
+                            vehiculo.IdVehiculo = Convert.ToInt32(reader["idVehiculo"]);
+                            vehiculo.Marca = reader["Marca"].ToString();
+                            vehiculo.Capacidad = reader["Capacidad"].ToString();
+                            vehiculo.Modelo = reader["Modelo"].ToString();
+                            vehiculo.Kilometraje = reader["Kilometraje"].ToString();
+                            vehiculo.Estado = reader["Estado"].ToString();
+                            vehiculo.Disponibilidad = Convert.ToBoolean(reader["Disponibilidad"]);
                                 vehiculo.IdVehiculo = Convert.ToInt32(reader["idVehiculo"]);
                                 vehiculo.Marca = reader["Marca"].ToString();
                                 vehiculo.Capacidad = reader["Capacidad"].ToString();

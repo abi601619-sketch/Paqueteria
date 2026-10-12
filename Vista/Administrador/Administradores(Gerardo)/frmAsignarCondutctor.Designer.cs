@@ -71,6 +71,7 @@
             ptbExit.SizeMode = PictureBoxSizeMode.Zoom;
             ptbExit.TabIndex = 2;
             ptbExit.TabStop = false;
+            ptbExit.Click += ptbExit_Click;
             // 
             // lblDescripcion
             // 

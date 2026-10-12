@@ -35,7 +35,6 @@
             ptbFotoVehiculo = new PictureBox();
             cmbMarca = new ComboBox();
             lblModelo = new Label();
-            cmbModelo = new ComboBox();
             lblCapacidad = new Label();
             txtCapacidad = new TextBox();
             txtKilometraje = new TextBox();
@@ -43,6 +42,12 @@
             btnAgregar = new Button();
             sqlCommand1 = new Microsoft.Data.SqlClient.SqlCommand();
             pnlMain = new Panel();
+            chkDisponibilidad = new CheckBox();
+            cmbTipoCarro = new ComboBox();
+            lblTipoCarro = new Label();
+            txtModelo = new TextBox();
+            cmbEstado = new ComboBox();
+            lblEstadoTitulo = new Label();
             ((System.ComponentModel.ISupportInitialize)ptbExit).BeginInit();
             ((System.ComponentModel.ISupportInitialize)ptbFotoVehiculo).BeginInit();
             pnlMain.SuspendLayout();
@@ -104,12 +109,14 @@
             ptbFotoVehiculo.SizeMode = PictureBoxSizeMode.Zoom;
             ptbFotoVehiculo.TabIndex = 3;
             ptbFotoVehiculo.TabStop = false;
+            ptbFotoVehiculo.Click += ptbFotoVehiculo_Click;
             // 
             // cmbMarca
             // 
             cmbMarca.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbMarca.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             cmbMarca.FormattingEnabled = true;
+            cmbMarca.Items.AddRange(new object[] { "Freightliner", "Volvo", "Kenworth", "International", "Scania", "Mack", "Mercedes-Benz", "DAF", "MAN", "Hino", "Isuzu", "Mitsubishi", "Ford", "Chevrolet", "Toyota", "Nissan", "JAC", "Foton", "Renault", "Fiat", "Peugeot", "Citroën", "Volkswagen" });
             cmbMarca.Location = new Point(728, 177);
             cmbMarca.Name = "cmbMarca";
             cmbMarca.Size = new Size(578, 33);
@@ -125,16 +132,6 @@
             lblModelo.Size = new Size(89, 30);
             lblModelo.TabIndex = 2;
             lblModelo.Text = "Modelo";
-            // 
-            // cmbModelo
-            // 
-            cmbModelo.DropDownStyle = ComboBoxStyle.DropDownList;
-            cmbModelo.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            cmbModelo.FormattingEnabled = true;
-            cmbModelo.Location = new Point(728, 273);
-            cmbModelo.Name = "cmbModelo";
-            cmbModelo.Size = new Size(578, 33);
-            cmbModelo.TabIndex = 4;
             // 
             // lblCapacidad
             // 
@@ -185,6 +182,7 @@
             btnAgregar.TabIndex = 8;
             btnAgregar.Text = "Agregar Vehículo";
             btnAgregar.UseVisualStyleBackColor = false;
+            btnAgregar.Click += btnAgregar_Click;
             // 
             // sqlCommand1
             // 
@@ -194,12 +192,82 @@
             // pnlMain
             // 
             pnlMain.BackColor = SystemColors.Control;
+            pnlMain.Controls.Add(chkDisponibilidad);
+            pnlMain.Controls.Add(cmbTipoCarro);
+            pnlMain.Controls.Add(lblTipoCarro);
+            pnlMain.Controls.Add(txtModelo);
             pnlMain.Controls.Add(btnAgregar);
             pnlMain.Controls.Add(ptbExit);
+            pnlMain.Controls.Add(cmbEstado);
+            pnlMain.Controls.Add(lblEstadoTitulo);
             pnlMain.Location = new Point(7, 12);
             pnlMain.Name = "pnlMain";
             pnlMain.Size = new Size(1321, 712);
             pnlMain.TabIndex = 9;
+            // 
+            // chkDisponibilidad
+            // 
+            chkDisponibilidad.AutoSize = true;
+            chkDisponibilidad.Checked = true;
+            chkDisponibilidad.CheckState = CheckState.Checked;
+            chkDisponibilidad.Location = new Point(728, 534);
+            chkDisponibilidad.Name = "chkDisponibilidad";
+            chkDisponibilidad.Size = new Size(102, 19);
+            chkDisponibilidad.TabIndex = 12;
+            chkDisponibilidad.Text = "Disponibilidad";
+            chkDisponibilidad.UseVisualStyleBackColor = true;
+            // 
+            // cmbTipoCarro
+            // 
+            cmbTipoCarro.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbTipoCarro.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            cmbTipoCarro.FormattingEnabled = true;
+            cmbTipoCarro.Items.AddRange(new object[] { "Vehículo Ligero", "Trailer" });
+            cmbTipoCarro.Location = new Point(388, 611);
+            cmbTipoCarro.Name = "cmbTipoCarro";
+            cmbTipoCarro.Size = new Size(297, 33);
+            cmbTipoCarro.TabIndex = 11;
+            // 
+            // lblTipoCarro
+            // 
+            lblTipoCarro.AutoSize = true;
+            lblTipoCarro.BackColor = SystemColors.Control;
+            lblTipoCarro.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblTipoCarro.Location = new Point(388, 571);
+            lblTipoCarro.Name = "lblTipoCarro";
+            lblTipoCarro.Size = new Size(143, 30);
+            lblTipoCarro.TabIndex = 10;
+            lblTipoCarro.Text = "Tipo de carro";
+            // 
+            // txtModelo
+            // 
+            txtModelo.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            txtModelo.Location = new Point(721, 259);
+            txtModelo.Name = "txtModelo";
+            txtModelo.Size = new Size(578, 35);
+            txtModelo.TabIndex = 9;
+            // 
+            // cmbEstado
+            // 
+            cmbEstado.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbEstado.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            cmbEstado.FormattingEnabled = true;
+            cmbEstado.Items.AddRange(new object[] { "En buenas condiciones", "Necesita reparación" });
+            cmbEstado.Location = new Point(17, 611);
+            cmbEstado.Name = "cmbEstado";
+            cmbEstado.Size = new Size(296, 33);
+            cmbEstado.TabIndex = 4;
+            // 
+            // lblEstadoTitulo
+            // 
+            lblEstadoTitulo.AutoSize = true;
+            lblEstadoTitulo.BackColor = SystemColors.Control;
+            lblEstadoTitulo.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblEstadoTitulo.Location = new Point(17, 571);
+            lblEstadoTitulo.Name = "lblEstadoTitulo";
+            lblEstadoTitulo.Size = new Size(78, 30);
+            lblEstadoTitulo.TabIndex = 2;
+            lblEstadoTitulo.Text = "Estado";
             // 
             // frmAgregarVehiculo
             // 
@@ -210,7 +278,6 @@
             Controls.Add(txtKilometraje);
             Controls.Add(lblKilometraje);
             Controls.Add(txtCapacidad);
-            Controls.Add(cmbModelo);
             Controls.Add(cmbMarca);
             Controls.Add(ptbFotoVehiculo);
             Controls.Add(lblCapacidad);
@@ -226,6 +293,7 @@
             ((System.ComponentModel.ISupportInitialize)ptbExit).EndInit();
             ((System.ComponentModel.ISupportInitialize)ptbFotoVehiculo).EndInit();
             pnlMain.ResumeLayout(false);
+            pnlMain.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -239,7 +307,6 @@
         private PictureBox ptbFotoVehiculo;
         private ComboBox cmbMarca;
         private Label lblModelo;
-        private ComboBox cmbModelo;
         private Label lblCapacidad;
         private TextBox txtCapacidad;
         private TextBox txtKilometraje;
@@ -247,5 +314,11 @@
         private Button btnAgregar;
         private Microsoft.Data.SqlClient.SqlCommand sqlCommand1;
         private Panel pnlMain;
+        private TextBox txtModelo;
+        private ComboBox cmbEstado;
+        private Label lblEstadoTitulo;
+        private ComboBox cmbTipoCarro;
+        private Label lblTipoCarro;
+        private CheckBox chkDisponibilidad;
     }
 }
