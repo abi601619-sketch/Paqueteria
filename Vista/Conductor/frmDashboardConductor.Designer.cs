@@ -33,8 +33,6 @@
             lblNombre = new Label();
             lblBienvenid = new Label();
             panel1 = new Panel();
-            lblSinRutas = new Label();
-            btnAccionRuta = new Button();
             panel4 = new Panel();
             panel6 = new Panel();
             label5 = new Label();
@@ -50,10 +48,20 @@
             label4 = new Label();
             label1 = new Label();
             pictureBox1 = new PictureBox();
+            pnlSinR = new Panel();
+            lblSinRutas = new Label();
             pnlRutas = new Panel();
             pnlCalendario = new Panel();
+            lblMesCalendario = new Label();
+            panel8 = new Panel();
+            label7 = new Label();
+            label8 = new Label();
+            label9 = new Label();
             tlpCalendario = new TableLayoutPanel();
             lblCalendario = new Label();
+            panel9 = new Panel();
+            label11 = new Label();
+            label10 = new Label();
             pnlBienvenida.SuspendLayout();
             panel1.SuspendLayout();
             panel4.SuspendLayout();
@@ -65,7 +73,10 @@
             panel2.SuspendLayout();
             panel5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            pnlSinR.SuspendLayout();
             pnlCalendario.SuspendLayout();
+            panel8.SuspendLayout();
+            panel9.SuspendLayout();
             SuspendLayout();
             // 
             // pnlBienvenida
@@ -82,7 +93,7 @@
             // lblFecha
             // 
             lblFecha.Font = new Font("Segoe UI Semibold", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblFecha.Location = new Point(1202, 100);
+            lblFecha.Location = new Point(1162, 100);
             lblFecha.Name = "lblFecha";
             lblFecha.Size = new Size(289, 23);
             lblFecha.TabIndex = 2;
@@ -112,8 +123,6 @@
             // panel1
             // 
             panel1.BorderStyle = BorderStyle.FixedSingle;
-            panel1.Controls.Add(lblSinRutas);
-            panel1.Controls.Add(btnAccionRuta);
             panel1.Controls.Add(panel4);
             panel1.Controls.Add(panel3);
             panel1.Controls.Add(panel2);
@@ -122,39 +131,12 @@
             panel1.Size = new Size(1153, 234);
             panel1.TabIndex = 1;
             // 
-            // lblSinRutas
-            // 
-            lblSinRutas.Dock = DockStyle.Fill;
-            lblSinRutas.Font = new Font("Segoe UI Semibold", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblSinRutas.Location = new Point(0, 0);
-            lblSinRutas.Name = "lblSinRutas";
-            lblSinRutas.Size = new Size(1151, 232);
-            lblSinRutas.TabIndex = 4;
-            lblSinRutas.Text = "No hay rutas programadas para el día de hoy";
-            lblSinRutas.TextAlign = ContentAlignment.MiddleCenter;
-            lblSinRutas.Visible = false;
-            // 
-            // btnAccionRuta
-            // 
-            btnAccionRuta.BackColor = Color.FromArgb(78, 35, 14);
-            btnAccionRuta.FlatAppearance.BorderSize = 0;
-            btnAccionRuta.FlatStyle = FlatStyle.Flat;
-            btnAccionRuta.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnAccionRuta.ForeColor = Color.White;
-            btnAccionRuta.Location = new Point(946, 80);
-            btnAccionRuta.Name = "btnAccionRuta";
-            btnAccionRuta.Size = new Size(165, 68);
-            btnAccionRuta.TabIndex = 3;
-            btnAccionRuta.Text = "Iniciar Ruta";
-            btnAccionRuta.UseVisualStyleBackColor = false;
-            btnAccionRuta.Click += btnAccionRuta_Click;
-            // 
             // panel4
             // 
             panel4.Controls.Add(panel6);
             panel4.Controls.Add(label2);
             panel4.Controls.Add(pictureBox2);
-            panel4.Location = new Point(372, 27);
+            panel4.Location = new Point(446, 27);
             panel4.Name = "panel4";
             panel4.Size = new Size(200, 177);
             panel4.TabIndex = 2;
@@ -204,7 +186,7 @@
             panel3.Controls.Add(panel7);
             panel3.Controls.Add(label3);
             panel3.Controls.Add(pictureBox3);
-            panel3.Location = new Point(691, 24);
+            panel3.Location = new Point(781, 27);
             panel3.Name = "panel3";
             panel3.Size = new Size(200, 177);
             panel3.TabIndex = 1;
@@ -254,7 +236,7 @@
             panel2.Controls.Add(panel5);
             panel2.Controls.Add(label1);
             panel2.Controls.Add(pictureBox1);
-            panel2.Location = new Point(49, 24);
+            panel2.Location = new Point(147, 27);
             panel2.Name = "panel2";
             panel2.Size = new Size(200, 177);
             panel2.TabIndex = 0;
@@ -299,22 +281,93 @@
             pictureBox1.TabIndex = 0;
             pictureBox1.TabStop = false;
             // 
+            // pnlSinR
+            // 
+            pnlSinR.Controls.Add(lblSinRutas);
+            pnlSinR.Location = new Point(47, 462);
+            pnlSinR.Name = "pnlSinR";
+            pnlSinR.Size = new Size(1151, 18);
+            pnlSinR.TabIndex = 3;
+            pnlSinR.Visible = false;
+            // 
+            // lblSinRutas
+            // 
+            lblSinRutas.AutoSize = true;
+            lblSinRutas.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblSinRutas.Location = new Point(532, 1);
+            lblSinRutas.Name = "lblSinRutas";
+            lblSinRutas.Size = new Size(87, 17);
+            lblSinRutas.TabIndex = 1;
+            lblSinRutas.Text = "No hay rutas";
+            // 
             // pnlRutas
             // 
-            pnlRutas.Location = new Point(1234, 259);
+            pnlRutas.Location = new Point(1234, 223);
             pnlRutas.Name = "pnlRutas";
-            pnlRutas.Size = new Size(340, 672);
+            pnlRutas.Size = new Size(340, 708);
             pnlRutas.TabIndex = 2;
             // 
             // pnlCalendario
             // 
             pnlCalendario.BorderStyle = BorderStyle.FixedSingle;
+            pnlCalendario.Controls.Add(lblMesCalendario);
+            pnlCalendario.Controls.Add(panel8);
+            pnlCalendario.Controls.Add(label9);
             pnlCalendario.Controls.Add(tlpCalendario);
             pnlCalendario.Controls.Add(lblCalendario);
             pnlCalendario.Location = new Point(49, 486);
             pnlCalendario.Name = "pnlCalendario";
             pnlCalendario.Size = new Size(1153, 445);
             pnlCalendario.TabIndex = 3;
+            // 
+            // lblMesCalendario
+            // 
+            lblMesCalendario.Font = new Font("Segoe UI Semibold", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblMesCalendario.Location = new Point(943, 36);
+            lblMesCalendario.Name = "lblMesCalendario";
+            lblMesCalendario.Size = new Size(98, 23);
+            lblMesCalendario.TabIndex = 7;
+            lblMesCalendario.Text = "OCTUBRE";
+            // 
+            // panel8
+            // 
+            panel8.BorderStyle = BorderStyle.FixedSingle;
+            panel8.Controls.Add(label7);
+            panel8.Controls.Add(label8);
+            panel8.Location = new Point(1158, 16);
+            panel8.Name = "panel8";
+            panel8.Size = new Size(293, 86);
+            panel8.TabIndex = 6;
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.ForeColor = SystemColors.ControlDarkDark;
+            label7.Location = new Point(36, 49);
+            label7.Name = "label7";
+            label7.Size = new Size(275, 15);
+            label7.TabIndex = 3;
+            label7.Text = "Presiona un ruta para ver los productos solicitados.";
+            // 
+            // label8
+            // 
+            label8.AutoSize = true;
+            label8.Font = new Font("Segoe UI Semibold", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label8.Location = new Point(36, 19);
+            label8.Name = "label8";
+            label8.Size = new Size(142, 30);
+            label8.TabIndex = 1;
+            label8.Text = "IMPORTANTE";
+            // 
+            // label9
+            // 
+            label9.AutoSize = true;
+            label9.ForeColor = SystemColors.ControlDarkDark;
+            label9.Location = new Point(50, 46);
+            label9.Name = "label9";
+            label9.Size = new Size(229, 15);
+            label9.TabIndex = 3;
+            label9.Text = "Selecciona un día para consultar sus rutas.";
             // 
             // tlpCalendario
             // 
@@ -336,7 +389,7 @@
             tlpCalendario.RowStyles.Add(new RowStyle(SizeType.Percent, 17F));
             tlpCalendario.RowStyles.Add(new RowStyle(SizeType.Percent, 17F));
             tlpCalendario.RowStyles.Add(new RowStyle(SizeType.Percent, 17F));
-            tlpCalendario.Size = new Size(1055, 314);
+            tlpCalendario.Size = new Size(1055, 350);
             tlpCalendario.TabIndex = 1;
             tlpCalendario.Paint += tlpCalendario_Paint;
             // 
@@ -344,11 +397,41 @@
             // 
             lblCalendario.AutoSize = true;
             lblCalendario.Font = new Font("Segoe UI Semibold", 20.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblCalendario.Location = new Point(42, 28);
+            lblCalendario.Location = new Point(42, 9);
             lblCalendario.Name = "lblCalendario";
             lblCalendario.Size = new Size(182, 37);
             lblCalendario.TabIndex = 0;
             lblCalendario.Text = "CALENDARIO";
+            // 
+            // panel9
+            // 
+            panel9.BorderStyle = BorderStyle.FixedSingle;
+            panel9.Controls.Add(label11);
+            panel9.Controls.Add(label10);
+            panel9.Location = new Point(1234, 398);
+            panel9.Name = "panel9";
+            panel9.Size = new Size(337, 82);
+            panel9.TabIndex = 6;
+            // 
+            // label11
+            // 
+            label11.AutoSize = true;
+            label11.ForeColor = SystemColors.ControlDarkDark;
+            label11.Location = new Point(17, 51);
+            label11.Name = "label11";
+            label11.Size = new Size(283, 15);
+            label11.TabIndex = 4;
+            label11.Text = "Haz clic en una tarjeta para ver sus puntos y estados.";
+            // 
+            // label10
+            // 
+            label10.AutoSize = true;
+            label10.Font = new Font("Segoe UI Semibold", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label10.Location = new Point(10, 16);
+            label10.Name = "label10";
+            label10.Size = new Size(142, 30);
+            label10.TabIndex = 1;
+            label10.Text = "IMPORTANTE";
             // 
             // frmDashboardConductor
             // 
@@ -356,10 +439,12 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
             ClientSize = new Size(1642, 958);
+            Controls.Add(panel9);
+            Controls.Add(pnlSinR);
             Controls.Add(pnlCalendario);
-            Controls.Add(pnlRutas);
             Controls.Add(panel1);
             Controls.Add(pnlBienvenida);
+            Controls.Add(pnlRutas);
             FormBorderStyle = FormBorderStyle.None;
             Name = "frmDashboardConductor";
             Text = "frmDashboardConductor";
@@ -381,8 +466,14 @@
             panel5.ResumeLayout(false);
             panel5.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            pnlSinR.ResumeLayout(false);
+            pnlSinR.PerformLayout();
             pnlCalendario.ResumeLayout(false);
             pnlCalendario.PerformLayout();
+            panel8.ResumeLayout(false);
+            panel8.PerformLayout();
+            panel9.ResumeLayout(false);
+            panel9.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -412,7 +503,15 @@
         private Panel panel5;
         private Label label4;
         private Label label1;
-        private Button btnAccionRuta;
+        private Panel pnlSinR;
         private Label lblSinRutas;
+        private Panel panel8;
+        private Label label7;
+        private Label label8;
+        private Panel panel9;
+        private Label label11;
+        private Label label9;
+        private Label label10;
+        private Label lblMesCalendario;
     }
 }

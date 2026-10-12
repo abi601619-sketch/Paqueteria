@@ -17,13 +17,16 @@ namespace Vista.Conductor
         {
             InitializeComponent();
             this.idUsuario = idUsuario;
+            this.FormBorderStyle = FormBorderStyle.None;
+            this.StartPosition = FormStartPosition.Manual;
+            this.Bounds = Screen.PrimaryScreen.WorkingArea;
+            this.TopMost = false;
         }
 
         private void frmMenu_Load(object sender, EventArgs e)
         {
-            AbrirFormularioEnPanel(
-        new frmDashboardConductor(idUsuario)
-    );
+
+            AbrirFormularioEnPanel(new frmDashboardConductor(idUsuario));
         }
 
         private void btnDashboardC_Click(object sender, EventArgs e)
@@ -58,6 +61,25 @@ namespace Vista.Conductor
             formulario.Show();
         }
 
+
+
+
+        public void MostrarProductos(int idProgramacion)
+        {
+            AbrirFormularioEnPanel(
+                new frmProductos(idProgramacion, this)
+            );
+        }
+
+        public void MostrarRutas()
+        {
+            AbrirFormularioEnPanel(
+                new frmRutasC(idUsuario, this)
+            );
+        }
+
+
+
         private void btnDashboard_Click(object sender, EventArgs e)
         {
             AbrirFormularioEnPanel(new frmDashboardConductor(idUsuario));
@@ -70,7 +92,7 @@ namespace Vista.Conductor
 
         private void btnRutasC_Click(object sender, EventArgs e)
         {
-            AbrirFormularioEnPanel(new frmRutas());
+            AbrirFormularioEnPanel(new frmRutasC(idUsuario, this));
         }
 
         private void btnVehiculos_Click(object sender, EventArgs e)
@@ -80,7 +102,8 @@ namespace Vista.Conductor
 
         private void btnProductos_Click(object sender, EventArgs e)
         {
-            AbrirFormularioEnPanel(new frmProductos());
         }
+
+        
     }
 }

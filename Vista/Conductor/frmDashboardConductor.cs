@@ -15,6 +15,11 @@ namespace Vista.Conductor
         private Modelo.Entidades.Conductor conductor;
         private DataTable programacionesRutas;
         private int idProgramacionSeleccionada = 0;
+        private int idProgramacionDelDia = 0;
+        private System.Windows.Forms.Timer timerEstadosRuta;
+        private bool mostrandoRutaCalendario = false;
+        private System.Windows.Forms.Timer timerCalendario;
+        private DateTime mesCalendarioMostrado = DateTime.MinValue;
 
         public frmDashboardConductor(int idUsuario)
         {
@@ -25,11 +30,52 @@ namespace Vista.Conductor
             CargarDatosConductor();
             CrearCalendario();
             CargarRutas();
-            CargarProgresoRuta();
+            CargarEstadosRutaDelDia();
+
+            // Verificar periódicamente si cambió el mes
+            timerCalendario = new System.Windows.Forms.Timer();
+            timerCalendario.Interval = 60000; // Cada minuto
+
+            timerCalendario.Tick += (s, e) =>
+            {
+                DateTime ahora = DateTime.Now;
+
+                if (ahora.Year != mesCalendarioMostrado.Year ||
+                    ahora.Month != mesCalendarioMostrado.Month)
+                {
+                    CargarProgramacionRutas();
+                    CrearCalendario();
+                }
+            };
+
+            timerCalendario.Start();
+
+            // Actualizar los estados periódicamente
+            timerEstadosRuta = new System.Windows.Forms.Timer();
+
+            timerEstadosRuta.Interval = 3000; // 3 segundos
+
+            timerEstadosRuta.Tick += (s, e) =>
+            {
+                CargarEstadosRutaDelDia();
+            };
+
+            timerEstadosRuta.Start();
+
             lblFecha.Text = DateTime.Now.ToString(
-    "dddd, dd 'de' MMMM 'de' yyyy",
-    new System.Globalization.CultureInfo("es-SV")
-);
+                 "dddd, dd 'de' MMMM 'de' yyyy",
+                  new System.Globalization.CultureInfo("es-SV"));
+        }
+
+
+        private void AsignarClickATarjeta(Control control, EventHandler evento)
+        {
+            control.Click += evento;
+
+            foreach (Control hijo in control.Controls)
+            {
+                AsignarClickATarjeta(hijo, evento);
+            }
         }
 
         //Calendario ---------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -41,6 +87,15 @@ namespace Vista.Conductor
 
             int mes = fechaActual.Month;
             int año = fechaActual.Year;
+
+
+            mesCalendarioMostrado = new DateTime(año, mes, 1);
+
+            lblMesCalendario.Text = fechaActual.ToString("MMMM yyyy", new System.Globalization.CultureInfo("es-SV"));
+
+            lblMesCalendario.Text =
+                char.ToUpper(lblMesCalendario.Text[0]) +
+                lblMesCalendario.Text.Substring(1);
 
             string[] diasSemana =
             {
@@ -136,6 +191,7 @@ namespace Vista.Conductor
                 // --------------------------
 
                 Panel panelDia = new Panel();
+                panelDia.Cursor = Cursors.Hand;
 
                 panelDia.Dock = DockStyle.Fill;
 
@@ -184,6 +240,20 @@ namespace Vista.Conductor
                 // --------------------------
 
                 DateTime fechaRuta = new DateTime(año, mes, dia);
+                // Permitir seleccionar el día del calendario.
+                panelDia.Tag = fechaRuta;
+
+                panelDia.Click += (sender, e) =>
+                {
+                    SeleccionarFechaCalendario(fechaRuta);
+                };
+
+                lblFecha.Cursor = Cursors.Hand;
+
+                lblFecha.Click += (sender, e) =>
+                {
+                    SeleccionarFechaCalendario(fechaRuta);
+                };
 
                 bool tieneRuta = false;
 
@@ -227,6 +297,13 @@ namespace Vista.Conductor
                     punto.TextAlign =
                         ContentAlignment.MiddleCenter;
 
+                    punto.Cursor = Cursors.Hand;
+
+                    punto.Click += (sender, e) =>
+                    {
+                        SeleccionarFechaCalendario(fechaRuta);
+                    };
+
                     panelDia.Controls.Add(punto);
                     punto.BringToFront();
                 }
@@ -250,16 +327,92 @@ namespace Vista.Conductor
             programacionesRutas = conductorDAO.ObtenerProgramacionRutas(idUsuario);
         }
 
+
+        private void SeleccionarFechaCalendario(DateTime fecha)
+        {
+            mostrandoRutaCalendario = fecha.Date != DateTime.Today;
+            ConductorDAO conductorDAO = new ConductorDAO();
+
+            DataTable rutas = conductorDAO.ObtenerRutas(
+                idUsuario,
+                fecha.Date
+            );
+
+            if (rutas.Rows.Count == 0)
+            {
+                MessageBox.Show(
+                    "No hay rutas programadas para el " +
+                    fecha.ToString("dd/MM/yyyy") + ".",
+                    "Calendario de rutas",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information
+                );
+
+                pnlRutas.Controls.Clear();
+                MostrarEstadoRutas(false);
+                return;
+            }
+
+            // Cargar las tarjetas de las rutas de la fecha elegida.
+            MostrarRutasDeFecha(rutas, fecha);
+        }
+
+
+        private void MostrarRutasDeFecha(DataTable rutas, DateTime fecha)
+        {
+            pnlRutas.SuspendLayout();
+
+            try
+            {
+                pnlRutas.Controls.Clear();
+                pnlRutas.AutoScroll = true;
+
+                int posicionY = 5;
+
+                foreach (DataRow fila in rutas.Rows)
+                {
+                    Panel tarjeta = CrearTarjetaRuta(fila);
+
+                    tarjeta.Left = 5;
+                    tarjeta.Top = posicionY;
+                    tarjeta.Width = pnlRutas.ClientSize.Width - 25;
+
+                    pnlRutas.Controls.Add(tarjeta);
+
+                    posicionY += tarjeta.Height + 10;
+                }
+
+                MostrarEstadoRutas(true);
+            }
+            finally
+            {
+                pnlRutas.ResumeLayout();
+            }
+        }
+
         //Tarjetas de Rutas ----------------------------------------------------------------------------------------------------------------------------------------
+
         private void CargarDatosConductor()
         {
             ConductorDAO conductorDAO = new ConductorDAO();
 
             conductor = conductorDAO.ObtenerConductor(idUsuario);
 
-            lblNombre.Text =
-    conductor.Nombre + " " + conductor.Apellido;
+            if (conductor == null)
+            {
+                MessageBox.Show(
+                    "No se encontró el conductor con ID: " + idUsuario,
+                    "MyPickup",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning
+                );
+                return;
+            }
+
+            lblNombre.Text = conductor.Nombre + " " + conductor.Apellido;
         }
+
+
 
 
 
@@ -267,14 +420,15 @@ namespace Vista.Conductor
         {
             ConductorDAO conductorDAO = new ConductorDAO();
 
-            DataTable tabla =
-                conductorDAO.ObtenerRutasDelDia(idUsuario);
-
+            // Obtener las rutas asignadas al conductor por el administrador
+            DataTable tabla = conductorDAO.ObtenerRutas(
+    idUsuario,
+    DateTime.Today
+);
             MostrarEstadoRutas(tabla.Rows.Count > 0);
 
             pnlRutas.SuspendLayout();
             pnlRutas.Controls.Clear();
-
             pnlRutas.AutoScroll = true;
 
             int posicionY = 5;
@@ -297,6 +451,7 @@ namespace Vista.Conductor
 
 
 
+
         private Panel CrearTarjetaRuta(DataRow fila)
         {
             // ==========================
@@ -306,15 +461,9 @@ namespace Vista.Conductor
             Panel tarjeta = new Panel();
 
             int idProgramacion =
-    Convert.ToInt32(fila["idProgramacion"]);
+                Convert.ToInt32(fila["idProgramacion"]);
 
             tarjeta.Cursor = Cursors.Hand;
-
-            tarjeta.Click += (sender, e) =>
-            {
-                idProgramacionSeleccionada = idProgramacion;
-                CargarProgresoRuta();
-            };
 
             tarjeta.Width = pnlRutas.ClientSize.Width - 20;
             tarjeta.Height = 150;
@@ -331,7 +480,7 @@ namespace Vista.Conductor
             Color colorRuta = Color.DodgerBlue;
 
             string nombreRuta =
-    fila["NombreRuta"].ToString().ToUpper();
+    fila["Nombre"].ToString().ToUpper();
 
             if (nombreRuta.Contains("01"))
             {
@@ -367,7 +516,7 @@ namespace Vista.Conductor
             Label lblRuta = new Label();
 
             lblRuta.Text =
-    fila["NombreRuta"].ToString().ToUpper();
+    fila["Nombre"].ToString().ToUpper();
 
             lblRuta.Font = new Font(
                 "Arial",
@@ -505,220 +654,76 @@ namespace Vista.Conductor
 
             tarjeta.Controls.Add(lblEstado);
 
+
+            EventHandler seleccionarRuta = (sender, e) =>
+            {
+                idProgramacionSeleccionada = idProgramacion;
+                CargarProgresoRuta();
+            };
+
+            AsignarClickATarjeta(tarjeta, seleccionarRuta);
+
             return tarjeta;
         }
 
         //Puntos -------------------------------------------------------------------------------------------------------------------------
 
+
         private void CargarProgresoRuta()
         {
+            CargarProgresoProgramacion(idProgramacionSeleccionada);
+        }
 
-
-            if (idProgramacionSeleccionada <= 0)
+        private void CargarProgresoProgramacion(int idProgramacion)
+        {
+            if (idProgramacion <= 0)
             {
+                MostrarSinRutaDelDia();
                 return;
             }
 
             ConductorDAO conductorDAO = new ConductorDAO();
 
             DataTable tabla =
-                conductorDAO.ObtenerProgresoProgramacion(
-                    idProgramacionSeleccionada
-                );
+                conductorDAO.ObtenerProgresoProgramacion(idProgramacion);
 
             if (tabla.Rows.Count == 0)
             {
+                MostrarSinRutaDelDia();
                 return;
             }
 
-
             DataRow ruta = tabla.Rows[0];
 
-            // ==========================
-            // NOMBRES DE LOS PUNTOS
-            // ==========================
-
+            // Nombres de los puntos
             label1.Text = ruta["PuntoOrigen"].ToString()
-    .Replace("Punto de entrega - ", "");
+                .Replace("Punto de entrega - ", "");
 
-            if (ruta["DestinoA"] != DBNull.Value)
-            {
-                label2.Text = ruta["DestinoA"].ToString()
-                    .Replace("Punto de entrega - ", "");
-            }
-            else
-            {
-                label2.Text = "Sin parada";
-            }
+            label2.Text = ruta["DestinoA"] != DBNull.Value
+                ? ruta["DestinoA"].ToString()
+                    .Replace("Punto de entrega - ", "")
+                : "Sin parada";
 
             label3.Text = ruta["PuntoFinal"].ToString()
                 .Replace("Punto de entrega - ", "");
 
+            // Estados guardados en la base de datos
+            string estado1 = ruta["EstadoPunto1"].ToString();
+            string estado2 = ruta["EstadoPunto2"].ToString();
+            string estado3 = ruta["EstadoPunto3"].ToString();
 
-            // ==========================
-            // DATOS DE LA RUTA
-            // ==========================
+            CambiarEstadoPunto(
+                pictureBox1, label4, panel5, estado1);
 
-            int puntoActual = Convert.ToInt32(ruta["PuntoActual"]);
+            CambiarEstadoPunto(
+                pictureBox2, label5, panel6, estado2);
 
-            bool rutaIniciada =
-                ruta["HoraInicioReal"] != DBNull.Value;
-
-            bool rutaFinalizada =
-                ruta["HoraFinReal"] != DBNull.Value;
-
-
-            // ==========================
-            // RUTA PENDIENTE
-            // ==========================
-
-            if (!rutaIniciada)
-            {
-                CambiarEstadoPunto(
-                    pictureBox1,
-                    label4,
-                    panel5,
-
-                "PENDIENTE"
-                );
-
-                CambiarEstadoPunto(
-                    pictureBox2,
-                    label5,
-                    panel6,
-                    "PENDIENTE"
-                );
-
-                CambiarEstadoPunto(
-                    pictureBox3,
-                    label6,
-                    panel7,
-                    "PENDIENTE"
-                );
-
-                btnAccionRuta.Text = "INICIAR RUTA";
-
-                btnAccionRuta.Enabled = true;
-
-                return;
-            }
-
-
-            // ==========================
-            // RUTA COMPLETADA
-            // ==========================
-
-            if (rutaFinalizada)
-            {
-                CambiarEstadoPunto(
-                    pictureBox1,
-                    label4,
-                    panel5,
-                    "COMPLETADO"
-                );
-
-                CambiarEstadoPunto(
-                    pictureBox2,
-                    label5,
-                    panel6,
-                    "COMPLETADO"
-                );
-
-                CambiarEstadoPunto(
-                    pictureBox3,
-                    label6,
-                    panel7,
-                    "COMPLETADO"
-                );
-
-                btnAccionRuta.Text = "RUTA COMPLETADA";
-
-                btnAccionRuta.Enabled = false;
-
-                return;
-            }
-
-
-            // ==========================
-            // RUTA EN PROGRESO
-            // ==========================
-
-            if (puntoActual == 1)
-            {
-                CambiarEstadoPunto(
-                    pictureBox1,
-                    label4,
-                    panel5,
-                    "EN CAMINO"
-                );
-
-                CambiarEstadoPunto(
-                    pictureBox2,
-                    label5,
-                    panel6,
-                    "PENDIENTE"
-                );
-
-                CambiarEstadoPunto(
-                    pictureBox3,
-                    label6,
-                    panel7,
-                    "PENDIENTE"
-                );
-
-                btnAccionRuta.Text = "LLEGAR AL SIGUIENTE PUNTO";
-            }
-            else if (puntoActual == 2)
-            {
-                CambiarEstadoPunto(
-                    pictureBox1,
-                    label4,
-                    panel5,
-                    "COMPLETADO"
-                );
-
-                CambiarEstadoPunto(
-                    pictureBox2,
-                    label5,
-                    panel6,
-                    "EN CAMINO"
-                );
-
-                CambiarEstadoPunto(
-                    pictureBox3,
-                    label6,
-                    panel7,
-                    "PENDIENTE"
-                );
-
-                btnAccionRuta.Text = "LLEGAR AL SIGUIENTE PUNTO";
-            }
-            else if (puntoActual == 3)
-            {
-                CambiarEstadoPunto(
-                    pictureBox1,
-                    label4,
-                    panel5,
-                    "COMPLETADO"
-                );
-
-                CambiarEstadoPunto(
-                    pictureBox2,
-                    label5,
-                    panel6,
-                    "COMPLETADO"
-                );
-
-                CambiarEstadoPunto(
-                    pictureBox3,
-                    label6,
-                    panel7,
-                    "EN CAMINO"
-                );
-
-                btnAccionRuta.Text = "FINALIZAR RUTA";
-            }
+            CambiarEstadoPunto(
+                pictureBox3, label6, panel7, estado3);
         }
+
+
+
 
 
         private void CambiarEstadoPunto(
@@ -770,23 +775,27 @@ namespace Vista.Conductor
             }
         }
 
+
         private void MostrarEstadoRutas(bool hayRutas)
         {
-            panel2.Visible = hayRutas;
-            panel4.Visible = hayRutas;
-            panel3.Visible = hayRutas;
+            // Mostrar siempre los paneles de los tres puntos
+            panel2.Visible = true;
+            panel3.Visible = true;
+            panel4.Visible = true;
 
-            btnAccionRuta.Visible = hayRutas;
+            // Mostrar u ocultar el mensaje de rutas
+            pnlSinR.Visible = !hayRutas;
 
-            lblSinRutas.Visible = !hayRutas;
-
+            // Mostrar u ocultar las tarjetas de rutas
             pnlRutas.Visible = hayRutas;
 
             if (!hayRutas)
             {
-                lblSinRutas.BringToFront();
+                pnlSinR.Text = "No hay ruta";
+                pnlSinR.BringToFront();
             }
         }
+
 
 
         private void tlpCalendario_Paint(object sender, PaintEventArgs e)
@@ -794,82 +803,64 @@ namespace Vista.Conductor
 
         }
 
-        private void btnAccionRuta_Click(object sender, EventArgs e)
+
+
+
+        private void MostrarSinRutaDelDia()
         {
-            if (idProgramacionSeleccionada <= 0)
-            {
-                MessageBox.Show(
-                    "Seleccioná una ruta antes de continuar.",
-                    "Ruta no seleccionada",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Warning
-                );
+            // Nombres de los puntos
+            label1.Text = "No hay ruta";
+            label2.Text = "No hay ruta";
+            label3.Text = "No hay ruta";
+
+            // Estados pendientes
+            CambiarEstadoPunto(
+                pictureBox1, label4, panel5, "PENDIENTE");
+
+            CambiarEstadoPunto(
+                pictureBox2, label5, panel6, "PENDIENTE");
+
+            CambiarEstadoPunto(
+                pictureBox3, label6, panel7, "PENDIENTE");
+
+        }
+
+
+
+        private void CargarEstadosRutaDelDia()
+        {
+            if (mostrandoRutaCalendario)
                 return;
-            }
 
             ConductorDAO conductorDAO = new ConductorDAO();
 
-            DataTable tabla =
-                conductorDAO.ObtenerProgresoProgramacion(
-                    idProgramacionSeleccionada
-                );
+            // Buscar las rutas programadas para hoy
+            DataTable rutasHoy =
+                conductorDAO.ObtenerRutasDelDia(idUsuario);
 
-            if (tabla.Rows.Count == 0)
+            if (rutasHoy == null || rutasHoy.Rows.Count == 0)
             {
-                MessageBox.Show("No se encontró la programación seleccionada.");
+                idProgramacionDelDia = 0;
+                MostrarSinRutaDelDia();
                 return;
             }
 
-            DataRow ruta = tabla.Rows[0];
+            // Identificar la programación de hoy
+            idProgramacionDelDia =
+                Convert.ToInt32(rutasHoy.Rows[0]["idProgramacion"]);
 
-            bool rutaIniciada =
-                ruta["HoraInicioReal"] != DBNull.Value;
+            // Cargar nombres y estados guardados en SQL
+            CargarProgresoProgramacion(idProgramacionDelDia);
+        }
 
-            bool rutaFinalizada =
-                ruta["HoraFinReal"] != DBNull.Value;
+        private void btnAccionRuta_Click(object sender, EventArgs e)
+        {
 
-            int puntoActual =
-                Convert.ToInt32(ruta["PuntoActual"]);
+        }
 
-            bool resultado;
+        private void lblSinRutas_Click(object sender, EventArgs e)
+        {
 
-            if (!rutaIniciada)
-            {
-                resultado = conductorDAO.IniciarRuta(
-                    idProgramacionSeleccionada
-                );
-            }
-            else if (rutaFinalizada)
-            {
-                MessageBox.Show("Esta ruta ya está completada.");
-                return;
-            }
-            else if (puntoActual < 3)
-            {
-                resultado = conductorDAO.AvanzarPuntoRuta(
-                    idProgramacionSeleccionada
-                );
-            }
-            else
-            {
-                resultado = conductorDAO.FinalizarRuta(
-                    idProgramacionSeleccionada
-                );
-            }
-
-            if (resultado)
-            {
-                CargarProgresoRuta();
-            }
-            else
-            {
-                MessageBox.Show(
-                    "No se pudo actualizar la ruta. Verificá su estado.",
-                    "Aviso",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Warning
-                );
-            }
         }
     }
 }

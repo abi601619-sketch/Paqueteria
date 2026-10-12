@@ -37,6 +37,7 @@
             tlpLogin = new TableLayoutPanel();
             pictureBox1 = new PictureBox();
             pnlInicioS = new Panel();
+            btnCerrar = new Button();
             label1 = new Label();
             guna2CustomGradientPanel2 = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
             guna2CustomGradientPanel1 = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
@@ -48,6 +49,7 @@
             lbliniciarS = new Label();
             guna2CirclePictureBox1 = new Guna.UI2.WinForms.Guna2CirclePictureBox();
             errorProvider1 = new ErrorProvider(components);
+            label3 = new Label();
             tlpLogin.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             pnlInicioS.SuspendLayout();
@@ -85,6 +87,8 @@
             // pnlInicioS
             // 
             pnlInicioS.BackColor = Color.White;
+            pnlInicioS.Controls.Add(label3);
+            pnlInicioS.Controls.Add(btnCerrar);
             pnlInicioS.Controls.Add(label1);
             pnlInicioS.Controls.Add(guna2CustomGradientPanel2);
             pnlInicioS.Controls.Add(guna2CustomGradientPanel1);
@@ -100,7 +104,20 @@
             pnlInicioS.Name = "pnlInicioS";
             pnlInicioS.Size = new Size(946, 1035);
             pnlInicioS.TabIndex = 1;
-            pnlInicioS.Paint += pnlInicioS_Paint;
+            // 
+            // btnCerrar
+            // 
+            btnCerrar.BackColor = Color.DarkSalmon;
+            btnCerrar.FlatAppearance.BorderSize = 0;
+            btnCerrar.FlatStyle = FlatStyle.Flat;
+            btnCerrar.ForeColor = Color.White;
+            btnCerrar.Location = new Point(832, 984);
+            btnCerrar.Name = "btnCerrar";
+            btnCerrar.Size = new Size(105, 31);
+            btnCerrar.TabIndex = 11;
+            btnCerrar.Text = "Cerrar Programa";
+            btnCerrar.UseVisualStyleBackColor = false;
+            btnCerrar.Click += btnCerrar_Click;
             // 
             // label1
             // 
@@ -163,6 +180,7 @@
             txtContraseña.Name = "txtContraseña";
             txtContraseña.Size = new Size(399, 23);
             txtContraseña.TabIndex = 6;
+            txtContraseña.UseSystemPasswordChar = true;
             // 
             // lblContraseña
             // 
@@ -217,7 +235,19 @@
             // 
             // errorProvider1
             // 
+            errorProvider1.BlinkStyle = ErrorBlinkStyle.NeverBlink;
             errorProvider1.ContainerControl = this;
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label3.Location = new Point(538, 684);
+            label3.Name = "label3";
+            label3.Size = new Size(110, 15);
+            label3.TabIndex = 12;
+            label3.Text = "Mostrar Contraseña";
+            label3.Click += label3_Click;
             // 
             // frmLogin
             // 
@@ -253,5 +283,8 @@
         private Guna.UI2.WinForms.Guna2CustomGradientPanel guna2CustomGradientPanel2;
         private Guna.UI2.WinForms.Guna2CustomGradientPanel guna2CustomGradientPanel1;
         private ErrorProvider errorProvider1;
+        private Label label2;
+        private Button btnCerrar;
+        private Label label3;
     }
 }

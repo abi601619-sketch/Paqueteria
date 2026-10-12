@@ -30,14 +30,12 @@
         {
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges1 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             pnlMenu = new Panel();
-            btnProductos = new Button();
             btnVehiculos = new Button();
             btnRutasC = new Button();
             btnDashboardC = new Button();
             ptbLogo = new Guna.UI2.WinForms.Guna2CirclePictureBox();
             btnCerrarS = new Button();
             pnlParteA = new Panel();
-            sqlCommand1 = new Microsoft.Data.SqlClient.SqlCommand();
             pnlInformacion = new Panel();
             pnlMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)ptbLogo).BeginInit();
@@ -46,7 +44,6 @@
             // pnlMenu
             // 
             pnlMenu.BackColor = Color.FromArgb(78, 35, 14);
-            pnlMenu.Controls.Add(btnProductos);
             pnlMenu.Controls.Add(btnVehiculos);
             pnlMenu.Controls.Add(btnRutasC);
             pnlMenu.Controls.Add(btnDashboardC);
@@ -57,22 +54,6 @@
             pnlMenu.Name = "pnlMenu";
             pnlMenu.Size = new Size(262, 1041);
             pnlMenu.TabIndex = 0;
-            // 
-            // btnProductos
-            // 
-            btnProductos.BackColor = Color.FromArgb(78, 35, 14);
-            btnProductos.Dock = DockStyle.Top;
-            btnProductos.FlatAppearance.BorderSize = 0;
-            btnProductos.FlatStyle = FlatStyle.Flat;
-            btnProductos.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnProductos.ForeColor = Color.White;
-            btnProductos.Location = new Point(0, 525);
-            btnProductos.Name = "btnProductos";
-            btnProductos.Size = new Size(262, 108);
-            btnProductos.TabIndex = 6;
-            btnProductos.Text = "PRODUCTOS";
-            btnProductos.UseVisualStyleBackColor = false;
-            btnProductos.Click += btnProductos_Click;
             // 
             // btnVehiculos
             // 
@@ -163,11 +144,6 @@
             pnlParteA.TabIndex = 1;
             pnlParteA.Paint += pnlParteA_Paint;
             // 
-            // sqlCommand1
-            // 
-            sqlCommand1.CommandTimeout = 30;
-            sqlCommand1.EnableOptimizedParameterBinding = false;
-            // 
             // pnlInformacion
             // 
             pnlInformacion.Dock = DockStyle.Fill;
@@ -199,13 +175,11 @@
         private Panel pnlParteA;
         private Button btnCerrarS;
         private Guna.UI2.WinForms.Guna2CirclePictureBox ptbLogo;
-        private Button btnProductos;
         private Button btnVehiculos;
         private Button btnRutasC;
         private Button btnDashboardC;
         private Panel pnlInformacion;
         private PictureBox pictureBox1;
-        private Microsoft.Data.SqlClient.SqlCommand sqlCommand1;
         private Button btnRutas;
         private Guna.UI2.WinForms.Guna2CustomGradientPanel guna2CustomGradientPanel1;
     }
