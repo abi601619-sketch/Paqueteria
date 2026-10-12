@@ -126,6 +126,11 @@
   </data>
   <data name="box (1)" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\box (1).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="iconback" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\iconback.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="van compacta" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\van compacta.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="circulo verde" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\circulo verde.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -141,6 +146,8 @@
   </data>
   <data name="CARRO-removebg-preview" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\CARRO-removebg-preview.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="van grande" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\van grande.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="van" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\van.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -157,11 +164,17 @@
   <data name="user" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\user.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="camion ligero" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\camion ligero.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="2d01e215a07cdd5f57d39b2c23eb12e479073242" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\2d01e215a07cdd5f57d39b2c23eb12e479073242.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="profile.con" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\profile.con.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="camion mediano" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\camion mediano.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="close" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\close.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -172,8 +185,11 @@
   <data name="iconTrash" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\iconTrash.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="iconback" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\iconback.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="iconTrash" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\iconTrash.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="circulo_verde-removebg-preview" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\circulo_verde-removebg-preview.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="maps-and-flags" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\maps-and-flags.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -183,5 +199,13 @@
   </data>
   <data name="ZonaOriente" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ZonaOriente.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="van mediana" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\van mediana.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="r-removebg-preview" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\r-removebg-preview.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="camion mediano lona" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\camion mediano lona.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

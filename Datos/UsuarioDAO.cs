@@ -11,101 +11,147 @@ namespace Modelo.Datos
     {
         public Usuario IniciarSesion(string correo, string contrasena)
         {
-            Usuario usuario = null;
-
-            string consulta = @"
-                SELECT
-                    idUsuario,
-                    dui,
-                    nombre,
-                    apellido,
-                    correo,
-                    contrasena,
-                    fotoPerfil
-                FROM Usuarios
-                WHERE correo = @correo
-                AND contrasena = @contrasena";
-
-            using (SqlConnection conexion = Conexion.Conectar())
+            try
             {
-                using (SqlCommand comando = new SqlCommand(consulta, conexion))
+                Usuario usuario = null;
+
+                string consulta = @"
+                    SELECT
+                        idUsuario,
+                        dui,
+                        nombre,
+                        apellido,
+                        correo,
+                        contrasena,
+                        fotoPerfil
+                    FROM Usuarios
+                    WHERE correo = @correo";
+
+                using (SqlConnection conexion = Conexion.Conectar())
                 {
-                    comando.Parameters.AddWithValue("@correo", correo);
-                    comando.Parameters.AddWithValue("@contrasena", contrasena);
-
-                    using (SqlDataReader reader = comando.ExecuteReader())
+                    using (SqlCommand comando = new SqlCommand(consulta, conexion))
                     {
-                        if (reader.Read())
+                        comando.Parameters.AddWithValue("@correo", correo);
+
+                        using (SqlDataReader reader = comando.ExecuteReader())
                         {
-                            usuario = new Usuario();
-
-                            usuario.IdUsuario =
-                                Convert.ToInt32(reader["idUsuario"]);
-
-                            usuario.Dui =
-                                reader["dui"].ToString();
-
-                            usuario.Nombre =
-                                reader["nombre"].ToString();
-
-                            usuario.Apellido =
-                                reader["apellido"].ToString();
-
-                            usuario.Correo =
-                                reader["correo"].ToString();
-
-                            if (reader["fotoPerfil"] != DBNull.Value)
+                            if (reader.Read())
                             {
-                                usuario.FotoPerfil =
-                                    (byte[])reader["fotoPerfil"];
+                                // Obtener el hash almacenado en la base de datos
+                                string hashGuardado =
+                                    reader["contrasena"].ToString();
+
+                                // Verificar la contraseña ingresada con BCrypt
+                                bool contraseñaCorrecta = false;
+
+                                try
+                                {
+                                    contraseñaCorrecta =
+                                        BCrypt.Net.BCrypt.Verify(
+                                            contrasena,
+                                            hashGuardado
+                                        );
+                                }
+                                catch (BCrypt.Net.SaltParseException)
+                                {
+                                    contraseñaCorrecta = false;
+                                }
+                                catch (ArgumentException)
+                                {
+                                    contraseñaCorrecta = false;
+                                }
+
+                                // Solo permitir el acceso si la contraseña es correcta
+                                if (contraseñaCorrecta)
+                                {
+                                    usuario = new Usuario();
+
+                                    usuario.IdUsuario =
+                                        Convert.ToInt32(reader["idUsuario"]);
+
+                                    usuario.Dui =
+                                        reader["dui"].ToString();
+
+                                    usuario.Nombre =
+                                        reader["nombre"].ToString();
+
+                                    usuario.Apellido =
+                                        reader["apellido"].ToString();
+
+                                    usuario.Correo =
+                                        reader["correo"].ToString();
+
+                                    if (reader["fotoPerfil"] != DBNull.Value)
+                                    {
+                                        usuario.FotoPerfil =
+                                            (byte[])reader["fotoPerfil"];
+                                    }
+                                }
                             }
                         }
                     }
                 }
-            }
 
-            return usuario;
+                return usuario;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(
+                    "Error al iniciar sesión en UsuarioDAO.",
+                    ex
+                );
+            }
         }
 
         public string ObtenerTipoUsuario(int idUsuario)
         {
-            string tipoUsuario = "";
-
-            string consulta = @"
-        SELECT
-            CASE
-                WHEN EXISTS (
-                    SELECT 1
-                    FROM Administradores
-                    WHERE idUsuario = @idUsuario
-                ) THEN 'Administrador'
-
-                WHEN EXISTS (
-                    SELECT 1
-                    FROM Clientes
-                    WHERE idUsuario = @idUsuario
-                ) THEN 'Cliente'
-
-                WHEN EXISTS (
-                    SELECT 1
-                    FROM Conductores
-                    WHERE idUsuario = @idUsuario
-                ) THEN 'Conductor'
-
-                ELSE 'Desconocido'
-            END";
-
-            using (SqlConnection conexion = Conexion.Conectar())
+            try
             {
-                using (SqlCommand comando = new SqlCommand(consulta, conexion))
+                string tipoUsuario = "";
+
+                string consulta = @"
+                    SELECT
+                        CASE
+                            WHEN EXISTS (
+                                SELECT 1
+                                FROM Administradores
+                                WHERE idUsuario = @idUsuario
+                            ) THEN 'Administrador'
+
+                            WHEN EXISTS (
+                                SELECT 1
+                                FROM Clientes
+                                WHERE idUsuario = @idUsuario
+                            ) THEN 'Cliente'
+
+                            WHEN EXISTS (
+                                SELECT 1
+                                FROM Conductores
+                                WHERE idUsuario = @idUsuario
+                            ) THEN 'Conductor'
+
+                            ELSE 'Desconocido'
+                        END";
+
+                using (SqlConnection conexion = Conexion.Conectar())
                 {
-                    comando.Parameters.AddWithValue("@idUsuario", idUsuario);
+                    using (SqlCommand comando = new SqlCommand(consulta, conexion))
+                    {
+                        comando.Parameters.AddWithValue("@idUsuario", idUsuario);
 
-                    tipoUsuario = comando.ExecuteScalar().ToString();
+                        tipoUsuario = comando.ExecuteScalar().ToString();
+                    }
                 }
-            }
 
-            return tipoUsuario;
+                return tipoUsuario;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(
+                    "Error al obtener el tipo de usuario en UsuarioDAO.",
+                    ex
+                );
+            }
         }
     }
 }
