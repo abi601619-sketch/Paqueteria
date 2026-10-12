@@ -93,9 +93,6 @@ namespace Vista.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap box__1_ {
-            get {
-                object obj = ResourceManager.GetObject("box (1)", resourceCulture);
         internal static System.Drawing.Bitmap camion_ligero {
             get {
                 object obj = ResourceManager.GetObject("camion ligero", resourceCulture);
@@ -306,9 +303,6 @@ namespace Vista.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap ZonaOriente {
-            get {
-                object obj = ResourceManager.GetObject("ZonaOriente", resourceCulture);
         internal static System.Drawing.Bitmap van_compacta {
             get {
                 object obj = ResourceManager.GetObject("van compacta", resourceCulture);
@@ -332,6 +326,16 @@ namespace Vista.Properties {
         internal static System.Drawing.Bitmap van_mediana {
             get {
                 object obj = ResourceManager.GetObject("van mediana", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ZonaOriente {
+            get {
+                object obj = ResourceManager.GetObject("ZonaOriente", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

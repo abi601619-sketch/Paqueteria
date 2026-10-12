@@ -17,7 +17,7 @@ namespace Vista
 
             ApplicationConfiguration.Initialize();
 
-            Application.Run(new frmMenuAdministradores());
+            Application.Run(new frmLogin());
         }
 
         private static void Application_ThreadException(object sender, ThreadExceptionEventArgs e)

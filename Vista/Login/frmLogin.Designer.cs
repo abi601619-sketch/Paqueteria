@@ -37,6 +37,7 @@
             tlpLogin = new TableLayoutPanel();
             pictureBox1 = new PictureBox();
             pnlInicioS = new Panel();
+            label3 = new Label();
             btnCerrar = new Button();
             label1 = new Label();
             guna2CustomGradientPanel2 = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
@@ -47,14 +48,13 @@
             txtUsuario = new TextBox();
             lblUsuario = new Label();
             lbliniciarS = new Label();
-            guna2CirclePictureBox1 = new Guna.UI2.WinForms.Guna2CirclePictureBox();
             errorProvider1 = new ErrorProvider(components);
-            label3 = new Label();
+            ptbLogo = new Guna.UI2.WinForms.Guna2CirclePictureBox();
             tlpLogin.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             pnlInicioS.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)guna2CirclePictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)errorProvider1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)ptbLogo).BeginInit();
             SuspendLayout();
             // 
             // tlpLogin
@@ -98,12 +98,23 @@
             pnlInicioS.Controls.Add(txtUsuario);
             pnlInicioS.Controls.Add(lblUsuario);
             pnlInicioS.Controls.Add(lbliniciarS);
-            pnlInicioS.Controls.Add(guna2CirclePictureBox1);
+            pnlInicioS.Controls.Add(ptbLogo);
             pnlInicioS.Dock = DockStyle.Fill;
             pnlInicioS.Location = new Point(955, 3);
             pnlInicioS.Name = "pnlInicioS";
             pnlInicioS.Size = new Size(946, 1035);
             pnlInicioS.TabIndex = 1;
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label3.Location = new Point(538, 684);
+            label3.Name = "label3";
+            label3.Size = new Size(110, 15);
+            label3.TabIndex = 12;
+            label3.Text = "Mostrar Contraseña";
+            label3.Click += label3_Click;
             // 
             // btnCerrar
             // 
@@ -219,35 +230,24 @@
             lbliniciarS.TabIndex = 2;
             lbliniciarS.Text = "Iniciar Sesión";
             // 
-            // guna2CirclePictureBox1
-            // 
-            guna2CirclePictureBox1.Image = Properties.Resources._2d01e215a07cdd5f57d39b2c23eb12e479073242;
-            guna2CirclePictureBox1.ImageRotate = 0F;
-            guna2CirclePictureBox1.InitialImage = null;
-            guna2CirclePictureBox1.Location = new Point(300, 125);
-            guna2CirclePictureBox1.Name = "guna2CirclePictureBox1";
-            guna2CirclePictureBox1.ShadowDecoration.CustomizableEdges = customizableEdges5;
-            guna2CirclePictureBox1.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
-            guna2CirclePictureBox1.Size = new Size(286, 286);
-            guna2CirclePictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
-            guna2CirclePictureBox1.TabIndex = 1;
-            guna2CirclePictureBox1.TabStop = false;
-            // 
             // errorProvider1
             // 
             errorProvider1.BlinkStyle = ErrorBlinkStyle.NeverBlink;
             errorProvider1.ContainerControl = this;
             // 
-            // label3
+            // ptbLogo
             // 
-            label3.AutoSize = true;
-            label3.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label3.Location = new Point(538, 684);
-            label3.Name = "label3";
-            label3.Size = new Size(110, 15);
-            label3.TabIndex = 12;
-            label3.Text = "Mostrar Contraseña";
-            label3.Click += label3_Click;
+            ptbLogo.Image = Properties.Resources._2d01e215a07cdd5f57d39b2c23eb12e479073242;
+            ptbLogo.ImageRotate = 0F;
+            ptbLogo.InitialImage = null;
+            ptbLogo.Location = new Point(328, 145);
+            ptbLogo.Name = "ptbLogo";
+            ptbLogo.ShadowDecoration.CustomizableEdges = customizableEdges5;
+            ptbLogo.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
+            ptbLogo.Size = new Size(239, 256);
+            ptbLogo.SizeMode = PictureBoxSizeMode.Zoom;
+            ptbLogo.TabIndex = 13;
+            ptbLogo.TabStop = false;
             // 
             // frmLogin
             // 
@@ -262,8 +262,8 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             pnlInicioS.ResumeLayout(false);
             pnlInicioS.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)guna2CirclePictureBox1).EndInit();
             ((System.ComponentModel.ISupportInitialize)errorProvider1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)ptbLogo).EndInit();
             ResumeLayout(false);
         }
 
@@ -273,7 +273,6 @@
         private PictureBox pictureBox1;
         private Panel pnlInicioS;
         private Label lbliniciarS;
-        private Guna.UI2.WinForms.Guna2CirclePictureBox guna2CirclePictureBox1;
         private TextBox txtContraseña;
         private Label lblContraseña;
         private TextBox txtUsuario;
@@ -286,5 +285,6 @@
         private Label label2;
         private Button btnCerrar;
         private Label label3;
+        private Guna.UI2.WinForms.Guna2CirclePictureBox ptbLogo;
     }
 }
