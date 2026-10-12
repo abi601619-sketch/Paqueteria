@@ -23,7 +23,21 @@ namespace Modelo.Datos
 
             using (SqlConnection conexion = Conexion.Conectar())
             {
-                using (SqlCommand comando = new SqlCommand(consulta, conexion))
+                Usuario usuario = null;
+
+                string consulta = @"
+                    SELECT
+                        idUsuario,
+                        dui,
+                        nombre,
+                        apellido,
+                        correo,
+                        contrasena,
+                        fotoPerfil
+                    FROM Usuarios
+                    WHERE correo = @correo";
+
+                using (SqlConnection conexion = Conexion.Conectar())
                 {
                     comando.Parameters.AddWithValue("@correo", correo);
 
@@ -56,9 +70,16 @@ namespace Modelo.Datos
                         }
                     }
                 }
-            }
 
-            return usuario;
+                return usuario;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(
+                    "Error al iniciar sesión en UsuarioDAO.",
+                    ex
+                );
+            }
         }
 
         public string ObtenerTipoUsuario(int idUsuario)
@@ -89,15 +110,51 @@ namespace Modelo.Datos
 
             using (SqlConnection conexion = Conexion.Conectar())
             {
-                using (SqlCommand comando = new SqlCommand(consulta, conexion))
+                string tipoUsuario = "";
+
+                string consulta = @"
+                    SELECT
+                        CASE
+                            WHEN EXISTS (
+                                SELECT 1
+                                FROM Administradores
+                                WHERE idUsuario = @idUsuario
+                            ) THEN 'Administrador'
+
+                            WHEN EXISTS (
+                                SELECT 1
+                                FROM Clientes
+                                WHERE idUsuario = @idUsuario
+                            ) THEN 'Cliente'
+
+                            WHEN EXISTS (
+                                SELECT 1
+                                FROM Conductores
+                                WHERE idUsuario = @idUsuario
+                            ) THEN 'Conductor'
+
+                            ELSE 'Desconocido'
+                        END";
+
+                using (SqlConnection conexion = Conexion.Conectar())
                 {
-                    comando.Parameters.AddWithValue("@idUsuario", idUsuario);
+                    using (SqlCommand comando = new SqlCommand(consulta, conexion))
+                    {
+                        comando.Parameters.AddWithValue("@idUsuario", idUsuario);
 
-                    tipoUsuario = comando.ExecuteScalar().ToString();
+                        tipoUsuario = comando.ExecuteScalar().ToString();
+                    }
                 }
-            }
 
-            return tipoUsuario;
+                return tipoUsuario;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(
+                    "Error al obtener el tipo de usuario en UsuarioDAO.",
+                    ex
+                );
+            }
         }
 
         public Usuario ObtenerUsuario(int idUsuario)

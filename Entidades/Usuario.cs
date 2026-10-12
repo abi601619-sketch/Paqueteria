@@ -1,6 +1,9 @@
 ﻿using Microsoft.Data.SqlClient;
 using Modelo.Conexion_DB;
 using System.Data;
+using System;
+using System.Collections.Generic;
+using System.Text;
 
 namespace Modelo.Entidades
 {
@@ -104,6 +107,38 @@ namespace Modelo.Entidades
                     }
                 }
             }
+    
+
+    public Usuario ObtenerUsuarioPorId(int idUsuario)
+        {
+            Usuario usuario = null;
+
+            using (SqlConnection conexion = Conexion_DB.Conexion.Conectar())
+            {
+                string consulta = @"
+            SELECT idUsuario, correo, dui
+            FROM Usuarios
+            WHERE idUsuario = @idUsuario";
+
+                using (SqlCommand comando = new SqlCommand(consulta, conexion))
+                {
+                    comando.Parameters.AddWithValue("@idUsuario", idUsuario);
+
+                    using (SqlDataReader reader = comando.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            usuario = new Usuario();
+
+                            usuario.IdUsuario = Convert.ToInt32(reader["idUsuario"]);
+                            usuario.Correo = reader["correo"].ToString();
+                            usuario.Dui = reader["dui"].ToString();
+                        }
+                    }
+                }
+            }
+
+            return usuario;
         }
     }
 }
