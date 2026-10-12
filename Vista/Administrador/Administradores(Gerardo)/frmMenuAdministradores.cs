@@ -20,9 +20,10 @@ namespace Vista.Administrador.Administradores_Gerardo_
         private frmConductoresAdministrador adminConductores;
         private Usuario usuario;
 
-        public frmMenuAdministradores()
+        public frmMenuAdministradores(Usuario usuario)
         {
             InitializeComponent();
+            this.usuario = usuario;
         }
 
         public Panel panelPlantilla

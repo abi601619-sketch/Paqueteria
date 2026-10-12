@@ -150,7 +150,7 @@ namespace Vista.Login
                 }
                 else if (tipoUsuario == "Administrador")
                 {
-                    frmMenuAdministradores menu = new frmMenuAdministradores();
+                    frmMenuAdministradores menu = new frmMenuAdministradores(usuario);
                     menu.Show();
                     this.Hide();
                 }
@@ -197,7 +197,7 @@ namespace Vista.Login
         // Validar correo del dominio de la aplicación
         private bool CorreoValido(string correo)
         {
-            string patron = @"^[A-Za-z]+(?:\.[A-Za-z]+)*@mypickup.com$";
+            string patron = @"^[A-Za-z]+(?:\.[A-Za-z]+)*@(mypickup\.com|gmail\.com)$";
 
             return Regex.IsMatch(
                 correo,
