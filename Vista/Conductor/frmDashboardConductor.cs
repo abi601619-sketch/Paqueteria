@@ -737,7 +737,7 @@ namespace Vista.Conductor
                 case "PENDIENTE":
 
                     pictureBox.Image =
-                        Properties.Resources.r_removebg_preview;
+                       Properties.Resources.r_removebg_preview;
 
                     labelEstado.Text = "PENDIENTE";
                     labelEstado.ForeColor = Color.Red;
@@ -763,7 +763,7 @@ namespace Vista.Conductor
                 case "COMPLETADO":
 
                     pictureBox.Image =
-                        Properties.Resources.circulo_verde_removebg_preview;
+                       Properties.Resources.circulo_verde_removebg_preview;
 
                     labelEstado.Text = "COMPLETADO";
                     labelEstado.ForeColor = Color.Green;

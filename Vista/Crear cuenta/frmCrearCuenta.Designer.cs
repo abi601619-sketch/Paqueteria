@@ -144,7 +144,7 @@
             btnMostrarContrasena.FillColor = Color.Transparent;
             btnMostrarContrasena.Font = new Font("Segoe UI", 9F);
             btnMostrarContrasena.ForeColor = Color.White;
-            btnMostrarContrasena.Image = Properties.Resources.vista;
+            btnMostrarContrasena.Image = Properties.Resources.vistas;
             btnMostrarContrasena.Location = new Point(728, 483);
             btnMostrarContrasena.Name = "btnMostrarContrasena";
             btnMostrarContrasena.ShadowDecoration.CustomizableEdges = customizableEdges2;
@@ -162,7 +162,7 @@
             btnMostrarcontrasena1.FillColor = Color.Transparent;
             btnMostrarcontrasena1.Font = new Font("Segoe UI", 9F);
             btnMostrarcontrasena1.ForeColor = Color.White;
-            btnMostrarcontrasena1.Image = Properties.Resources.vista;
+            btnMostrarcontrasena1.Image = Properties.Resources.vistas;
             btnMostrarcontrasena1.Location = new Point(313, 483);
             btnMostrarcontrasena1.Name = "btnMostrarcontrasena1";
             btnMostrarcontrasena1.ShadowDecoration.CustomizableEdges = customizableEdges4;

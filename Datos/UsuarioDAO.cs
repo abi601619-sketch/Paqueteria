@@ -13,6 +13,7 @@ namespace Modelo.Datos
             try
             {
                 Usuario usuario = null;
+                string hashGuardado = null;
 
                 string consulta = @"
                     SELECT
@@ -35,28 +36,78 @@ namespace Modelo.Datos
                     {
                         if (reader.Read())
                         {
-                            string hashContrasena =
-                                reader["contrasena"].ToString();
+                            hashGuardado = reader["contrasena"] == DBNull.Value
+                                ? null
+                                : reader["contrasena"].ToString();
 
-                            if (BCrypt.Net.BCrypt.Verify(
-                                contrasena, hashContrasena))
+                            usuario = new Usuario
                             {
-                                usuario = new Usuario();
+                                IdUsuario = Convert.ToInt32(reader["idUsuario"]),
+                                Dui = reader["dui"].ToString(),
+                                Nombre = reader["nombre"].ToString(),
+                                Apellido = reader["apellido"].ToString(),
+                                Correo = reader["correo"].ToString()
+                            };
 
-                                usuario.IdUsuario =
-                                    Convert.ToInt32(reader["idUsuario"]);
-                                usuario.Dui = reader["dui"].ToString();
-                                usuario.Nombre = reader["nombre"].ToString();
-                                usuario.Apellido = reader["apellido"].ToString();
-                                usuario.Correo = reader["correo"].ToString();
-
-                                if (reader["fotoPerfil"] != DBNull.Value)
-                                {
-                                    usuario.FotoPerfil =
-                                        (byte[])reader["fotoPerfil"];
-                                }
+                            if (reader["fotoPerfil"] != DBNull.Value)
+                            {
+                                usuario.FotoPerfil = (byte[])reader["fotoPerfil"];
                             }
                         }
+                    }
+                }
+
+                if (usuario == null || string.IsNullOrEmpty(hashGuardado))
+                {
+                    return null;
+                }
+
+                bool esHashBCrypt =
+                    hashGuardado.StartsWith("$2a$") ||
+                    hashGuardado.StartsWith("$2b$") ||
+                    hashGuardado.StartsWith("$2y$");
+
+                if (esHashBCrypt)
+                {
+                    try
+                    {
+                        return BCrypt.Net.BCrypt.Verify(contrasena, hashGuardado)
+                            ? usuario
+                            : null;
+                    }
+                    catch (BCrypt.Net.SaltParseException)
+                    {
+                        return null;
+                    }
+                    catch (BCrypt.Net.HashInformationException)
+                    {
+                        return null;
+                    }
+                }
+
+                // Compatibilidad temporal con contraseñas antiguas
+                if (hashGuardado != contrasena)
+                {
+                    return null;
+                }
+
+                // Convertir la contraseña antigua a BCrypt
+                string nuevoHash = BCrypt.Net.BCrypt.HashPassword(contrasena);
+
+                string actualizar = @"
+                    UPDATE Usuarios
+                    SET contrasena = @hash
+                    WHERE idUsuario = @idUsuario";
+
+                using (SqlConnection conexion = Conexion.Conectar())
+                using (SqlCommand comando = new SqlCommand(actualizar, conexion))
+                {
+                    comando.Parameters.AddWithValue("@hash", nuevoHash);
+                    comando.Parameters.AddWithValue("@idUsuario", usuario.IdUsuario);
+
+                    if (comando.ExecuteNonQuery() != 1)
+                    {
+                        return null;
                     }
                 }
 
@@ -99,6 +150,7 @@ namespace Modelo.Datos
                     comando.Parameters.AddWithValue("@idUsuario", idUsuario);
 
                     object resultado = comando.ExecuteScalar();
+
                     return resultado == null || resultado == DBNull.Value
                         ? "Desconocido"
                         : resultado.ToString();
@@ -113,48 +165,55 @@ namespace Modelo.Datos
 
         public Usuario ObtenerUsuario(int idUsuario)
         {
-            Usuario usuario = null;
-
-            string consulta = @"
-                SELECT
-                    idUsuario,
-                    dui,
-                    nombre,
-                    apellido,
-                    correo,
-                    contrasena,
-                    fotoPerfil
-                FROM Usuarios
-                WHERE idUsuario = @idUsuario";
-
-            using (SqlConnection conexion = Conexion.Conectar())
-            using (SqlCommand comando = new SqlCommand(consulta, conexion))
+            try
             {
-                comando.Parameters.AddWithValue("@idUsuario", idUsuario);
+                Usuario usuario = null;
 
-                using (SqlDataReader reader = comando.ExecuteReader())
+                string consulta = @"
+                    SELECT
+                        idUsuario,
+                        dui,
+                        nombre,
+                        apellido,
+                        correo,
+                        contrasena,
+                        fotoPerfil
+                    FROM Usuarios
+                    WHERE idUsuario = @idUsuario";
+
+                using (SqlConnection conexion = Conexion.Conectar())
+                using (SqlCommand comando = new SqlCommand(consulta, conexion))
                 {
-                    if (reader.Read())
+                    comando.Parameters.AddWithValue("@idUsuario", idUsuario);
+
+                    using (SqlDataReader reader = comando.ExecuteReader())
                     {
-                        usuario = new Usuario();
-
-                        usuario.IdUsuario =
-                            Convert.ToInt32(reader["idUsuario"]);
-                        usuario.Dui = reader["dui"].ToString();
-                        usuario.Nombre = reader["nombre"].ToString();
-                        usuario.Apellido = reader["apellido"].ToString();
-                        usuario.Correo = reader["correo"].ToString();
-
-                        if (reader["fotoPerfil"] != DBNull.Value)
+                        if (reader.Read())
                         {
-                            usuario.FotoPerfil =
-                                (byte[])reader["fotoPerfil"];
+                            usuario = new Usuario
+                            {
+                                IdUsuario = Convert.ToInt32(reader["idUsuario"]),
+                                Dui = reader["dui"].ToString(),
+                                Nombre = reader["nombre"].ToString(),
+                                Apellido = reader["apellido"].ToString(),
+                                Correo = reader["correo"].ToString()
+                            };
+
+                            if (reader["fotoPerfil"] != DBNull.Value)
+                            {
+                                usuario.FotoPerfil = (byte[])reader["fotoPerfil"];
+                            }
                         }
                     }
                 }
-            }
 
-            return usuario;
+                return usuario;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(
+                    "Error al obtener el usuario en UsuarioDAO.", ex);
+            }
         }
     }
 }

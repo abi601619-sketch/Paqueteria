@@ -423,9 +423,9 @@ namespace Vista.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap vista {
+        internal static System.Drawing.Bitmap vistas {
             get {
-                object obj = ResourceManager.GetObject("vista", resourceCulture);
+                object obj = ResourceManager.GetObject("vistas", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
