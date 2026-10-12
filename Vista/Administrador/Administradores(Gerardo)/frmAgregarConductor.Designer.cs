@@ -92,6 +92,7 @@
             btnAgregar.TabIndex = 16;
             btnAgregar.Text = "Agregar Conductor";
             btnAgregar.UseVisualStyleBackColor = false;
+            btnAgregar.Click += btnAgregar_Click_1;
             // 
             // txtContraseña
             // 
@@ -170,6 +171,7 @@
             cmbZona.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbZona.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             cmbZona.FormattingEnabled = true;
+            cmbZona.Items.AddRange(new object[] { "CENTRAL", "ORIENTE", "OCCIDENTE", "MULTIZONAS" });
             cmbZona.Location = new Point(736, 188);
             cmbZona.Name = "cmbZona";
             cmbZona.Size = new Size(537, 33);
@@ -186,6 +188,7 @@
             ptbFotoVehiculo.SizeMode = PictureBoxSizeMode.Zoom;
             ptbFotoVehiculo.TabIndex = 6;
             ptbFotoVehiculo.TabStop = false;
+            ptbFotoVehiculo.Click += ptbFotoVehiculo_Click;
             // 
             // txtNombre
             // 

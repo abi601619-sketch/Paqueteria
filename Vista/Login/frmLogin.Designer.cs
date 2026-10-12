@@ -37,6 +37,9 @@
             tlpLogin = new TableLayoutPanel();
             pictureBox1 = new PictureBox();
             pnlInicioS = new Panel();
+            guna2Button2 = new Guna.UI2.WinForms.Guna2Button();
+            guna2Button1 = new Guna.UI2.WinForms.Guna2Button();
+            btnCerrar = new Button();
             label1 = new Label();
             guna2CustomGradientPanel2 = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
             guna2CustomGradientPanel1 = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
@@ -48,6 +51,7 @@
             lbliniciarS = new Label();
             guna2CirclePictureBox1 = new Guna.UI2.WinForms.Guna2CirclePictureBox();
             errorProvider1 = new ErrorProvider(components);
+            label3 = new Label();
             tlpLogin.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             pnlInicioS.SuspendLayout();
@@ -85,6 +89,8 @@
             // pnlInicioS
             // 
             pnlInicioS.BackColor = Color.White;
+            pnlInicioS.Controls.Add(guna2Button2);
+            pnlInicioS.Controls.Add(guna2Button1);
             pnlInicioS.Controls.Add(label1);
             pnlInicioS.Controls.Add(guna2CustomGradientPanel2);
             pnlInicioS.Controls.Add(guna2CustomGradientPanel1);
@@ -100,7 +106,57 @@
             pnlInicioS.Name = "pnlInicioS";
             pnlInicioS.Size = new Size(946, 1035);
             pnlInicioS.TabIndex = 1;
-            pnlInicioS.Paint += pnlInicioS_Paint;
+            // 
+            // btnCerrar
+            // 
+            btnCerrar.BackColor = Color.DarkSalmon;
+            btnCerrar.FlatAppearance.BorderSize = 0;
+            btnCerrar.FlatStyle = FlatStyle.Flat;
+            btnCerrar.ForeColor = Color.White;
+            btnCerrar.Location = new Point(832, 984);
+            btnCerrar.Name = "btnCerrar";
+            btnCerrar.Size = new Size(105, 31);
+            btnCerrar.TabIndex = 11;
+            btnCerrar.Text = "Cerrar Programa";
+            btnCerrar.UseVisualStyleBackColor = false;
+            btnCerrar.Click += btnCerrar_Click;
+            // 
+            // guna2Button2
+            // 
+            guna2Button2.CustomizableEdges = customizableEdges1;
+            guna2Button2.DisabledState.BorderColor = Color.DarkGray;
+            guna2Button2.DisabledState.CustomBorderColor = Color.DarkGray;
+            guna2Button2.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
+            guna2Button2.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            guna2Button2.FillColor = Color.Transparent;
+            guna2Button2.Font = new Font("Segoe UI", 9F);
+            guna2Button2.ForeColor = Color.White;
+            guna2Button2.Image = Properties.Resources.letra_x__1_;
+            guna2Button2.Location = new Point(882, 9);
+            guna2Button2.Name = "guna2Button2";
+            guna2Button2.ShadowDecoration.CustomizableEdges = customizableEdges2;
+            guna2Button2.Size = new Size(55, 34);
+            guna2Button2.TabIndex = 12;
+            guna2Button2.Click += guna2Button2_Click;
+            // 
+            // guna2Button1
+            // 
+            guna2Button1.BorderRadius = 6;
+            guna2Button1.CustomizableEdges = customizableEdges3;
+            guna2Button1.DisabledState.BorderColor = Color.DarkGray;
+            guna2Button1.DisabledState.CustomBorderColor = Color.DarkGray;
+            guna2Button1.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
+            guna2Button1.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            guna2Button1.FillColor = Color.FromArgb(255, 128, 0);
+            guna2Button1.Font = new Font("Segoe UI", 9F);
+            guna2Button1.ForeColor = Color.White;
+            guna2Button1.Location = new Point(475, 709);
+            guna2Button1.Name = "guna2Button1";
+            guna2Button1.ShadowDecoration.CustomizableEdges = customizableEdges4;
+            guna2Button1.Size = new Size(173, 31);
+            guna2Button1.TabIndex = 11;
+            guna2Button1.Text = "Crear Cuenta";
+            guna2Button1.Click += guna2Button1_Click;
             // 
             // label1
             // 
@@ -116,6 +172,7 @@
             // 
             guna2CustomGradientPanel2.BackColor = Color.Black;
             guna2CustomGradientPanel2.CustomizableEdges = customizableEdges6;
+            guna2CustomGradientPanel2.CustomizableEdges = customizableEdges5;
             guna2CustomGradientPanel2.FillColor = Color.Black;
             guna2CustomGradientPanel2.FillColor2 = Color.Black;
             guna2CustomGradientPanel2.FillColor3 = Color.Black;
@@ -124,6 +181,7 @@
             guna2CustomGradientPanel2.MinimumSize = new Size(1, 1);
             guna2CustomGradientPanel2.Name = "guna2CustomGradientPanel2";
             guna2CustomGradientPanel2.ShadowDecoration.CustomizableEdges = customizableEdges7;
+            guna2CustomGradientPanel2.ShadowDecoration.CustomizableEdges = customizableEdges6;
             guna2CustomGradientPanel2.Size = new Size(200, 1);
             guna2CustomGradientPanel2.TabIndex = 9;
             // 
@@ -131,6 +189,7 @@
             // 
             guna2CustomGradientPanel1.BackColor = Color.Black;
             guna2CustomGradientPanel1.CustomizableEdges = customizableEdges8;
+            guna2CustomGradientPanel1.CustomizableEdges = customizableEdges7;
             guna2CustomGradientPanel1.FillColor = Color.Black;
             guna2CustomGradientPanel1.FillColor2 = Color.Black;
             guna2CustomGradientPanel1.FillColor3 = Color.Black;
@@ -139,6 +198,7 @@
             guna2CustomGradientPanel1.MinimumSize = new Size(1, 1);
             guna2CustomGradientPanel1.Name = "guna2CustomGradientPanel1";
             guna2CustomGradientPanel1.ShadowDecoration.CustomizableEdges = customizableEdges9;
+            guna2CustomGradientPanel1.ShadowDecoration.CustomizableEdges = customizableEdges8;
             guna2CustomGradientPanel1.Size = new Size(200, 1);
             guna2CustomGradientPanel1.TabIndex = 8;
             // 
@@ -163,6 +223,7 @@
             txtContraseña.Name = "txtContraseña";
             txtContraseña.Size = new Size(399, 23);
             txtContraseña.TabIndex = 6;
+            txtContraseña.UseSystemPasswordChar = true;
             // 
             // lblContraseña
             // 
@@ -210,6 +271,7 @@
             guna2CirclePictureBox1.Location = new Point(300, 125);
             guna2CirclePictureBox1.Name = "guna2CirclePictureBox1";
             guna2CirclePictureBox1.ShadowDecoration.CustomizableEdges = customizableEdges10;
+            guna2CirclePictureBox1.ShadowDecoration.CustomizableEdges = customizableEdges9;
             guna2CirclePictureBox1.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
             guna2CirclePictureBox1.Size = new Size(286, 286);
             guna2CirclePictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
@@ -218,7 +280,19 @@
             // 
             // errorProvider1
             // 
+            errorProvider1.BlinkStyle = ErrorBlinkStyle.NeverBlink;
             errorProvider1.ContainerControl = this;
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label3.Location = new Point(538, 684);
+            label3.Name = "label3";
+            label3.Size = new Size(110, 15);
+            label3.TabIndex = 12;
+            label3.Text = "Mostrar Contraseña";
+            label3.Click += label3_Click;
             // 
             // frmLogin
             // 
@@ -254,5 +328,10 @@
         private Guna.UI2.WinForms.Guna2CustomGradientPanel guna2CustomGradientPanel2;
         private Guna.UI2.WinForms.Guna2CustomGradientPanel guna2CustomGradientPanel1;
         private ErrorProvider errorProvider1;
+        private Guna.UI2.WinForms.Guna2Button guna2Button1;
+        private Guna.UI2.WinForms.Guna2Button guna2Button2;
+        private Label label2;
+        private Button btnCerrar;
+        private Label label3;
     }
 }

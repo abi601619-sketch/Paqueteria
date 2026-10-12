@@ -30,14 +30,12 @@
         {
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges1 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             pnlMenu = new Panel();
-            btnProductos = new Button();
             btnVehiculos = new Button();
             btnRutasC = new Button();
-            btnDashboard = new Button();
+            btnDashboardC = new Button();
             ptbLogo = new Guna.UI2.WinForms.Guna2CirclePictureBox();
             btnCerrarS = new Button();
             pnlParteA = new Panel();
-            sqlCommand1 = new Microsoft.Data.SqlClient.SqlCommand();
             pnlInformacion = new Panel();
             pnlMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)ptbLogo).BeginInit();
@@ -46,10 +44,9 @@
             // pnlMenu
             // 
             pnlMenu.BackColor = Color.FromArgb(78, 35, 14);
-            pnlMenu.Controls.Add(btnProductos);
             pnlMenu.Controls.Add(btnVehiculos);
             pnlMenu.Controls.Add(btnRutasC);
-            pnlMenu.Controls.Add(btnDashboard);
+            pnlMenu.Controls.Add(btnDashboardC);
             pnlMenu.Controls.Add(ptbLogo);
             pnlMenu.Controls.Add(btnCerrarS);
             pnlMenu.Dock = DockStyle.Left;
@@ -57,21 +54,6 @@
             pnlMenu.Name = "pnlMenu";
             pnlMenu.Size = new Size(262, 1041);
             pnlMenu.TabIndex = 0;
-            // 
-            // btnProductos
-            // 
-            btnProductos.BackColor = Color.FromArgb(78, 35, 14);
-            btnProductos.Dock = DockStyle.Top;
-            btnProductos.FlatAppearance.BorderSize = 0;
-            btnProductos.FlatStyle = FlatStyle.Flat;
-            btnProductos.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnProductos.ForeColor = Color.White;
-            btnProductos.Location = new Point(0, 525);
-            btnProductos.Name = "btnProductos";
-            btnProductos.Size = new Size(262, 108);
-            btnProductos.TabIndex = 6;
-            btnProductos.Text = "PRODUCTOS";
-            btnProductos.UseVisualStyleBackColor = false;
             // 
             // btnVehiculos
             // 
@@ -87,6 +69,7 @@
             btnVehiculos.TabIndex = 7;
             btnVehiculos.Text = "VEHICULOS";
             btnVehiculos.UseVisualStyleBackColor = false;
+            btnVehiculos.Click += btnVehiculos_Click;
             // 
             // btnRutasC
             // 
@@ -102,21 +85,23 @@
             btnRutasC.TabIndex = 8;
             btnRutasC.Text = "RUTAS";
             btnRutasC.UseVisualStyleBackColor = false;
+            btnRutasC.Click += btnRutasC_Click;
             // 
-            // btnDashboard
+            // btnDashboardC
             // 
-            btnDashboard.BackColor = Color.FromArgb(78, 35, 14);
-            btnDashboard.Dock = DockStyle.Top;
-            btnDashboard.FlatAppearance.BorderSize = 0;
-            btnDashboard.FlatStyle = FlatStyle.Flat;
-            btnDashboard.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnDashboard.ForeColor = Color.White;
-            btnDashboard.Location = new Point(0, 201);
-            btnDashboard.Name = "btnDashboard";
-            btnDashboard.Size = new Size(262, 108);
-            btnDashboard.TabIndex = 5;
-            btnDashboard.Text = "DASHBOARD";
-            btnDashboard.UseVisualStyleBackColor = false;
+            btnDashboardC.BackColor = Color.FromArgb(78, 35, 14);
+            btnDashboardC.Dock = DockStyle.Top;
+            btnDashboardC.FlatAppearance.BorderSize = 0;
+            btnDashboardC.FlatStyle = FlatStyle.Flat;
+            btnDashboardC.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnDashboardC.ForeColor = Color.White;
+            btnDashboardC.Location = new Point(0, 201);
+            btnDashboardC.Name = "btnDashboardC";
+            btnDashboardC.Size = new Size(262, 108);
+            btnDashboardC.TabIndex = 5;
+            btnDashboardC.Text = "DASHBOARD";
+            btnDashboardC.UseVisualStyleBackColor = false;
+            btnDashboardC.Click += btnDashboard_Click;
             // 
             // ptbLogo
             // 
@@ -157,11 +142,7 @@
             pnlParteA.Name = "pnlParteA";
             pnlParteA.Size = new Size(1642, 83);
             pnlParteA.TabIndex = 1;
-            // 
-            // sqlCommand1
-            // 
-            sqlCommand1.CommandTimeout = 30;
-            sqlCommand1.EnableOptimizedParameterBinding = false;
+            pnlParteA.Paint += pnlParteA_Paint;
             // 
             // pnlInformacion
             // 
@@ -194,13 +175,11 @@
         private Panel pnlParteA;
         private Button btnCerrarS;
         private Guna.UI2.WinForms.Guna2CirclePictureBox ptbLogo;
-        private Button btnProductos;
         private Button btnVehiculos;
         private Button btnRutasC;
-        private Button btnDashboard;
+        private Button btnDashboardC;
         private Panel pnlInformacion;
         private PictureBox pictureBox1;
-        private Microsoft.Data.SqlClient.SqlCommand sqlCommand1;
         private Button btnRutas;
         private Guna.UI2.WinForms.Guna2CustomGradientPanel guna2CustomGradientPanel1;
     }

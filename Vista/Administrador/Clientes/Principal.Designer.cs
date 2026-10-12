@@ -30,9 +30,12 @@
         {
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges1 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges2 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges3 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges4 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             guna2HtmlLabel1 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             txtBuscar = new Guna.UI2.WinForms.Guna2TextBox();
             flpProductos = new FlowLayoutPanel();
+            btnVerMas = new Guna.UI2.WinForms.Guna2Button();
             SuspendLayout();
             // 
             // guna2HtmlLabel1
@@ -70,8 +73,27 @@
             flpProductos.AutoScroll = true;
             flpProductos.Location = new Point(9, 139);
             flpProductos.Name = "flpProductos";
-            flpProductos.Size = new Size(1622, 859);
+            flpProductos.Size = new Size(1622, 798);
             flpProductos.TabIndex = 3;
+            // 
+            // btnVerMas
+            // 
+            btnVerMas.BorderRadius = 8;
+            btnVerMas.CustomizableEdges = customizableEdges3;
+            btnVerMas.DisabledState.BorderColor = Color.DarkGray;
+            btnVerMas.DisabledState.CustomBorderColor = Color.DarkGray;
+            btnVerMas.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
+            btnVerMas.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            btnVerMas.FillColor = Color.Red;
+            btnVerMas.Font = new Font("Segoe UI", 9F);
+            btnVerMas.ForeColor = Color.White;
+            btnVerMas.Location = new Point(661, 955);
+            btnVerMas.Name = "btnVerMas";
+            btnVerMas.ShadowDecoration.CustomizableEdges = customizableEdges4;
+            btnVerMas.Size = new Size(451, 38);
+            btnVerMas.TabIndex = 6;
+            btnVerMas.Text = "Ver más productos";
+            btnVerMas.Click += btnVerMas_Click;
             // 
             // Principal
             // 
@@ -79,6 +101,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             AutoScroll = true;
             ClientSize = new Size(1640, 1015);
+            Controls.Add(btnVerMas);
             Controls.Add(guna2HtmlLabel1);
             Controls.Add(txtBuscar);
             Controls.Add(flpProductos);
@@ -95,5 +118,6 @@
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel1;
         private Guna.UI2.WinForms.Guna2TextBox txtBuscar;
         private FlowLayoutPanel flpProductos;
+        private Guna.UI2.WinForms.Guna2Button btnVerMas;
     }
 }
