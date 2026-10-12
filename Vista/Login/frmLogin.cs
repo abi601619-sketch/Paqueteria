@@ -2,12 +2,13 @@
 using Modelo.Datos;
 using Modelo.Entidades;
 using System;
-using System.Data;
 using System.Drawing;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using Vista.Administrador.Administradores_Gerardo_;
 using Vista.Administrador.Clientes;
 using Vista.Conductor;
+using Vista.Crear_cuenta;
 
 namespace Vista.Login
 {
@@ -20,21 +21,26 @@ namespace Vista.Login
         {
             InitializeComponent();
 
+            // Bloquear copiar, pegar y cortar
             txtUsuario.KeyDown += BloquearCopiarPegar;
             txtContraseña.KeyDown += BloquearCopiarPegar;
 
+            // Bloquear menú contextual del clic derecho
             txtUsuario.MouseDown += BloquearMenuContextual;
             txtContraseña.MouseDown += BloquearMenuContextual;
 
+            // Permitir iniciar sesión presionando Enter
             this.AcceptButton = btnIniciarSesion;
+
+            // Ocultar la contraseña inicialmente
             txtContraseña.UseSystemPasswordChar = true;
 
+            // Configuración de la ventana
             this.FormBorderStyle = FormBorderStyle.None;
             this.StartPosition = FormStartPosition.Manual;
             this.Bounds = Screen.PrimaryScreen.WorkingArea;
             this.TopMost = false;
         }
-
 
         private void btnIniciarSesion_Click(object sender, EventArgs e)
         {
@@ -54,15 +60,14 @@ namespace Vista.Login
                 return;
             }
 
-            // Limpiar errores anteriores
             errorProvider1.Clear();
 
             string correo = txtUsuario.Text.Trim();
-            string contraseña = txtContraseña.Text;
+            string contrasena = txtContraseña.Text;
 
             bool hayErrores = false;
 
-            // VALIDAR CORREO
+            // Validar correo
             if (string.IsNullOrWhiteSpace(correo))
             {
                 errorProvider1.SetError(
@@ -82,8 +87,8 @@ namespace Vista.Login
                 hayErrores = true;
             }
 
-            // VALIDAR CONTRASEÑA
-            if (string.IsNullOrWhiteSpace(contraseña))
+            // Validar contraseña
+            if (string.IsNullOrWhiteSpace(contrasena))
             {
                 errorProvider1.SetError(
                     txtContraseña,
@@ -92,7 +97,7 @@ namespace Vista.Login
 
                 hayErrores = true;
             }
-            else if (!ContrasenaValida(contraseña))
+            else if (!ContrasenaValida(contrasena))
             {
                 errorProvider1.SetError(
                     txtContraseña,
@@ -102,18 +107,17 @@ namespace Vista.Login
                 hayErrores = true;
             }
 
-            // DETENER SI HAY ERRORES
             if (hayErrores)
             {
                 return;
             }
 
-            // INICIAR SESIÓN
+            // Verificar credenciales
             UsuarioDAO usuarioDAO = new UsuarioDAO();
 
             Usuario usuario = usuarioDAO.IniciarSesion(
                 correo,
-                contraseña
+                contrasena
             );
 
             if (usuario != null)
@@ -125,30 +129,24 @@ namespace Vista.Login
                 string tipoUsuario =
                     usuarioDAO.ObtenerTipoUsuario(usuario.IdUsuario);
 
+                // Abrir la ventana según el tipo de usuario
                 if (tipoUsuario == "Conductor")
                 {
-                    frmMenu dashboard =
-                        new frmMenu(usuario.IdUsuario);
-
-                    dashboard.Show();
+                    frmMenu menu = new frmMenu(usuario.IdUsuario);
+                    menu.Show();
                     this.Hide();
                 }
                 else if (tipoUsuario == "Cliente")
                 {
-                    Dashboard ventanaCliente = new Dashboard();
-
+                    Dashboard ventanaCliente = new Dashboard(usuario);
                     ventanaCliente.Show();
                     this.Hide();
                 }
                 else if (tipoUsuario == "Administrador")
                 {
-                    MessageBox.Show(
-                        "Usuario administrador detectado. " +
-                        "El menú de administrador se conectará posteriormente.",
-                        "Inicio de sesión",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Information
-                    );
+                    frmMenuAdministradores menu = new frmMenuAdministradores();
+                    menu.Show();
+                    this.Hide();
                 }
                 else
                 {
@@ -162,7 +160,7 @@ namespace Vista.Login
             }
             else
             {
-                // Contabilizar intentos fallidos
+                // Incrementar intentos fallidos
                 intentosFallidos++;
 
                 if (intentosFallidos >= 5)
@@ -190,9 +188,7 @@ namespace Vista.Login
             }
         }
 
-
-
-
+        // Validar correo del dominio de la aplicación
         private bool CorreoValido(string correo)
         {
             string patron = @"^[A-Za-z]+(?:\.[A-Za-z]+)*@mypickup.com$";
@@ -204,47 +200,27 @@ namespace Vista.Login
             );
         }
 
-
-
+        // Permitir únicamente letras, números y asterisco
         private bool ContrasenaValida(string contrasena)
         {
-            return Regex.IsMatch(
-                contrasena,
-                @"^[A-Za-z0-9*]+$"
-            );
+            return Regex.IsMatch(contrasena, @"^[A-Za-z0-9*]+$");
         }
 
-        private void btnCerrar_Click(object sender, EventArgs e)
+        // Mostrar u ocultar contraseña
+        private void label4_Click(object sender, EventArgs e)
         {
-            DialogResult resultado = MessageBox.Show(
-               "¿Está seguro de que desea salir?",
-               "Salir",
-               MessageBoxButtons.YesNo,
-               MessageBoxIcon.Question
-           );
 
-            if (resultado == DialogResult.Yes)
-            {
-                Application.Exit();
-            }
         }
 
-        private void label3_Click(object sender, EventArgs e)
+        // Bloquear copiar, pegar y cortar
+        private void BloquearCopiarPegar(
+            object sender,
+            KeyEventArgs e)
         {
-            txtContraseña.UseSystemPasswordChar =
-                !txtContraseña.UseSystemPasswordChar;
-
-            label3.Text =
-                txtContraseña.UseSystemPasswordChar
-                ? "Mostrar Contraseña"
-                : "Ocultar Contraseña";
-        }
-
-        private void BloquearCopiarPegar(object sender, KeyEventArgs e)
-        {
-            if (e.Control && (e.KeyCode == Keys.C ||
-                              e.KeyCode == Keys.V ||
-                              e.KeyCode == Keys.X))
+            if (e.Control &&
+                (e.KeyCode == Keys.C ||
+                 e.KeyCode == Keys.V ||
+                 e.KeyCode == Keys.X))
             {
                 e.SuppressKeyPress = true;
                 e.Handled = true;
@@ -257,12 +233,65 @@ namespace Vista.Login
             }
         }
 
-        private void BloquearMenuContextual(object sender, MouseEventArgs e)
+        // Bloquear menú contextual del clic derecho
+        private void BloquearMenuContextual(
+            object sender,
+            MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Right)
             {
-                ((TextBox)sender).ContextMenuStrip = new ContextMenuStrip();
+                ((TextBox)sender).ContextMenuStrip =
+                    new ContextMenuStrip();
             }
         }
+
+        // Botón de cerrar
+        private void btnCerrar_Click(object sender, EventArgs e)
+        {
+            CerrarPrograma();
+        }
+
+
+
+        private void CerrarPrograma()
+        {
+            DialogResult resultado = MessageBox.Show(
+                "¿Está seguro de que desea salir?",
+                "Salir",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question
+            );
+
+            if (resultado == DialogResult.Yes)
+            {
+                Application.Exit();
+            }
+        }
+
+        // Abrir formulario de creación de cuenta
+        private void guna2Button1_Click(object sender, EventArgs e)
+        {
+            frmCrearCuenta crearCuenta = new frmCrearCuenta();
+            crearCuenta.Show();
+            this.Hide();
+        }
+
+        private void guna2Button3_Click(object sender, EventArgs e)
+        {
+            CerrarPrograma();
+        }
+
+        private void label4_Click_1(object sender, EventArgs e)
+        {
+            txtContraseña.UseSystemPasswordChar =
+                !txtContraseña.UseSystemPasswordChar;
+
+            label3.Text = txtContraseña.UseSystemPasswordChar
+                ? "Mostrar Contraseña"
+                : "Ocultar Contraseña";
+        }
+
+
+       
     }
 }

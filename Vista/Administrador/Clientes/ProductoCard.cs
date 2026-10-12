@@ -9,16 +9,16 @@ namespace Vista.Administrador.Clientes
         private Producto producto;
 
         public ProductoDB.Producto Producto { get; }
-
-        public ProductoCard(Producto producto)
+        private Usuario usuarioActual;
+        public ProductoCard(Producto producto, Usuario usuario)
         {
             InitializeComponent();
 
             this.producto = producto;
+            this.usuarioActual = usuario;
 
             CargarDatos();
         }
-
 
 
         private void CargarDatos()
@@ -255,9 +255,8 @@ namespace Vista.Administrador.Clientes
             // Mostrar el overlay
             overlay.Show(principal);
             overlay.BringToFront();
-
             // Abrir detalle del producto
-            frmProductos formulario = new frmProductos(producto);
+            frmProductos formulario = new frmProductos(producto, usuarioActual);
 
             formulario.StartPosition = FormStartPosition.CenterScreen;
 

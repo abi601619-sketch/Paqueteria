@@ -1,11 +1,30 @@
-﻿namespace Vista.Administrador.Clientes
+﻿using Modelo.Entidades;
+
+namespace Vista.Administrador.Clientes
 {
     public partial class Dashboard : Form
     {
-        public Dashboard()
+        private Usuario usuarioActual;
+        private Principal PantallaInicio;
+        private Inicio inicioForm;
+        private Carretilla CarretillaForm;
+
+        public Dashboard(Usuario usuario)
         {
             InitializeComponent();
 
+            if (usuario == null)
+            {
+                MessageBox.Show("No se recibió ningún usuario.");
+                Close();
+                return;
+            }
+
+            usuarioActual = usuario;
+
+            PantallaInicio = new Principal(usuarioActual);
+            inicioForm = new Inicio(usuarioActual);
+            CarretillaForm = new Carretilla();
         }
 
         private void AbrirFormulario(Form formulario)
@@ -22,12 +41,6 @@
             formulario.Show();
             formulario.BringToFront();
         }
-        private Inicio inicioForm = new Inicio();
-
-        private Carretilla CarretillaForm = new Carretilla();
-        private Principal PantallaInicio = new Principal();
-
-
 
         private void guna2Button2_Click(object sender, EventArgs e)
         {
@@ -44,6 +57,7 @@
         private void guna2Button1_Click(object sender, EventArgs e)
         {
             AbrirFormulario(PantallaInicio);
+
         }
 
         private void guna2Button3_Click(object sender, EventArgs e)
@@ -101,6 +115,7 @@
 
             // Cargar productos automáticamente
             AbrirFormulario(PantallaInicio);
+
         }
     }
 }

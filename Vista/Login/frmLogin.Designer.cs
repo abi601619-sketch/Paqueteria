@@ -34,11 +34,19 @@
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges3 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges4 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges5 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges6 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges7 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges8 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges9 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges10 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges11 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             tlpLogin = new TableLayoutPanel();
             pictureBox1 = new PictureBox();
             pnlInicioS = new Panel();
-            label3 = new Label();
-            btnCerrar = new Button();
+            label4 = new Label();
+            guna2Button3 = new Guna.UI2.WinForms.Guna2Button();
+            guna2Button2 = new Guna.UI2.WinForms.Guna2Button();
+            guna2Button1 = new Guna.UI2.WinForms.Guna2Button();
             label1 = new Label();
             guna2CustomGradientPanel2 = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
             guna2CustomGradientPanel1 = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
@@ -48,13 +56,15 @@
             txtUsuario = new TextBox();
             lblUsuario = new Label();
             lbliniciarS = new Label();
-            errorProvider1 = new ErrorProvider(components);
             ptbLogo = new Guna.UI2.WinForms.Guna2CirclePictureBox();
+            label3 = new Label();
+            btnCerrar = new Button();
+            errorProvider1 = new ErrorProvider(components);
             tlpLogin.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             pnlInicioS.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)errorProvider1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)ptbLogo).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)errorProvider1).BeginInit();
             SuspendLayout();
             // 
             // tlpLogin
@@ -87,8 +97,10 @@
             // pnlInicioS
             // 
             pnlInicioS.BackColor = Color.White;
-            pnlInicioS.Controls.Add(label3);
-            pnlInicioS.Controls.Add(btnCerrar);
+            pnlInicioS.Controls.Add(label4);
+            pnlInicioS.Controls.Add(guna2Button3);
+            pnlInicioS.Controls.Add(guna2Button2);
+            pnlInicioS.Controls.Add(guna2Button1);
             pnlInicioS.Controls.Add(label1);
             pnlInicioS.Controls.Add(guna2CustomGradientPanel2);
             pnlInicioS.Controls.Add(guna2CustomGradientPanel1);
@@ -105,30 +117,71 @@
             pnlInicioS.Size = new Size(946, 1035);
             pnlInicioS.TabIndex = 1;
             // 
-            // label3
+            // label4
             // 
-            label3.AutoSize = true;
-            label3.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label3.Location = new Point(538, 684);
-            label3.Name = "label3";
-            label3.Size = new Size(110, 15);
-            label3.TabIndex = 12;
-            label3.Text = "Mostrar Contraseña";
-            label3.Click += label3_Click;
+            label4.AutoSize = true;
+            label4.Font = new Font("Segoe UI Semibold", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label4.Location = new Point(249, 684);
+            label4.Name = "label4";
+            label4.Size = new Size(107, 13);
+            label4.TabIndex = 15;
+            label4.Text = "Mostrar Contraseña";
+            label4.Click += label4_Click_1;
             // 
-            // btnCerrar
+            // guna2Button3
             // 
-            btnCerrar.BackColor = Color.DarkSalmon;
-            btnCerrar.FlatAppearance.BorderSize = 0;
-            btnCerrar.FlatStyle = FlatStyle.Flat;
-            btnCerrar.ForeColor = Color.White;
-            btnCerrar.Location = new Point(832, 984);
-            btnCerrar.Name = "btnCerrar";
-            btnCerrar.Size = new Size(105, 31);
-            btnCerrar.TabIndex = 11;
-            btnCerrar.Text = "Cerrar Programa";
-            btnCerrar.UseVisualStyleBackColor = false;
-            btnCerrar.Click += btnCerrar_Click;
+            guna2Button3.BorderRadius = 6;
+            guna2Button3.CustomizableEdges = customizableEdges1;
+            guna2Button3.DisabledState.BorderColor = Color.DarkGray;
+            guna2Button3.DisabledState.CustomBorderColor = Color.DarkGray;
+            guna2Button3.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
+            guna2Button3.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            guna2Button3.FillColor = Color.FromArgb(255, 128, 0);
+            guna2Button3.Font = new Font("Segoe UI", 9F);
+            guna2Button3.ForeColor = Color.White;
+            guna2Button3.Location = new Point(816, 979);
+            guna2Button3.Name = "guna2Button3";
+            guna2Button3.ShadowDecoration.CustomizableEdges = customizableEdges2;
+            guna2Button3.Size = new Size(118, 31);
+            guna2Button3.TabIndex = 14;
+            guna2Button3.Text = "Cerrar Programa";
+            guna2Button3.Click += guna2Button3_Click;
+            // 
+            // guna2Button2
+            // 
+            guna2Button2.CustomizableEdges = customizableEdges3;
+            guna2Button2.DisabledState.BorderColor = Color.DarkGray;
+            guna2Button2.DisabledState.CustomBorderColor = Color.DarkGray;
+            guna2Button2.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
+            guna2Button2.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            guna2Button2.FillColor = Color.Transparent;
+            guna2Button2.Font = new Font("Segoe UI", 9F);
+            guna2Button2.ForeColor = Color.White;
+            guna2Button2.Image = Properties.Resources.letra_x__1_;
+            guna2Button2.Location = new Point(882, 9);
+            guna2Button2.Name = "guna2Button2";
+            guna2Button2.ShadowDecoration.CustomizableEdges = customizableEdges4;
+            guna2Button2.Size = new Size(55, 34);
+            guna2Button2.TabIndex = 12;
+            // 
+            // guna2Button1
+            // 
+            guna2Button1.BorderRadius = 6;
+            guna2Button1.CustomizableEdges = customizableEdges5;
+            guna2Button1.DisabledState.BorderColor = Color.DarkGray;
+            guna2Button1.DisabledState.CustomBorderColor = Color.DarkGray;
+            guna2Button1.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
+            guna2Button1.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            guna2Button1.FillColor = Color.FromArgb(255, 128, 0);
+            guna2Button1.Font = new Font("Segoe UI", 9F);
+            guna2Button1.ForeColor = Color.White;
+            guna2Button1.Location = new Point(475, 687);
+            guna2Button1.Name = "guna2Button1";
+            guna2Button1.ShadowDecoration.CustomizableEdges = customizableEdges6;
+            guna2Button1.Size = new Size(173, 31);
+            guna2Button1.TabIndex = 11;
+            guna2Button1.Text = "Crear Cuenta";
+            guna2Button1.Click += guna2Button1_Click;
             // 
             // label1
             // 
@@ -143,7 +196,7 @@
             // guna2CustomGradientPanel2
             // 
             guna2CustomGradientPanel2.BackColor = Color.Black;
-            guna2CustomGradientPanel2.CustomizableEdges = customizableEdges1;
+            guna2CustomGradientPanel2.CustomizableEdges = customizableEdges7;
             guna2CustomGradientPanel2.FillColor = Color.Black;
             guna2CustomGradientPanel2.FillColor2 = Color.Black;
             guna2CustomGradientPanel2.FillColor3 = Color.Black;
@@ -151,14 +204,14 @@
             guna2CustomGradientPanel2.Location = new Point(519, 910);
             guna2CustomGradientPanel2.MinimumSize = new Size(1, 1);
             guna2CustomGradientPanel2.Name = "guna2CustomGradientPanel2";
-            guna2CustomGradientPanel2.ShadowDecoration.CustomizableEdges = customizableEdges2;
+            guna2CustomGradientPanel2.ShadowDecoration.CustomizableEdges = customizableEdges8;
             guna2CustomGradientPanel2.Size = new Size(200, 1);
             guna2CustomGradientPanel2.TabIndex = 9;
             // 
             // guna2CustomGradientPanel1
             // 
             guna2CustomGradientPanel1.BackColor = Color.Black;
-            guna2CustomGradientPanel1.CustomizableEdges = customizableEdges3;
+            guna2CustomGradientPanel1.CustomizableEdges = customizableEdges9;
             guna2CustomGradientPanel1.FillColor = Color.Black;
             guna2CustomGradientPanel1.FillColor2 = Color.Black;
             guna2CustomGradientPanel1.FillColor3 = Color.Black;
@@ -166,7 +219,7 @@
             guna2CustomGradientPanel1.Location = new Point(167, 910);
             guna2CustomGradientPanel1.MinimumSize = new Size(1, 1);
             guna2CustomGradientPanel1.Name = "guna2CustomGradientPanel1";
-            guna2CustomGradientPanel1.ShadowDecoration.CustomizableEdges = customizableEdges4;
+            guna2CustomGradientPanel1.ShadowDecoration.CustomizableEdges = customizableEdges10;
             guna2CustomGradientPanel1.Size = new Size(200, 1);
             guna2CustomGradientPanel1.TabIndex = 8;
             // 
@@ -230,11 +283,6 @@
             lbliniciarS.TabIndex = 2;
             lbliniciarS.Text = "Iniciar Sesión";
             // 
-            // errorProvider1
-            // 
-            errorProvider1.BlinkStyle = ErrorBlinkStyle.NeverBlink;
-            errorProvider1.ContainerControl = this;
-            // 
             // ptbLogo
             // 
             ptbLogo.Image = Properties.Resources._2d01e215a07cdd5f57d39b2c23eb12e479073242;
@@ -242,12 +290,41 @@
             ptbLogo.InitialImage = null;
             ptbLogo.Location = new Point(328, 145);
             ptbLogo.Name = "ptbLogo";
-            ptbLogo.ShadowDecoration.CustomizableEdges = customizableEdges5;
+            ptbLogo.ShadowDecoration.CustomizableEdges = customizableEdges11;
             ptbLogo.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
             ptbLogo.Size = new Size(239, 256);
             ptbLogo.SizeMode = PictureBoxSizeMode.Zoom;
             ptbLogo.TabIndex = 13;
             ptbLogo.TabStop = false;
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label3.Location = new Point(538, 684);
+            label3.Name = "label3";
+            label3.Size = new Size(110, 15);
+            label3.TabIndex = 12;
+            label3.Text = "Mostrar Contraseña";
+            // 
+            // btnCerrar
+            // 
+            btnCerrar.BackColor = Color.DarkSalmon;
+            btnCerrar.FlatAppearance.BorderSize = 0;
+            btnCerrar.FlatStyle = FlatStyle.Flat;
+            btnCerrar.ForeColor = Color.White;
+            btnCerrar.Location = new Point(832, 984);
+            btnCerrar.Name = "btnCerrar";
+            btnCerrar.Size = new Size(105, 31);
+            btnCerrar.TabIndex = 11;
+            btnCerrar.Text = "Cerrar Programa";
+            btnCerrar.UseVisualStyleBackColor = false;
+            btnCerrar.Click += btnCerrar_Click;
+            // 
+            // errorProvider1
+            // 
+            errorProvider1.BlinkStyle = ErrorBlinkStyle.NeverBlink;
+            errorProvider1.ContainerControl = this;
             // 
             // frmLogin
             // 
@@ -262,8 +339,8 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             pnlInicioS.ResumeLayout(false);
             pnlInicioS.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)errorProvider1).EndInit();
             ((System.ComponentModel.ISupportInitialize)ptbLogo).EndInit();
+            ((System.ComponentModel.ISupportInitialize)errorProvider1).EndInit();
             ResumeLayout(false);
         }
 
@@ -282,9 +359,13 @@
         private Guna.UI2.WinForms.Guna2CustomGradientPanel guna2CustomGradientPanel2;
         private Guna.UI2.WinForms.Guna2CustomGradientPanel guna2CustomGradientPanel1;
         private ErrorProvider errorProvider1;
+        private Guna.UI2.WinForms.Guna2Button guna2Button1;
+        private Guna.UI2.WinForms.Guna2Button guna2Button2;
         private Label label2;
         private Button btnCerrar;
         private Label label3;
         private Guna.UI2.WinForms.Guna2CirclePictureBox ptbLogo;
+        private Guna.UI2.WinForms.Guna2Button guna2Button3;
+        private Label label4;
     }
 }
